@@ -116,15 +116,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 /* EVENT ROW */
 .ev{display:flex;align-items:flex-start;gap:8px;padding:4px 0;}
 .ev-time{min-width:50px;font-size:11px;color:var(--muted);padding-top:4px;flex-shrink:0;font-variant-numeric:tabular-nums;}
-.ev-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px;}
-.ev-dot.fly{background:var(--fly);}
-.ev-dot.train{background:var(--train);}
-.ev-dot.hotel{background:var(--hotel);}
-.ev-dot.food{background:var(--food);}
-.ev-dot.act{background:var(--act);}
-.ev-dot.must{background:var(--must);}
-.ev-dot.rec{background:var(--rec);}
-.ev-dot.opt{background:var(--opt);}
+.ev-dot{width:16px;flex-shrink:0;margin-top:3px;font-size:11px;line-height:1;text-align:center;}
+.ev-dot::before{display:block;}
+.ev-dot.fly::before{content:'✈️';}
+.ev-dot.train::before{content:'🚄';}
+.ev-dot.hotel::before{content:'🏨';}
+.ev-dot.food::before{content:'🍽️';}
+.ev-dot.act::before{content:'🎯';}
+.ev-dot.must::before{content:'⭐';}
+.ev-dot.rec::before{content:'👍';}
+.ev-dot.opt::before{content:'💡';}
 .ev-body{flex:1;}
 .ev-title{font-size:13px;font-weight:500;}
 .ev-detail{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.6;}
@@ -404,6 +405,141 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:999;align-items:center;justify-content:center;cursor:pointer;}
 .lightbox.show{display:flex;}
 .lightbox img{max-width:90%;max-height:90%;border-radius:8px;}
+
+/* ===== BUDGET TAB ===== */
+.budget-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;}
+.budget-card{padding:16px;border-radius:10px;border:1px solid var(--border);background:#fff;}
+.budget-card.prebooked{border-left:4px solid var(--accent);}
+.budget-card.actual{border-left:4px solid var(--rec);}
+.budget-card .bc-label{font-size:11px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.5px;}
+.budget-card .bc-amount{font-size:22px;font-weight:600;margin:4px 0;}
+.budget-card .bc-sub{font-size:11px;color:var(--muted);}
+.budget-total-bar{margin-bottom:1.5rem;padding:14px 16px;border-radius:10px;background:var(--surface);border:1px solid var(--border);}
+.budget-total-bar .bt-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.budget-total-bar .bt-label{font-size:13px;font-weight:600;}
+.budget-total-bar .bt-amount{font-size:18px;font-weight:600;}
+.budget-total-bar .bt-bar{height:8px;background:#e5e3de;border-radius:4px;overflow:hidden;}
+.budget-total-bar .bt-fill{height:100%;border-radius:4px;transition:width .3s;background:linear-gradient(90deg,var(--accent),var(--rec));}
+.budget-total-bar .bt-pct{font-size:11px;color:var(--muted);margin-top:4px;text-align:right;}
+
+.budget-section-title{font-size:14px;font-weight:600;margin:1.5rem 0 .75rem;display:flex;align-items:center;gap:8px;}
+.budget-section-title .bst-icon{font-size:16px;}
+
+/* By City bars */
+.city-bar{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.city-bar:last-child{border-bottom:none;}
+.city-bar .cb-flag{font-size:16px;width:24px;text-align:center;}
+.city-bar .cb-name{font-size:12px;font-weight:500;width:80px;}
+.city-bar .cb-bar-wrap{flex:1;height:8px;background:#e5e3de;border-radius:4px;overflow:hidden;}
+.city-bar .cb-bar-fill{height:100%;border-radius:4px;transition:width .3s;}
+.city-bar .cb-bar-fill.pre{background:var(--accent);}
+.city-bar .cb-bar-fill.act{background:var(--rec);}
+.city-bar .cb-amount{font-size:12px;font-weight:500;width:70px;text-align:right;}
+
+/* By Category bars */
+.cat-bar{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.cat-bar:last-child{border-bottom:none;}
+.cat-bar .catb-icon{font-size:14px;width:24px;text-align:center;}
+.cat-bar .catb-name{font-size:12px;font-weight:500;width:80px;}
+.cat-bar .catb-bar-wrap{flex:1;height:8px;background:#e5e3de;border-radius:4px;overflow:hidden;}
+.cat-bar .catb-bar-fill{height:100%;border-radius:4px;background:var(--rec);transition:width .3s;}
+.cat-bar .catb-amount{font-size:12px;font-weight:500;width:70px;text-align:right;}
+
+/* Expense list */
+.expense-header{display:flex;justify-content:space-between;align-items:center;margin:1.5rem 0 .75rem;}
+.expense-header .eh-title{font-size:14px;font-weight:600;}
+.expense-filter{display:flex;gap:6px;}
+.expense-filter select{padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px;background:#fff;}
+.expense-item{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:#fff;cursor:pointer;transition:all .15s;}
+.expense-item:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.expense-item .ei-receipt{width:40px;height:40px;border-radius:8px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;overflow:hidden;}
+.expense-item .ei-receipt img{width:100%;height:100%;object-fit:cover;}
+.expense-item .ei-body{flex:1;min-width:0;}
+.expense-item .ei-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.expense-item .ei-meta{font-size:11px;color:var(--muted);}
+.expense-item .ei-amount{font-size:14px;font-weight:600;white-space:nowrap;}
+.expense-item .ei-actions{display:flex;gap:4px;}
+.expense-item .ei-actions button{background:none;border:none;cursor:pointer;font-size:12px;padding:4px;border-radius:4px;opacity:.5;transition:opacity .15s;}
+.expense-item .ei-actions button:hover{opacity:1;}
+.expense-empty{text-align:center;padding:2rem;color:var(--muted);font-size:13px;}
+
+/* Add expense modal */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center;}
+.modal-overlay.show{display:flex;}
+.modal-sheet{background:#fff;border-radius:16px 16px 0 0;width:100%;max-width:500px;max-height:85vh;overflow-y:auto;padding:20px;animation:slideUp .25s ease;}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-sheet .ms-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.modal-sheet .ms-title{font-size:16px;font-weight:600;}
+.modal-sheet .ms-close{background:none;border:none;font-size:20px;cursor:pointer;padding:4px 8px;color:var(--muted);}
+.modal-sheet .ms-field{margin-bottom:12px;}
+.modal-sheet .ms-field label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
+.modal-sheet .ms-field input,.modal-sheet .ms-field select,.modal-sheet .ms-field textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;}
+.modal-sheet .ms-field textarea{min-height:50px;resize:vertical;}
+.modal-sheet .ms-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.modal-sheet .ms-receipt-area{border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .15s;margin-bottom:4px;}
+.modal-sheet .ms-receipt-area:hover{border-color:var(--accent);background:var(--fly-bg);}
+.modal-sheet .ms-receipt-area.has-img{padding:4px;border-style:solid;}
+.modal-sheet .ms-receipt-area img{max-width:100%;max-height:150px;border-radius:8px;}
+.modal-sheet .ms-receipt-icon{font-size:28px;margin-bottom:4px;}
+.modal-sheet .ms-receipt-text{font-size:11px;color:var(--muted);}
+.ms-split-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
+.ms-split-chip{padding:4px 10px;border:1px solid var(--border);border-radius:20px;font-size:11px;cursor:pointer;transition:all .15s;user-select:none;}
+.ms-split-chip.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.ms-save-btn{width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;transition:opacity .15s;}
+.ms-save-btn:hover{opacity:.9;}
+
+/* Settlement card */
+.settle-card{padding:12px 16px;border-radius:10px;border:1px solid var(--border);background:#fff;margin-bottom:8px;}
+.settle-card .sc-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;}
+.settle-card .sc-name{font-size:13px;font-weight:500;}
+.settle-card .sc-amount{font-size:13px;font-weight:600;}
+.settle-card .sc-amount.owes{color:var(--must);}
+.settle-card .sc-amount.gets{color:var(--done);}
+.settle-arrow{text-align:center;font-size:12px;color:var(--muted);padding:4px 0;}
+
+/* ===== PLACES/RESTAURANTS PAGE ===== */
+.places-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:150;overflow-y:auto;}
+.places-overlay.show{display:block;}
+.places-header{position:sticky;top:0;z-index:151;background:#fff;border-bottom:1px solid var(--border);padding:12px 2rem;display:flex;align-items:center;gap:12px;}
+.places-header .ph-back{background:none;border:none;font-size:18px;cursor:pointer;padding:4px 8px;}
+.places-header .ph-title{font-size:16px;font-weight:600;}
+.places-header .ph-add{margin-left:auto;padding:6px 14px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;}
+.places-wrap{max-width:820px;margin:0 auto;padding:1.5rem 2rem;}
+.places-city-group{margin-bottom:2rem;}
+.places-city-title{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:10px;}
+.place-card{display:flex;gap:12px;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;margin-bottom:8px;transition:all .15s;}
+.place-card:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.place-card .pc-photo{width:64px;height:64px;border-radius:8px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;overflow:hidden;}
+.place-card .pc-photo img{width:100%;height:100%;object-fit:cover;}
+.place-card .pc-body{flex:1;min-width:0;}
+.place-card .pc-name{font-size:13px;font-weight:600;}
+.place-card .pc-rating{color:#f59e0b;font-size:12px;margin:2px 0;}
+.place-card .pc-review{font-size:11px;color:var(--muted);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.place-card .pc-meta{font-size:11px;color:var(--muted);margin-top:4px;display:flex;gap:8px;}
+.place-card .pc-amount{font-size:14px;font-weight:600;white-space:nowrap;align-self:center;}
+.place-card .pc-actions{display:flex;flex-direction:column;gap:4px;align-self:center;}
+.place-card .pc-actions button{background:none;border:none;cursor:pointer;font-size:12px;padding:4px;opacity:.5;}
+.place-card .pc-actions button:hover{opacity:1;}
+.place-card .pc-link{font-size:10px;color:var(--accent);cursor:pointer;text-decoration:underline;}
+.places-empty{text-align:center;padding:3rem;color:var(--muted);}
+.places-empty .pe-icon{font-size:40px;margin-bottom:8px;}
+
+/* Add Place modal */
+.place-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center;}
+.place-modal.show{display:flex;}
+
+/* Time input fix */
+.time-select-row{display:flex;align-items:center;gap:4px;}
+.time-select-row select{padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;background:#fff;}
+.time-select-row .time-colon{font-weight:600;font-size:14px;}
+
+/* Budget tab responsive */
+@media(max-width:600px){
+  .budget-summary{grid-template-columns:1fr;}
+  .modal-sheet{max-width:100%;border-radius:16px 16px 0 0;}
+  .city-bar .cb-name{width:60px;}
+  .catb-name{width:60px;}
+}
 </style>
 </head>
 <body>
@@ -413,6 +549,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <button class="tab-btn active" onclick="switchTab('trip')">🗓️ Day by Day</button>
   <button class="tab-btn" onclick="switchTab('booking')">📋 Booking</button>
   <button class="tab-btn" onclick="switchTab('notes')">📖 Notes</button>
+  <button class="tab-btn" onclick="switchTab('budget')">💰 Budget</button>
   <div class="nav-right">
     <span id="ptxt">0/0</span>
     <div class="pbar"><div class="pbar-fill" id="pfill" style="width:0%"></div></div>
@@ -431,7 +568,8 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <span class="tag clickable" onclick="togglePopup('pop-stops',this)">17 stops</span>
   <span class="tag clickable" onclick="togglePopup('pop-countries',this)">8 ประเทศ</span>
   <span class="tag clickable" onclick="togglePopup('pop-flights',this)">9 flights</span>
-  <span class="tag">Copenhagen edition</span>
+  <span class="tag clickable" id="tag-places" onclick="openPlacesPage('place')">📍 Places</span>
+  <span class="tag clickable" id="tag-restaurants" onclick="openPlacesPage('restaurant')">🍽️ Restaurants</span>
 
   <div class="stats-popup" id="pop-stops">
     <div class="stats-popup-title">🗺️ All 17 Stops</div>
@@ -487,17 +625,15 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <div class="legend">
-  <div style="font-size:10px;font-weight:600;color:var(--text);width:100%;margin-bottom:6px;">🗺️ ความสำคัญ (สีจุด)</div>
-  <div class="legend-item"><span style="width:10px;height:10px;border-radius:50%;background:var(--must);display:inline-block;flex-shrink:0"></span> <strong style="color:var(--must)">ต้องไป</strong> — ห้ามพลาด</div>
-  <div class="legend-item"><span style="width:10px;height:10px;border-radius:50%;background:var(--rec);display:inline-block;flex-shrink:0"></span> <span style="color:var(--rec)">แนะนำ</span> — ควรไปถ้าทำได้</div>
-  <div class="legend-item"><span style="width:10px;height:10px;border-radius:50%;background:var(--opt);display:inline-block;flex-shrink:0"></span> <span style="color:#b45309">Bonus</span> — ถ้ามีเวลา</div>
-  <div style="width:100%;border-top:1px solid var(--border);margin:6px 0"></div>
-  <div style="font-size:10px;font-weight:600;color:var(--text);width:100%;margin-bottom:6px;">🏷️ ประเภท (ไอคอน)</div>
-  <div class="legend-item">⭐ ร้านอาหาร / Food</div>
-  <div class="legend-item">🏛️ Historical landmark</div>
-  <div class="legend-item">🎨 Museum / Art</div>
-  <div class="legend-item">🌅 Viewpoint / วิว</div>
-  <div class="legend-item">🛍️ Market / ช้อป</div>
+  <div style="font-size:10px;font-weight:600;color:var(--text);width:100%;margin-bottom:6px;">🏷️ ไอคอนแต่ละประเภท</div>
+  <div class="legend-item">✈️ Flight</div>
+  <div class="legend-item">🚄 Train</div>
+  <div class="legend-item">🏨 Hotel</div>
+  <div class="legend-item">🍽️ Food</div>
+  <div class="legend-item">🎯 Activity</div>
+  <div class="legend-item">⭐ ห้ามพลาด</div>
+  <div class="legend-item">👍 แนะนำ</div>
+  <div class="legend-item">💡 ถ้ามีเวลา</div>
   <div style="width:100%;border-top:1px solid var(--border);margin:6px 0"></div>
   <div class="legend-item">
     <span class="ev-st warn" style="width:22px;height:18px;font-size:11px;cursor:default">✈️</span>
@@ -526,18 +662,17 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div class="ev"><span class="ev-st done" data-bk="bk-hotel-lisbon" onclick="goBooking('bk-hotel-lisbon',event)">🏨</span><span class="ev-time">13:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Pestana Rua Augusta &nbsp;<a class="tbadge done" onclick="goBooking('bk-hotel-lisbon',event)">✅ จองแล้ว</a></div><div class="ev-detail">Premium Corner City View · Baixa</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🏛️ Baixa + Praça do Comércio + Terreiro do Paço</div><div class="ev-detail">ลานริมทะเล Tagus · Arco da Rua Augusta · ใจกลางเมืองเก่า</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🏛️ Alfama — ย่านเก่าแก่ที่สุดของ Lisbon</div><div class="ev-detail">เดินซอกซอย Medieval · Fado music ตอนเย็น · Miradouro das Portas do Sol วิว</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">⭐ Dinner — แถว Alfama / Bairro Alto</div><div class="ev-detail">Bacalhau (ปลาค็อด) · Pastéis de nata ลองวันแรก</div></div></div>
-    <div class="add-ev-form" id="add-ev-form-placeholder"></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🍽️ Dinner — แถว Alfama / Bairro Alto</div><div class="ev-detail">Bacalhau (ปลาค็อด) · Pastéis de nata ลองวันแรก</div></div></div>
   </div>
 
   <div class="db" data-date="2026-05-02">
     <div class="dh"><span class="dn">Day 2</span><span class="dd">ศุกร์ 2 May</span><span class="dt">· Lisbon Food Exploring</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">⭐ Pastéis de Belém — ไปก่อน 09:00</div><div class="ev-detail">Rua de Belém 84 · <strong>ต้นตำรับ Pastel de Nata ของแท้</strong> · ต้องกินที่ร้านเท่านั้น รสชาติต่างจากที่อื่น</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🍽️ Pastéis de Belém — ไปก่อน 09:00</div><div class="ev-detail">Rua de Belém 84 · <strong>ต้นตำรับ Pastel de Nata ของแท้</strong> · ต้องกินที่ร้านเท่านั้น รสชาติต่างจากที่อื่น</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🏛️ Mosteiro dos Jerónimos (UNESCO) €10</div><div class="ev-detail">Gothic Manueline architecture · ติดกับ Pastéis de Belém · สวยมาก ห้ามพลาด</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:00</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">⭐ Time Out Market Lisboa — food hall concept</div><div class="ev-detail">Mercado da Ribeira · 40+ ร้านในที่เดียว · business research: multi-concept food hall ที่ดังที่สุดในยุโรป</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:00</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🍽️ Time Out Market Lisboa — food hall concept</div><div class="ev-detail">Mercado da Ribeira · 40+ ร้านในที่เดียว · business research: multi-concept food hall ที่ดังที่สุดในยุโรป</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot opt"></div><div class="ev-body"><div class="ev-title">🚃 Tram 28 — ชมเมืองผ่านย่านต่างๆ</div><div class="ev-detail">Tram เก่าแก่ iconic ผ่าน Alfama · Chiado · Graça · ซื้อตั๋วบนรถ €3</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🛍️ LX Factory — Market + Street Food + Street Art</div><div class="ev-detail">โรงงานเก่าแปลงเป็น creative space · เปิดศุกร์-อาทิตย์ · food trucks + local brands + live music</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">⭐ Dinner — Cervejaria Ramiro</div><div class="ev-detail"><strong>ร้าน seafood icon ≥60 ปี</strong> · ไม่รับจอง เข้าแถว ~30min · gambas, percebes, lobster · Av. Almirante Reis 1</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🍽️ Dinner — Cervejaria Ramiro</div><div class="ev-detail"><strong>ร้าน seafood icon ≥60 ปี</strong> · ไม่รับจอง เข้าแถว ~30min · gambas, percebes, lobster · Av. Almirante Reis 1</div></div></div>
   </div>
 
   <div class="db travel" data-date="2026-05-03">
@@ -545,7 +680,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot opt"></div><div class="ev-body"><div class="ev-title">🛍️ Mercado de Campo de Ourique — ตลาดเช้า local</div><div class="ev-detail">ย่านที่คน Lisbon อาศัยจริง · ไม่ใช่ tourist · กาแฟ + pastel + cheese บน counter</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🌅 Miradouro de São Pedro de Alcântara</div><div class="ev-detail">วิวที่ดีที่สุดของ Lisbon · ฟรี · ย่าน Bairro Alto บรรยากาศดี</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:30</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🛍️ Príncipe Real — ย่าน antique + design shops</div><div class="ev-detail">ถนนสวย · Jardim do Príncipe Real · ร้าน design local brand</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">⭐ Lunch แถว Chiado — Taberna Rua das Flores (Bib Gourmand)</div><div class="ev-detail">Michelin Bib Gourmand · Portuguese traditional · จองล่วงหน้าแนะนำ</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🍽️ Lunch แถว Chiado — Taberna Rua das Flores (Bib Gourmand)</div><div class="ev-detail">Michelin Bib Gourmand · Portuguese traditional · จองล่วงหน้าแนะนำ</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out โรงแรม + ไปสนามบิน LIS</div><div class="ev-detail">ถึงก่อน 2 ชั่วโมง</div></div></div>
     <div class="ev"><span class="ev-st done" data-bk="bk-fly2" onclick="goBooking('bk-fly2',event)">✈️</span><span class="ev-time">19:05</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Lisbon LIS → Paris ORY &nbsp;<a class="tbadge done" onclick="goBooking('bk-fly2',event)">TO 7647 ✅</a></div><div class="ev-detail">Transavia · ~2h 30min · arr 22:35</div></div></div>
     <div class="ev"><span class="ev-st done" data-bk="bk-hotel-paris" onclick="goBooking('bk-hotel-paris',event)">🏨</span><span class="ev-time">23:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Arrive ORY → 129 Rue de Vaugirard &nbsp;<a class="tbadge done" onclick="goBooking('bk-hotel-paris',event)">✅ ฟรี</a></div></div></div>
@@ -1187,7 +1322,269 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div><!-- /notes-layout -->
 </div><!-- /tab-notes -->
 
-<footer>Europe 2026 · Siam Palette Group · Copenhagen Edition · v6 April 2026</footer>
+<!-- ============================================================
+     TAB 4 : BUDGET — Expense Tracker
+============================================================ -->
+<div id="tab-budget" class="section">
+<div class="wrap">
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+  <div class="page-title">💰 Budget</div>
+  <button class="add-bk-btn" style="margin:0" onclick="openExpenseModal()">+ Add Expense</button>
+</div>
+<div class="page-sub" style="margin-bottom:1.5rem">Pre-booked + ค่าใช้จ่ายจริงระหว่างทริป</div>
+
+<!-- Summary Cards -->
+<div class="budget-summary">
+  <div class="budget-card prebooked">
+    <div class="bc-label">Pre-booked</div>
+    <div class="bc-amount" id="bg-prebooked">A$0</div>
+    <div class="bc-sub">Flights · Trains · Hotels · Activities</div>
+  </div>
+  <div class="budget-card actual">
+    <div class="bc-label">Actual Spend</div>
+    <div class="bc-amount" id="bg-actual">A$0</div>
+    <div class="bc-sub">Food · Transport · Shopping · Tickets</div>
+  </div>
+</div>
+
+<!-- Total Bar -->
+<div class="budget-total-bar">
+  <div class="bt-row">
+    <span class="bt-label">Total</span>
+    <span class="bt-amount" id="bg-total">A$0</span>
+  </div>
+  <div class="bt-bar"><div class="bt-fill" id="bg-bar-fill" style="width:0%"></div></div>
+  <div class="bt-pct" id="bg-pct">Set a budget →</div>
+</div>
+
+<!-- By City -->
+<div class="budget-section-title"><span class="bst-icon">🏙️</span> By City</div>
+<div id="bg-by-city"><!-- JS renders --></div>
+
+<!-- By Category (actual) -->
+<div class="budget-section-title"><span class="bst-icon">📊</span> By Category (Actual)</div>
+<div id="bg-by-cat"><!-- JS renders --></div>
+
+<!-- Settlement -->
+<div class="budget-section-title"><span class="bst-icon">🤝</span> Settlement</div>
+<div id="bg-settlement"><!-- JS renders --></div>
+
+<!-- Expense list -->
+<div class="expense-header">
+  <span class="eh-title">Recent Expenses</span>
+  <div class="expense-filter">
+    <select id="bg-filter-city" onchange="renderBudgetTab()">
+      <option value="">All Cities</option>
+    </select>
+    <select id="bg-filter-cat" onchange="renderBudgetTab()">
+      <option value="">All Categories</option>
+      <option value="food">🍽️ Food</option>
+      <option value="transport">🚕 Transport</option>
+      <option value="shopping">🛍️ Shopping</option>
+      <option value="tickets">🎟️ Tickets</option>
+      <option value="grocery">🛒 Grocery</option>
+      <option value="other">📦 Other</option>
+    </select>
+  </div>
+</div>
+<div id="bg-expense-list"><!-- JS renders --></div>
+
+</div><!-- /wrap -->
+</div><!-- /tab-budget -->
+
+<!-- ===== ADD EXPENSE MODAL ===== -->
+<div class="modal-overlay" id="expense-modal" onclick="if(event.target===this)closeExpenseModal()">
+  <div class="modal-sheet">
+    <div class="ms-header">
+      <span class="ms-title" id="expense-modal-title">➕ Add Expense</span>
+      <button class="ms-close" onclick="closeExpenseModal()">✕</button>
+    </div>
+    <div class="ms-field">
+      <label>📷 Receipt Photo</label>
+      <div class="ms-receipt-area" id="exp-receipt-area" onclick="document.getElementById('exp-receipt-file').click()">
+        <div class="ms-receipt-icon">📷</div>
+        <div class="ms-receipt-text">Tap to take photo or choose from gallery</div>
+      </div>
+      <input type="file" id="exp-receipt-file" accept="image/*" capture="environment" style="display:none" onchange="previewExpReceipt(this)">
+    </div>
+    <div class="ms-row">
+      <div class="ms-field">
+        <label>Amount</label>
+        <input type="number" id="exp-amount" placeholder="0.00" step="0.01" inputmode="decimal">
+      </div>
+      <div class="ms-field">
+        <label>Currency</label>
+        <select id="exp-currency">
+          <option value="EUR">EUR €</option>
+          <option value="CHF">CHF ₣</option>
+          <option value="AUD">AUD A$</option>
+          <option value="GBP">GBP £</option>
+          <option value="DKK">DKK kr</option>
+        </select>
+      </div>
+    </div>
+    <div class="ms-field">
+      <label>Store / Place</label>
+      <input type="text" id="exp-store" placeholder="e.g. Pastéis de Belém">
+    </div>
+    <div class="ms-row">
+      <div class="ms-field">
+        <label>City</label>
+        <select id="exp-city">
+          <option value="Lisbon">🇵🇹 Lisbon</option>
+          <option value="Paris">🇫🇷 Paris</option>
+          <option value="Nice">🇫🇷 Nice</option>
+          <option value="Monaco">🇲🇨 Monaco</option>
+          <option value="Cannes">🇫🇷 Cannes</option>
+          <option value="Barcelona">🇪🇸 Barcelona</option>
+          <option value="Madrid">🇪🇸 Madrid</option>
+          <option value="Copenhagen">🇩🇰 Copenhagen</option>
+          <option value="Milan">🇮🇹 Milan</option>
+          <option value="Como">🇮🇹 Como</option>
+          <option value="Lucerne">🇨🇭 Lucerne</option>
+          <option value="Interlaken">🇨🇭 Interlaken</option>
+          <option value="Bern">🇨🇭 Bern</option>
+          <option value="Zürich">🇨🇭 Zürich</option>
+          <option value="Rome">🇮🇹 Rome</option>
+          <option value="Naples">🇮🇹 Naples</option>
+          <option value="Amalfi">🇮🇹 Amalfi</option>
+        </select>
+      </div>
+      <div class="ms-field">
+        <label>Category</label>
+        <select id="exp-cat">
+          <option value="food">🍽️ Food</option>
+          <option value="transport">🚕 Transport</option>
+          <option value="shopping">🛍️ Shopping</option>
+          <option value="tickets">🎟️ Tickets</option>
+          <option value="grocery">🛒 Grocery</option>
+          <option value="other">📦 Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="ms-field">
+      <label>Date</label>
+      <input type="date" id="exp-date">
+    </div>
+    <div class="ms-field">
+      <label>Note</label>
+      <textarea id="exp-note" placeholder="Optional note..."></textarea>
+    </div>
+    <div class="ms-field">
+      <label>Paid by</label>
+      <select id="exp-paid-by">
+        <option value="Onn">Onn</option>
+        <option value="P">P</option>
+      </select>
+    </div>
+    <div class="ms-field">
+      <label>Split with</label>
+      <div class="ms-split-row">
+        <span class="ms-split-chip active" data-person="Onn" onclick="toggleSplitChip(this)">Onn</span>
+        <span class="ms-split-chip active" data-person="P" onclick="toggleSplitChip(this)">P</span>
+      </div>
+    </div>
+    <input type="hidden" id="exp-edit-id" value="">
+    <button class="ms-save-btn" onclick="saveExpense()">💾 Save Expense</button>
+  </div>
+</div>
+
+<!-- ===== PLACES/RESTAURANTS OVERLAY ===== -->
+<div class="places-overlay" id="places-overlay">
+  <div class="places-header">
+    <button class="ph-back" onclick="closePlacesPage()">←</button>
+    <span class="ph-title" id="places-page-title">📍 Places</span>
+    <button class="ph-add" onclick="openPlaceModal()">+ Add</button>
+  </div>
+  <div class="places-wrap" id="places-list"><!-- JS renders --></div>
+</div>
+
+<!-- ===== ADD PLACE MODAL ===== -->
+<div class="place-modal" id="place-modal" onclick="if(event.target===this)closePlaceModal()">
+  <div class="modal-sheet">
+    <div class="ms-header">
+      <span class="ms-title" id="place-modal-title">➕ Add Place</span>
+      <button class="ms-close" onclick="closePlaceModal()">✕</button>
+    </div>
+    <div class="ms-field">
+      <label>📷 Photos</label>
+      <div class="ms-receipt-area" id="place-photo-area" onclick="document.getElementById('place-photo-file').click()">
+        <div class="ms-receipt-icon">📷</div>
+        <div class="ms-receipt-text">Tap to add photo</div>
+      </div>
+      <input type="file" id="place-photo-file" accept="image/*" capture="environment" style="display:none" onchange="previewPlacePhoto(this)">
+    </div>
+    <div class="ms-field">
+      <label>Name</label>
+      <input type="text" id="place-name" placeholder="e.g. Pastéis de Belém">
+    </div>
+    <div class="ms-row">
+      <div class="ms-field">
+        <label>City</label>
+        <select id="place-city">
+          <option value="Lisbon">🇵🇹 Lisbon</option>
+          <option value="Paris">🇫🇷 Paris</option>
+          <option value="Nice">🇫🇷 Nice</option>
+          <option value="Monaco">🇲🇨 Monaco</option>
+          <option value="Cannes">🇫🇷 Cannes</option>
+          <option value="Barcelona">🇪🇸 Barcelona</option>
+          <option value="Madrid">🇪🇸 Madrid</option>
+          <option value="Copenhagen">🇩🇰 Copenhagen</option>
+          <option value="Milan">🇮🇹 Milan</option>
+          <option value="Como">🇮🇹 Como</option>
+          <option value="Lucerne">🇨🇭 Lucerne</option>
+          <option value="Interlaken">🇨🇭 Interlaken</option>
+          <option value="Bern">🇨🇭 Bern</option>
+          <option value="Zürich">🇨🇭 Zürich</option>
+          <option value="Rome">🇮🇹 Rome</option>
+          <option value="Naples">🇮🇹 Naples</option>
+          <option value="Amalfi">🇮🇹 Amalfi</option>
+        </select>
+      </div>
+      <div class="ms-field">
+        <label>Type</label>
+        <select id="place-type">
+          <option value="restaurant">🍽️ Restaurant</option>
+          <option value="place">📍 Place</option>
+        </select>
+      </div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-field">
+        <label>Bill Amount</label>
+        <input type="number" id="place-amount" placeholder="0.00" step="0.01" inputmode="decimal">
+      </div>
+      <div class="ms-field">
+        <label>Currency</label>
+        <select id="place-currency">
+          <option value="EUR">EUR €</option>
+          <option value="CHF">CHF ₣</option>
+          <option value="AUD">AUD A$</option>
+          <option value="GBP">GBP £</option>
+          <option value="DKK">DKK kr</option>
+        </select>
+      </div>
+    </div>
+    <div class="ms-field">
+      <label>Rating</label>
+      <div id="place-rating-stars" style="font-size:24px;cursor:pointer;letter-spacing:4px;" onclick="setPlaceRating(event)">☆☆☆☆☆</div>
+      <input type="hidden" id="place-rating" value="0">
+    </div>
+    <div class="ms-field">
+      <label>Date Visited</label>
+      <input type="date" id="place-date">
+    </div>
+    <div class="ms-field">
+      <label>Review / Notes</label>
+      <textarea id="place-review" placeholder="How was it?"></textarea>
+    </div>
+    <input type="hidden" id="place-edit-id" value="">
+    <button class="ms-save-btn" onclick="savePlace()">💾 Save</button>
+  </div>
+</div>
+
+<footer>Europe 2026 · Siam Palette Group · v7 April 2026</footer>
 
 <script>
 // ===== SUPABASE CONFIG =====
@@ -1227,8 +1624,9 @@ function switchTab(t){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+t).classList.add('active');
-  const idx={'trip':0,'booking':1,'notes':2};
+  const idx={'trip':0,'booking':1,'notes':2,'budget':3};
   document.querySelectorAll('.tab-btn')[idx[t]].classList.add('active');
+  if(t==='budget')renderBudgetTab();
 }
 
 // ===== COUNTRY EXPAND/COLLAPSE =====
@@ -1539,8 +1937,9 @@ function showAddEvent(btn){
   if(!form){
     form=document.createElement('div');
     form.className='add-ev-form';
+    let hourOpts='';for(let h=0;h<24;h++)hourOpts+=`<option value="${String(h).padStart(2,'0')}">${String(h).padStart(2,'0')}</option>`;
     form.innerHTML=`
-      <div class="form-row"><input type="text" class="ev-time-input" placeholder="เวลา เช่น 10:00" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px"><input type="text" class="ev-title-input" placeholder="Title" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px"></div>
+      <div class="form-row"><div class="time-select-row"><select class="ev-hour-input">${hourOpts}</select><span class="time-colon">:</span><select class="ev-min-input"><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select></div><input type="text" class="ev-title-input" placeholder="Title" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;flex:1"></div>
       <div class="form-row full" style="margin-top:6px"><textarea class="ev-detail-input" placeholder="Detail (optional)" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;min-height:40px;width:100%;resize:vertical"></textarea></div>
       <div style="display:flex;gap:8px;margin-top:6px;align-items:center">
         <select class="ev-dot-input" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px"><option value="act">Activity</option><option value="food">Food</option><option value="fly">Flight</option><option value="train">Train</option><option value="hotel">Hotel</option><option value="must">Must See</option><option value="rec">Recommended</option><option value="opt">Optional</option></select>
@@ -1555,7 +1954,9 @@ async function saveEvent(btn){
   const form=btn.closest('.add-ev-form');
   const db=form.closest('.db');
   const cb=db.closest('.cb');
-  const time=form.querySelector('.ev-time-input').value.trim()||'';
+  const hh=form.querySelector('.ev-hour-input').value;
+  const mm=form.querySelector('.ev-min-input').value;
+  const time=hh+':'+mm;
   const title=form.querySelector('.ev-title-input').value.trim();
   const detail=form.querySelector('.ev-detail-input').value.trim();
   const dotType=form.querySelector('.ev-dot-input').value;
@@ -1574,10 +1975,24 @@ function renderUserEvent(ev,dbEl){
   const row=document.createElement('div');
   row.className='ev user-ev';
   row.dataset.eventId=ev.id;
+  row.dataset.time=ev.time||'99:99';
   row.innerHTML=`<span class="ev-st none"></span><span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title">${ev.title}<span class="user-ev-actions"><button onclick="deleteEvent(${ev.id})" title="Delete">🗑️</button></span></div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
-  // Insert before the add-ev-form or at end
-  const form=dbEl.querySelector('.add-ev-form');
-  if(form){dbEl.insertBefore(row,form);}else{dbEl.appendChild(row);}
+  // Insert sorted by time — find correct position among all .ev elements
+  const evTime=ev.time||'99:99';
+  const allEvs=dbEl.querySelectorAll('.ev');
+  let inserted=false;
+  for(const existing of allEvs){
+    const existTime=existing.querySelector('.ev-time')?.textContent?.trim()||'';
+    if(existTime && evTime < existTime){
+      dbEl.insertBefore(row,existing);
+      inserted=true;
+      break;
+    }
+  }
+  if(!inserted){
+    const form=dbEl.querySelector('.add-ev-form');
+    if(form){dbEl.insertBefore(row,form);}else{dbEl.appendChild(row);}
+  }
 }
 async function deleteEvent(id){
   if(!confirm('ลบ Event นี้?'))return;
@@ -1650,6 +2065,432 @@ async function loadEvents(){
   });
 }
 
+// ===== PLACES/RESTAURANTS =====
+let PLACES=[];
+let _placePhotoFile=null;
+let _placesCurrentType='place';
+
+async function loadPlaces(){
+  PLACES=await sbFetch('trip_places?select=*&order=city.asc,created_at.desc');
+  updatePlacesCounts();
+}
+function updatePlacesCounts(){
+  const pc=PLACES.filter(p=>p.type==='place').length;
+  const rc=PLACES.filter(p=>p.type==='restaurant').length;
+  const tagP=document.getElementById('tag-places');
+  const tagR=document.getElementById('tag-restaurants');
+  if(tagP)tagP.textContent='📍 '+(pc?pc+' ':'')+'Places';
+  if(tagR)tagR.textContent='🍽️ '+(rc?rc+' ':'')+'Restaurants';
+}
+
+function openPlacesPage(type){
+  _placesCurrentType=type;
+  const overlay=document.getElementById('places-overlay');
+  const title=document.getElementById('places-page-title');
+  title.textContent=type==='restaurant'?'🍽️ Restaurants':'📍 Places';
+  overlay.classList.add('show');
+  renderPlacesList();
+}
+function closePlacesPage(){document.getElementById('places-overlay').classList.remove('show');}
+
+function renderPlacesList(){
+  const wrap=document.getElementById('places-list');
+  const filtered=PLACES.filter(p=>p.type===_placesCurrentType);
+  if(!filtered.length){
+    const icon=_placesCurrentType==='restaurant'?'🍽️':'📍';
+    const label=_placesCurrentType==='restaurant'?'restaurants':'places';
+    wrap.innerHTML=`<div class="places-empty"><div class="pe-icon">${icon}</div>ยังไม่มี ${label}<br><span style="font-size:11px">กด + Add เพื่อเพิ่ม</span></div>`;
+    return;
+  }
+  // Group by city
+  const groups={};
+  filtered.forEach(p=>{if(!groups[p.city])groups[p.city]=[];groups[p.city].push(p);});
+  let html='';
+  for(const [city,items] of Object.entries(groups)){
+    html+=`<div class="places-city-group"><div class="places-city-title">${CITY_FLAGS[city]||'🏙️'} ${city}</div>`;
+    items.forEach(p=>{
+      const stars='★'.repeat(p.rating||0)+'☆'.repeat(5-(p.rating||0));
+      const cur=CUR_SYMBOLS[p.currency]||p.currency||'';
+      const amtStr=p.amount?`${cur}${parseFloat(p.amount).toLocaleString('en',{minimumFractionDigits:2})}`:'';
+      const dateStr=p.linked_date?new Date(p.linked_date+'T00:00:00').toLocaleDateString('en',{day:'numeric',month:'short'}):'';
+      const photoHtml=(p.photos&&p.photos.length)?`<img src="${SB_URL}/storage/v1/object/public/trip-images/${p.photos[0]}" onclick="event.stopPropagation();openLightbox(this.src)">`:(_placesCurrentType==='restaurant'?'🍽️':'📍');
+      html+=`<div class="place-card" onclick="editPlace(${p.id})">
+        <div class="pc-photo">${photoHtml}</div>
+        <div class="pc-body">
+          <div class="pc-name">${p.name}</div>
+          <div class="pc-rating">${stars}</div>
+          ${p.review?`<div class="pc-review">${p.review}</div>`:''}
+          <div class="pc-meta">${dateStr?`<span>📅 ${dateStr}</span>`:''}${p.tags&&p.tags.length?p.tags.map(t=>`<span>#${t}</span>`).join(''):''}</div>
+          ${p.linked_date?`<span class="pc-link" onclick="event.stopPropagation();goDay('${p.linked_date}')">→ Day by Day</span>`:''}
+        </div>
+        ${amtStr?`<div class="pc-amount">${amtStr}</div>`:''}
+        <div class="pc-actions"><button onclick="event.stopPropagation();deletePlace(${p.id})" title="Delete">🗑️</button></div>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+  wrap.innerHTML=html;
+}
+
+function goDay(dateStr){
+  closePlacesPage();
+  switchTab('trip');
+  setTimeout(()=>{
+    const db=document.querySelector('.db[data-date="'+dateStr+'"]');
+    if(db){db.scrollIntoView({behavior:'smooth',block:'center'});}
+  },150);
+}
+
+function openPlaceModal(editData){
+  _placePhotoFile=null;
+  document.getElementById('place-edit-id').value='';
+  document.getElementById('place-modal-title').textContent='➕ Add '+(_placesCurrentType==='restaurant'?'Restaurant':'Place');
+  document.getElementById('place-name').value=editData?.name||'';
+  document.getElementById('place-city').value=editData?.city||'Lisbon';
+  document.getElementById('place-type').value=editData?.type||_placesCurrentType;
+  document.getElementById('place-amount').value=editData?.amount||'';
+  document.getElementById('place-currency').value=editData?.currency||'EUR';
+  document.getElementById('place-date').value=editData?.linked_date||new Date().toISOString().split('T')[0];
+  document.getElementById('place-review').value=editData?.review||'';
+  document.getElementById('place-rating').value=editData?.rating||0;
+  updateStarDisplay(editData?.rating||0);
+  const area=document.getElementById('place-photo-area');
+  if(editData?.photos&&editData.photos.length){
+    area.classList.add('has-img');
+    area.innerHTML=`<img src="${SB_URL}/storage/v1/object/public/trip-images/${editData.photos[0]}">`;
+  }else{
+    area.classList.remove('has-img');
+    area.innerHTML='<div class="ms-receipt-icon">📷</div><div class="ms-receipt-text">Tap to add photo</div>';
+  }
+  if(editData?.id){
+    document.getElementById('place-edit-id').value=editData.id;
+    document.getElementById('place-modal-title').textContent='✏️ Edit';
+  }
+  document.getElementById('place-modal').classList.add('show');
+}
+function closePlaceModal(){document.getElementById('place-modal').classList.remove('show');}
+
+function setPlaceRating(e){
+  const rect=e.currentTarget.getBoundingClientRect();
+  const x=e.clientX-rect.left;
+  const rating=Math.min(5,Math.max(1,Math.ceil(x/rect.width*5)));
+  document.getElementById('place-rating').value=rating;
+  updateStarDisplay(rating);
+}
+function updateStarDisplay(r){
+  document.getElementById('place-rating-stars').textContent='★'.repeat(r)+'☆'.repeat(5-r);
+}
+
+function previewPlacePhoto(input){
+  if(!input.files[0])return;
+  _placePhotoFile=input.files[0];
+  const area=document.getElementById('place-photo-area');
+  const reader=new FileReader();
+  reader.onload=e=>{area.innerHTML=`<img src="${e.target.result}">`;area.classList.add('has-img');};
+  reader.readAsDataURL(_placePhotoFile);
+}
+
+async function savePlace(){
+  const name=document.getElementById('place-name').value.trim();
+  if(!name){alert('กรุณาใส่ชื่อ');return;}
+  const data={
+    name,
+    city:document.getElementById('place-city').value,
+    type:document.getElementById('place-type').value,
+    amount:parseFloat(document.getElementById('place-amount').value)||null,
+    currency:document.getElementById('place-currency').value,
+    rating:parseInt(document.getElementById('place-rating').value)||null,
+    linked_date:document.getElementById('place-date').value||null,
+    review:document.getElementById('place-review').value.trim()||null
+  };
+  // Upload photo
+  if(_placePhotoFile){
+    const path='places/'+Date.now()+'_'+_placePhotoFile.name;
+    await fetch(SB_URL+'/storage/v1/object/trip-images/'+path,{
+      method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':_placePhotoFile.type},body:_placePhotoFile
+    });
+    data.photos=[path];
+  }
+  const editId=document.getElementById('place-edit-id').value;
+  if(editId){
+    await sbFetch('trip_places?id=eq.'+editId,{method:'PATCH',body:JSON.stringify(data)});
+  }else{
+    await sbInsert('trip_places',[data]);
+  }
+  _placePhotoFile=null;
+  closePlaceModal();
+  await loadPlaces();
+  renderPlacesList();
+  updatePlacesCounts();
+}
+
+function editPlace(id){
+  const p=PLACES.find(x=>x.id===id);
+  if(p)openPlaceModal(p);
+}
+
+async function deletePlace(id){
+  if(!confirm('ลบรายการนี้?'))return;
+  await sbDelete('trip_places','id',id);
+  await loadPlaces();
+  renderPlacesList();
+  updatePlacesCounts();
+}
+
+// ===== BUDGET TAB =====
+let EXPENSES=[]; // loaded from Supabase
+let _expReceiptFile=null; // temp file for upload
+
+const CITY_FLAGS={Lisbon:'🇵🇹',Paris:'🇫🇷',Nice:'🇫🇷',Monaco:'🇲🇨',Cannes:'🇫🇷',Barcelona:'🇪🇸',Madrid:'🇪🇸',Copenhagen:'🇩🇰',Milan:'🇮🇹',Como:'🇮🇹',Lucerne:'🇨🇭',Interlaken:'🇨🇭',Bern:'🇨🇭','Zürich':'🇨🇭',Rome:'🇮🇹',Naples:'🇮🇹',Amalfi:'🇮🇹'};
+const EXP_CAT_ICONS={food:'🍽️',transport:'🚕',shopping:'🛍️',tickets:'🎟️',grocery:'🛒',other:'📦'};
+const EXP_CAT_LABELS={food:'Food',transport:'Transport',shopping:'Shopping',tickets:'Tickets',grocery:'Grocery',other:'Other'};
+const CUR_SYMBOLS={EUR:'€',CHF:'₣',AUD:'A$',GBP:'£',DKK:'kr'};
+
+async function loadExpenses(){
+  EXPENSES=await sbFetch('trip_expenses?select=*&order=expense_date.desc,created_at.desc');
+  // Populate city filter
+  const sel=document.getElementById('bg-filter-city');
+  if(sel&&sel.options.length<=1){
+    Object.keys(CITY_FLAGS).forEach(c=>{
+      const o=document.createElement('option');o.value=c;o.textContent=CITY_FLAGS[c]+' '+c;sel.appendChild(o);
+    });
+  }
+}
+
+function renderBudgetTab(){
+  // Pre-booked total from DB (trip_bookings)
+  let prebooked=0;
+  Object.values(DB).forEach(d=>{if(d.amount)prebooked+=parseFloat(d.amount)||0;});
+
+  // Actual total from EXPENSES
+  let actual=0;
+  const byCity={},byCat={},byPerson={};
+  const filterCity=document.getElementById('bg-filter-city')?.value||'';
+  const filterCat=document.getElementById('bg-filter-cat')?.value||'';
+
+  EXPENSES.forEach(e=>{
+    const amt=parseFloat(e.amount)||0;
+    actual+=amt;
+    // by city
+    byCity[e.city]=(byCity[e.city]||0)+amt;
+    // by category
+    byCat[e.category]=(byCat[e.category]||0)+amt;
+    // by person (for settlement)
+    const payer=e.paid_by||'Onn';
+    if(!byPerson[payer])byPerson[payer]={paid:0,share:0};
+    byPerson[payer].paid+=amt;
+    // split shares
+    const splitWith=e.split_with||[];
+    const splitCount=splitWith.length||1;
+    const perPerson=amt/splitCount;
+    splitWith.forEach(p=>{
+      if(!byPerson[p])byPerson[p]={paid:0,share:0};
+      byPerson[p].share+=perPerson;
+    });
+  });
+
+  // Also add pre-booked amounts to city mapping from ITEMS_META
+  const prebookedByCity={};
+  Object.values(DB).forEach(d=>{
+    if(!d.amount)return;
+    const meta=ITEMS_META.find(m=>m.id===Object.keys(DB).find(k=>DB[k]===d));
+    // Try to map city from label
+    let city='';
+    const label=(d.label||'').toLowerCase();
+    Object.keys(CITY_FLAGS).forEach(c=>{if(label.includes(c.toLowerCase()))city=c;});
+    if(city){prebookedByCity[city]=(prebookedByCity[city]||0)+(parseFloat(d.amount)||0);}
+  });
+
+  // Render summary cards
+  document.getElementById('bg-prebooked').textContent='A$'+prebooked.toLocaleString('en',{minimumFractionDigits:0});
+  document.getElementById('bg-actual').textContent='A$'+actual.toLocaleString('en',{minimumFractionDigits:0});
+  const total=prebooked+actual;
+  document.getElementById('bg-total').textContent='A$'+total.toLocaleString('en',{minimumFractionDigits:0});
+
+  // Budget bar (default budget $10,000 — can be changed)
+  const budget=10000;
+  const pct=Math.min(100,Math.round(total/budget*100));
+  document.getElementById('bg-bar-fill').style.width=pct+'%';
+  document.getElementById('bg-pct').textContent=pct+'% of A$'+budget.toLocaleString('en')+' budget';
+
+  // By City
+  const cityEl=document.getElementById('bg-by-city');
+  const allCities={...byCity};
+  // merge prebooked cities
+  Object.keys(prebookedByCity).forEach(c=>{allCities[c]=(allCities[c]||0)+prebookedByCity[c];});
+  const maxCity=Math.max(1,...Object.values(allCities));
+  cityEl.innerHTML=Object.entries(allCities).sort((a,b)=>b[1]-a[1]).map(([city,amt])=>{
+    const pct=Math.round(amt/maxCity*100);
+    return `<div class="city-bar">
+      <span class="cb-flag">${CITY_FLAGS[city]||'🏙️'}</span>
+      <span class="cb-name">${city}</span>
+      <div class="cb-bar-wrap"><div class="cb-bar-fill act" style="width:${pct}%"></div></div>
+      <span class="cb-amount">€${amt.toLocaleString('en',{minimumFractionDigits:0})}</span>
+    </div>`;
+  }).join('')||'<div class="expense-empty">ยังไม่มีข้อมูล</div>';
+
+  // By Category (actual only)
+  const catEl=document.getElementById('bg-by-cat');
+  const maxCat=Math.max(1,...Object.values(byCat));
+  catEl.innerHTML=Object.entries(byCat).sort((a,b)=>b[1]-a[1]).map(([cat,amt])=>{
+    const pct=Math.round(amt/maxCat*100);
+    return `<div class="cat-bar">
+      <span class="catb-icon">${EXP_CAT_ICONS[cat]||'📦'}</span>
+      <span class="catb-name">${EXP_CAT_LABELS[cat]||cat}</span>
+      <div class="catb-bar-wrap"><div class="catb-bar-fill" style="width:${pct}%"></div></div>
+      <span class="catb-amount">€${amt.toLocaleString('en',{minimumFractionDigits:0})}</span>
+    </div>`;
+  }).join('')||'<div class="expense-empty">ยังไม่มีข้อมูล</div>';
+
+  // Settlement
+  const settleEl=document.getElementById('bg-settlement');
+  const people=Object.keys(byPerson);
+  if(people.length>=2){
+    let html='<div class="settle-card">';
+    people.forEach(p=>{
+      const net=byPerson[p].paid-byPerson[p].share;
+      const cls=net>0?'gets':net<0?'owes':'';
+      const sign=net>0?'+':'';
+      html+=`<div class="sc-row"><span class="sc-name">${p}</span><span class="sc-amount">Paid: €${byPerson[p].paid.toFixed(0)}</span><span class="sc-amount">Share: €${byPerson[p].share.toFixed(0)}</span><span class="sc-amount ${cls}">${sign}€${net.toFixed(0)}</span></div>`;
+    });
+    html+='</div>';
+    settleEl.innerHTML=html;
+  }else{
+    settleEl.innerHTML='<div class="expense-empty">เพิ่ม expense แล้วจะคำนวณ settlement ให้</div>';
+  }
+
+  // Expense list (filtered)
+  const listEl=document.getElementById('bg-expense-list');
+  let filtered=EXPENSES;
+  if(filterCity)filtered=filtered.filter(e=>e.city===filterCity);
+  if(filterCat)filtered=filtered.filter(e=>e.category===filterCat);
+
+  if(!filtered.length){
+    listEl.innerHTML='<div class="expense-empty">📝 ยังไม่มี expense — กด + Add Expense เพื่อเริ่มบันทึก</div>';
+    return;
+  }
+  listEl.innerHTML=filtered.map(e=>{
+    const icon=EXP_CAT_ICONS[e.category]||'📦';
+    const cur=CUR_SYMBOLS[e.currency]||e.currency;
+    const dateStr=e.expense_date?new Date(e.expense_date+'T00:00:00').toLocaleDateString('en',{day:'numeric',month:'short'}):'';
+    const receiptThumb=e.receipt_path?`<img src="${SB_URL}/storage/v1/object/public/trip-images/${e.receipt_path}" onclick="event.stopPropagation();openLightbox(this.src)">`:'📷';
+    return `<div class="expense-item" onclick="editExpense(${e.id})">
+      <div class="ei-receipt">${receiptThumb}</div>
+      <div class="ei-body">
+        <div class="ei-title">${icon} ${e.store_name||'Expense'}</div>
+        <div class="ei-meta">${CITY_FLAGS[e.city]||''} ${e.city} · ${dateStr} · ${EXP_CAT_LABELS[e.category]||e.category}${e.paid_by?' · paid by '+e.paid_by:''}</div>
+      </div>
+      <div class="ei-amount">${cur}${parseFloat(e.amount).toLocaleString('en',{minimumFractionDigits:2})}</div>
+      <div class="ei-actions"><button onclick="event.stopPropagation();deleteExpense(${e.id})" title="Delete">🗑️</button></div>
+    </div>`;
+  }).join('');
+}
+
+// Modal
+function openExpenseModal(editData){
+  const modal=document.getElementById('expense-modal');
+  _expReceiptFile=null;
+  document.getElementById('exp-edit-id').value='';
+  document.getElementById('expense-modal-title').textContent='➕ Add Expense';
+  // Reset
+  document.getElementById('exp-amount').value=editData?.amount||'';
+  document.getElementById('exp-currency').value=editData?.currency||'EUR';
+  document.getElementById('exp-store').value=editData?.store_name||'';
+  document.getElementById('exp-city').value=editData?.city||'Lisbon';
+  document.getElementById('exp-cat').value=editData?.category||'food';
+  document.getElementById('exp-date').value=editData?.expense_date||new Date().toISOString().split('T')[0];
+  document.getElementById('exp-note').value=editData?.note||'';
+  document.getElementById('exp-paid-by').value=editData?.paid_by||'Onn';
+  // Reset receipt area
+  const area=document.getElementById('exp-receipt-area');
+  if(editData?.receipt_path){
+    area.classList.add('has-img');
+    area.innerHTML=`<img src="${SB_URL}/storage/v1/object/public/trip-images/${editData.receipt_path}">`;
+  }else{
+    area.classList.remove('has-img');
+    area.innerHTML='<div class="ms-receipt-icon">📷</div><div class="ms-receipt-text">Tap to take photo or choose from gallery</div>';
+  }
+  // Split chips
+  const splitWith=editData?.split_with||['Onn','P'];
+  document.querySelectorAll('.ms-split-chip').forEach(c=>{
+    c.classList.toggle('active',splitWith.includes(c.dataset.person));
+  });
+  if(editData?.id){
+    document.getElementById('exp-edit-id').value=editData.id;
+    document.getElementById('expense-modal-title').textContent='✏️ Edit Expense';
+  }
+  modal.classList.add('show');
+}
+function closeExpenseModal(){document.getElementById('expense-modal').classList.remove('show');}
+
+function previewExpReceipt(input){
+  if(!input.files[0])return;
+  _expReceiptFile=input.files[0];
+  const area=document.getElementById('exp-receipt-area');
+  const reader=new FileReader();
+  reader.onload=e=>{area.innerHTML=`<img src="${e.target.result}">`;area.classList.add('has-img');};
+  reader.readAsDataURL(_expReceiptFile);
+}
+
+function toggleSplitChip(el){el.classList.toggle('active');}
+
+async function saveExpense(){
+  const amt=document.getElementById('exp-amount').value.trim();
+  const store=document.getElementById('exp-store').value.trim();
+  if(!amt){alert('กรุณาใส่จำนวนเงิน');return;}
+  if(!store){alert('กรุณาใส่ชื่อร้าน/สถานที่');return;}
+
+  const splitWith=[];
+  document.querySelectorAll('.ms-split-chip.active').forEach(c=>splitWith.push(c.dataset.person));
+
+  const data={
+    city:document.getElementById('exp-city').value,
+    store_name:store,
+    amount:parseFloat(amt),
+    currency:document.getElementById('exp-currency').value,
+    category:document.getElementById('exp-cat').value,
+    expense_date:document.getElementById('exp-date').value||null,
+    note:document.getElementById('exp-note').value.trim()||null,
+    paid_by:document.getElementById('exp-paid-by').value,
+    split_with:splitWith
+  };
+
+  // Upload receipt if any
+  if(_expReceiptFile){
+    const path='expenses/'+Date.now()+'_'+_expReceiptFile.name;
+    await fetch(SB_URL+'/storage/v1/object/trip-images/'+path,{
+      method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':_expReceiptFile.type},body:_expReceiptFile
+    });
+    data.receipt_path=path;
+  }
+
+  const editId=document.getElementById('exp-edit-id').value;
+  if(editId){
+    // Update existing
+    await sbFetch('trip_expenses?id=eq.'+editId,{method:'PATCH',body:JSON.stringify(data)});
+  }else{
+    // Insert new
+    await sbInsert('trip_expenses',[data]);
+  }
+
+  _expReceiptFile=null;
+  closeExpenseModal();
+  await loadExpenses();
+  renderBudgetTab();
+}
+
+function editExpense(id){
+  const e=EXPENSES.find(x=>x.id===id);
+  if(e)openExpenseModal(e);
+}
+
+async function deleteExpense(id){
+  if(!confirm('ลบ Expense นี้?'))return;
+  await sbDelete('trip_expenses','id',id);
+  await loadExpenses();
+  renderBudgetTab();
+}
+
 // ===== INIT =====
 async function init(){
   const rows=await sbFetch('trip_bookings?select=*');
@@ -1659,6 +2500,8 @@ async function init(){
   initMap();
   loadNotes();
   loadEvents();
+  loadExpenses();
+  loadPlaces();
 }
 init();
 </script>
