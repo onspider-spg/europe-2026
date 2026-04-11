@@ -623,7 +623,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div class="stats-popup-item"><span class="sp-flag">🇪🇸</span><span class="sp-name">Madrid</span><span class="sp-date">18–21 May · 2 คืน</span></div>
     <div class="stats-popup-item"><span class="sp-flag">🇩🇰</span><span class="sp-name">Copenhagen</span><span class="sp-date">21–24 May · 3 คืน</span></div>
     <div class="stats-popup-item"><span class="sp-flag">🇮🇹</span><span class="sp-name">Milan</span><span class="sp-date">24–25 May · 1 คืน</span></div>
-    <div class="stats-popup-item"><span class="sp-flag">🇮🇹</span><span class="sp-name">Como</span><span class="sp-date">25–26 May · 1 คืน</span></div>
+    <div class="stats-popup-item"><span class="sp-flag">🇮🇹</span><span class="sp-name">Varenna (Lake Como)</span><span class="sp-date">26–27 May · 1 คืน</span></div>
     <div class="stats-popup-item"><span class="sp-flag">🇨🇭</span><span class="sp-name">Lucerne</span><span class="sp-date">26–27 May · 1 คืน</span></div>
     <div class="stats-popup-item"><span class="sp-flag">🇨🇭</span><span class="sp-name">Interlaken</span><span class="sp-date">27–30 May · 3 คืน</span></div>
     <div class="stats-popup-item"><span class="sp-flag">🇨🇭</span><span class="sp-name">Bern</span><span class="sp-date">30–31 May · 1 คืน</span></div>
@@ -690,7 +690,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
       <option value="Italy-Venice">🇮🇹 Venice</option>
       <option value="Italy-Bologna">🇮🇹 Bologna</option>
       <option value="Italy-Milan">🇮🇹 Milan</option>
-      <option value="Italy-Como">🇮🇹 Como</option>
+      <option value="Italy-Varenna">🇮🇹 Varenna (Lake Como)</option>
       <option value="Swiss-Lucerne">🇨🇭 Lucerne</option>
       <option value="Swiss-Grindelwald">🇨🇭 Grindelwald</option>
       <option value="Swiss-Bern">🇨🇭 Bern</option>
@@ -1008,19 +1008,31 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   </div><!-- /cb-body -->
 </div>
 
-<!-- ====== COMO ====== -->
-<div class="cb" data-country="Italy-Como">
-  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Como</span><span class="cd">26–27 May</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
+<!-- ====== VARENNA ====== -->
+<div class="cb" data-country="Italy-Varenna">
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Varenna (Lake Como)</span><span class="cd">26–27 May</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    หมู่บ้านเล็กๆ ริม Lake Como — postcard village 700 คน · ร้านอาหารริมทะเลสาบ · Ferry ไป Bellagio 15 นาที · ตอนเย็นนักท่องเที่ยวกลับหมด เหลือแค่เรา
+  </div>
+
   <div class="db travel day-collapsed" data-date="2026-05-26">
-    <div class="dh"><span class="dn">26 MAY</span><span class="dd">อังคาร 26 May</span><span class="dt">· Milan → Como</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">26 MAY</span><span class="dd">อังคาร 26 May</span><span class="dt">· Milan → Varenna + Bellagio Day Trip</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Milan</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-train-como" onclick="goBooking('bk-train-como',event)">🚄</span><span class="ev-time">~10:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Trenord Milan → Como San Giovanni &nbsp;<a class="tbadge warn" onclick="goBooking('bk-train-como',event)">ซื้อล่วงหน้า</a></div><div class="ev-detail">~35 นาที · ~€5 · trenord.it</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-como" onclick="goBooking('bk-hotel-como',event)">🏨</span><span class="ev-time">11:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Como ริมทะเลสาบ &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-como',event)">⚠️ ยังไม่จอง</a></div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">บ่าย</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Ferry Lake Como + Bellagio day trip</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้าจาก Milan → ถึง Varenna → เดินเล่นหมู่บ้าน + Villa Monastero → Ferry ไป Bellagio → กลับมา dinner sunset ริมทะเลสาบ</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Milan → Varenna-Esino</div><div class="ev-detail">Milano Centrale → Varenna-Esino · ~1 ชม. · train ตรง · วิวทะเลสาบสวยมาก</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-varenna" onclick="goBooking('bk-hotel-varenna',event)">🏨</span><span class="ev-time">10:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Varenna · ฝากกระเป๋า</div><div class="ev-detail">โรงแรมริมทะเลสาบ · หมู่บ้านเล็กเดินถึงทุกที่</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ เดินเล่นหมู่บ้าน Varenna</div><div class="ev-detail">ซอยแคบ ดอกไม้ บันได ริมทะเลสาบ · Passeggiata degli Innamorati (ทางเดินคนรัก)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Villa Monastero</div><div class="ev-detail">สวนริมทะเลสาบยาว 2 กม. · botanical garden + villa เก่า · EUR 10</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Lunch — Il Cavatappi</div><div class="ev-detail">ริมท่าเรือ Varenna · homemade pasta + seasonal ingredients · EUR 20-30</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">⭐ Ferry Varenna → Bellagio</div><div class="ev-detail">~15 นาที · วิวทะเลสาบ + ภูเขา · EUR 5</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:45</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Bellagio — Pearl of Lake Como</div><div class="ev-detail">เดินเล่นซอย cobblestone · ร้านค้า boutique · Gardens of Villa Melzi · gelato ริมน้ำ · 2 ชม.</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Ferry Bellagio → Varenna</div><div class="ev-detail">กลับ Varenna · ~15 นาที</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in ห้อง + พักผ่อน</div><div class="ev-detail">พักเตรียมตัวก่อน dinner</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Dinner sunset — Ristorante La Vista</div><div class="ev-detail">ริมทะเลสาบ · sunset dining วิว Lake Como · นักท่องเที่ยวกลับหมดแล้ว เงียบมาก · EUR 30-45</div></div></div>
     </div>
   </div>
+
   </div><!-- /cb-body -->
 </div>
 
@@ -1034,15 +1046,17 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   </div>
 
   <div class="db travel day-collapsed" data-date="2026-05-27">
-    <div class="dh"><span class="dn">27 MAY</span><span class="dd">พุธ 27 May</span><span class="dt">· Como → Lucerne</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">27 MAY</span><span class="dd">พุธ 27 May</span><span class="dt">· Varenna → Lugano → Lucerne</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">จาก Como ข้าม Alps → ถึง Lucerne บ่าย → Chapel Bridge + เดินเมืองเก่า → fondue dinner</div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Como → Lucerne</div><div class="ev-detail">~3 ชม. (เปลี่ยนที่ Milano/Arth-Goldau) · วิว Alps สวยมาก</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-lucerne" onclick="goBooking('bk-hotel-lucerne',event)">🏨</span><span class="ev-time">13:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Lucerne · Old Town</div><div class="ev-detail">แนะนำโซน Old Town ใกล้ Chapel Bridge</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Chapel Bridge (Kapellbrücke)</div><div class="ev-detail">สะพานไม้เก่าแก่ที่สุดในยุโรป · ภาพวาดบนเพดาน · Water Tower · ฟรี</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ เดินเมืองเก่า Lucerne</div><div class="ev-detail">Kornmarkt + Weinmarkt + กำแพงเมืองเก่า Museggmauer (ขึ้นหอคอยได้) · ฟรี</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Lion Monument</div><div class="ev-detail">รูปสลักสิงโตบนหน้าผา · Mark Twain เรียกว่า "the most mournful piece of stone in the world"</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ เดินริม Lake Lucerne</div><div class="ev-detail">sunset ริมทะเลสาบ · วิว Alps + Pilatus · ฟรี</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้าเดินเล่น Varenna สุดท้าย → train ไป Lugano แวะ lunch ริมทะเลสาบ → train ต่อไป Lucerne เย็น → Chapel Bridge + fondue dinner</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เช้าเดินเล่น Varenna</div><div class="ev-detail">เดินริมทะเลสาบเช้าๆ เงียบสงบ · ถ่ายรูป · กาแฟ</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Varenna → Lugano</div><div class="ev-detail">~1.5 ชม. · วิวทะเลสาบ + Alps</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 แวะ Lugano</div><div class="ev-detail">เมือง Swiss ที่พูดอิตาเลียน · ทะเลสาบ Lugano สวย · เดินเล่น Old Town</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Lunch ริมทะเลสาบ Lugano</div><div class="ev-detail">อาหาร Italian quality ราคา Swiss · ริมน้ำ · CHF 20-30</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Lugano → Lucerne</div><div class="ev-detail">~2 ชม. · สาย Gotthard · วิว Alps สวยตลอดทาง</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-lucerne" onclick="goBooking('bk-hotel-lucerne',event)">🏨</span><span class="ev-time">16:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Lucerne · Old Town</div><div class="ev-detail">แนะนำโซน Old Town ใกล้ Chapel Bridge</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Chapel Bridge (Kapellbrücke)</div><div class="ev-detail">สะพานไม้เก่าแก่ที่สุดในยุโรป · ภาพวาดบนเพดาน · Water Tower · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ เดินเมืองเก่า Lucerne + Lake sunset</div><div class="ev-detail">Kornmarkt + Museggmauer กำแพงเมือง + เดินริม Lake Lucerne</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Fondue dinner — Stadtkeller</div><div class="ev-detail">Old Town · fondue + raclette ดั้งเดิม · Swiss folk music · CHF 30-45</div></div></div>
     </div>
   </div>
@@ -1799,7 +1813,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div id="notes-milan" class="notes-page" data-city="milan">
       <div class="notes-dest-header">
         <div class="notes-dest-flag">🇮🇹</div>
-        <div><div class="notes-dest-name">Milan · Como</div><div class="notes-dest-sub">Italy · 24–26 May</div></div>
+        <div><div class="notes-dest-name">Milan · Varenna</div><div class="notes-dest-sub">Italy · 25–27 May</div></div>
       </div>
       <div class="notes-coming"><div class="big">✍️</div>Notes สำหรับ Milan กำลังจะมาค่ะ</div>
       <div class="user-notes-container" data-city="milan"></div>
@@ -1963,7 +1977,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
           <option value="Madrid">🇪🇸 Madrid</option>
           <option value="Copenhagen">🇩🇰 Copenhagen</option>
           <option value="Milan">🇮🇹 Milan</option>
-          <option value="Como">🇮🇹 Como</option>
+          <option value="Varenna">🇮🇹 Varenna</option>
           <option value="Lucerne">🇨🇭 Lucerne</option>
           <option value="Interlaken">🇨🇭 Interlaken</option>
           <option value="Bern">🇨🇭 Bern</option>
@@ -2054,7 +2068,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
           <option value="Madrid">🇪🇸 Madrid</option>
           <option value="Copenhagen">🇩🇰 Copenhagen</option>
           <option value="Milan">🇮🇹 Milan</option>
-          <option value="Como">🇮🇹 Como</option>
+          <option value="Varenna">🇮🇹 Varenna</option>
           <option value="Lucerne">🇨🇭 Lucerne</option>
           <option value="Interlaken">🇨🇭 Interlaken</option>
           <option value="Bern">🇨🇭 Bern</option>
@@ -2188,7 +2202,7 @@ const ITEMS_META=[
   {id:'bk-ave',cat:'train',icon:'🚄',label:'AVE Barcelona → Madrid',date:'16 May',category:'trains'},
   {id:'bk-train-venice-bologna',cat:'train',icon:'🚄',label:'Venice → Bologna',date:'24 May',category:'trains'},
   {id:'bk-train-bologna-milan',cat:'train',icon:'🚄',label:'Bologna → Milan',date:'25 May',category:'trains'},
-  {id:'bk-train-como',cat:'train',icon:'🚄',label:'Trenord Milan → Como',date:'26 May',category:'trains'},
+  {id:'bk-train-varenna',cat:'train',icon:'🚄',label:'Milan → Varenna',date:'26 May',category:'trains'},
   {id:'bk-train-tirano',cat:'train',icon:'🚄',label:'Trenord Tirano → Milan',date:'2 Jun',category:'trains'},
   {id:'bk-train-bern-zurich',cat:'train',icon:'🚄',label:'Bern → Zürich',date:'31 May',category:'trains'},
   {id:'bk-train-rome-naples',cat:'train',icon:'🚄',label:'Frecciarossa Rome → Naples',date:'7 Jun',category:'trains'},
@@ -2203,7 +2217,7 @@ const ITEMS_META=[
   {id:'bk-hotel-venice',cat:'hotel',icon:'🏨',label:'Venice',date:'22–24 May',category:'hotels'},
   {id:'bk-hotel-bologna',cat:'hotel',icon:'🏨',label:'Bologna',date:'24–25 May',category:'hotels'},
   {id:'bk-hotel-milan',cat:'hotel',icon:'🏨',label:'Milan · Brera/Navigli',date:'25–26 May',category:'hotels'},
-  {id:'bk-hotel-como',cat:'hotel',icon:'🏨',label:'Como · ริมทะเลสาบ',date:'26–27 May',category:'hotels'},
+  {id:'bk-hotel-varenna',cat:'hotel',icon:'🏨',label:'Varenna · Lake Como',date:'26–27 May',category:'hotels'},
   {id:'bk-hotel-lucerne',cat:'hotel',icon:'🏨',label:'Lucerne · Old Town',date:'27–28 May',category:'hotels'},
   {id:'bk-hotel-grindelwald',cat:'hotel',icon:'🏨',label:'Grindelwald',date:'28–30 May',category:'hotels'},
   {id:'bk-hotel-bern',cat:'hotel',icon:'🏨',label:'Bern · UNESCO Old Town',date:'30–31 May',category:'hotels'},
@@ -2689,7 +2703,7 @@ const COUNTRY_CITIES={
   'Spain':['Spain-Barcelona','Spain-Madrid'],
   'Denmark':['Denmark'],
   'Austria':['Austria'],
-  'Italy':['Italy-Venice','Italy-Bologna','Italy-Milan','Italy-Como','Italy-Milan2','Italy-Rome','Italy-Naples'],
+  'Italy':['Italy-Venice','Italy-Bologna','Italy-Milan','Italy-Varenna','Italy-Milan2','Italy-Rome','Italy-Naples'],
   'Switzerland':['Swiss-Lucerne','Swiss-Grindelwald','Swiss-Bern','Swiss-Zurich']
 };
 function filterByCountry(c){
@@ -2966,7 +2980,8 @@ function initMap(){
     {name:'Venice',flag:'🇮🇹',lat:45.4408,lng:12.3155,dates:'22–24 May',nights:'2 คืน'},
     {name:'Bologna',flag:'🇮🇹',lat:44.4949,lng:11.3426,dates:'24–25 May',nights:'1 คืน'},
     {name:'Milan',flag:'🇮🇹',lat:45.4642,lng:9.1900,dates:'25–26 May',nights:'1 คืน'},
-    {name:'Como',flag:'🇮🇹',lat:45.8080,lng:9.0852,dates:'26–27 May',nights:'1 คืน'},
+    {name:'Varenna',flag:'🇮🇹',lat:46.0117,lng:9.2847,dates:'26–27 May',nights:'1 คืน'},
+    {name:'Lugano',flag:'🇨🇭',lat:46.0037,lng:8.9511,dates:'27 May',nights:'transit'},
     {name:'Lucerne',flag:'🇨🇭',lat:47.0502,lng:8.3093,dates:'27–28 May',nights:'1 คืน'},
     {name:'Grindelwald',flag:'🇨🇭',lat:46.6240,lng:8.0413,dates:'28-30 May',nights:'2 คืน'},
     {name:'Bern',flag:'🇨🇭',lat:46.9480,lng:7.4474,dates:'30–31 May',nights:'1 คืน'},
@@ -2982,12 +2997,12 @@ function initMap(){
       .bindPopup(`<div style="font-family:'DM Sans',sans-serif;font-size:12px;line-height:1.6"><strong>${s.flag} ${s.name}</strong><br>${s.dates}<br>${s.nights}</div>`);
   });
 
-  // Route: Lisbon→Paris→Nice→Barcelona→Madrid→Copenhagen→Vienna→Venice→Bologna→Milan→Como→Lucerne→Interlaken→Bern→Zürich→(Bernina)→Milan→Rome→Naples→Amalfi
-  const mainRoute=[0,1,2,4,5,6,7,8,9,10,11,12,13,14,15,10,16,17,18];
+  // Route: Lisbon→Paris→Nice→Barcelona→Madrid→Copenhagen→Vienna→Venice→Bologna→Milan→Varenna→Lugano→Lucerne→Grindelwald→Bern→Zürich→(Bernina)→Milan→Rome→Naples→Amalfi
+  const mainRoute=[0,1,2,4,5,6,7,8,9,10,11,12,13,14,15,16,10,17,18,19];
   const trainCoords=mainRoute.map(i=>stops[i]?[stops[i].lat,stops[i].lng]:null).filter(Boolean);
   L.polyline(trainCoords,{color:'#5b3f9e',weight:2,opacity:.6}).addTo(map);
 
-  const flightPairs=[[1,0],[0,1],[2,5],[6,7],[7,8],[8,14]];
+  const flightPairs=[[1,0],[0,1],[2,5],[6,7],[7,8],[8,15]];
   flightPairs.forEach(([a,b])=>{
     L.polyline([[stops[a].lat,stops[a].lng],[stops[b].lat,stops[b].lng]],{
       color:'#1a4f8a',weight:2,dashArray:'8 6',opacity:.5
@@ -3189,7 +3204,7 @@ async function deletePlace(id){
 let EXPENSES=[]; // loaded from Supabase
 let _expReceiptFile=null; // temp file for upload
 
-const CITY_FLAGS={Lisbon:'🇵🇹',Paris:'🇫🇷',Nice:'🇫🇷',Monaco:'🇲🇨',Cannes:'🇫🇷',Barcelona:'🇪🇸',Madrid:'🇪🇸',Copenhagen:'🇩🇰',Milan:'🇮🇹',Como:'🇮🇹',Lucerne:'🇨🇭',Interlaken:'🇨🇭',Bern:'🇨🇭','Zürich':'🇨🇭',Rome:'🇮🇹',Naples:'🇮🇹',Amalfi:'🇮🇹'};
+const CITY_FLAGS={Lisbon:'🇵🇹',Paris:'🇫🇷',Nice:'🇫🇷',Monaco:'🇲🇨',Cannes:'🇫🇷',Barcelona:'🇪🇸',Madrid:'🇪🇸',Copenhagen:'🇩🇰',Milan:'🇮🇹',Varenna:'🇮🇹',Lugano:'🇨🇭',Lucerne:'🇨🇭',Interlaken:'🇨🇭',Bern:'🇨🇭','Zürich':'🇨🇭',Rome:'🇮🇹',Naples:'🇮🇹',Amalfi:'🇮🇹'};
 const EXP_CAT_ICONS={food:'🍽️',transport:'🚕',shopping:'🛍️',tickets:'🎟️',grocery:'🛒',other:'📦'};
 const EXP_CAT_LABELS={food:'Food',transport:'Transport',shopping:'Shopping',tickets:'Tickets',grocery:'Grocery',other:'Other'};
 const CUR_SYMBOLS={EUR:'€',CHF:'₣',AUD:'A$',GBP:'£',DKK:'kr'};
