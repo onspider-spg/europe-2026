@@ -109,7 +109,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .db{border-left:2px solid var(--border);margin-left:20px;padding-left:16px;padding-bottom:4px;position:relative;}
 .db::before{content:'';position:absolute;left:-5px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--border);border:2px solid var(--bg);}
 .db.travel::before{background:var(--fly);}
-.dh{display:flex;align-items:baseline;gap:8px;padding:10px 0 6px;}
+.dh{display:flex;align-items:baseline;gap:8px;padding:10px 0 6px;cursor:pointer;user-select:none;transition:color .15s;}
+.dh:hover{color:var(--accent);}
+.dh .dh-chevron{font-size:9px;color:var(--light);transition:transform .2s;margin-left:4px;}
+.db.day-collapsed .dh .dh-chevron{transform:rotate(-90deg);}
+.db-content{overflow:hidden;transition:max-height .3s ease,opacity .2s ease;max-height:9999px;opacity:1;}
+.db.day-collapsed .db-content{max-height:0;opacity:0;overflow:hidden;}
 .dn{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;min-width:36px;}
 .dd{font-size:13px;font-weight:600;}.dt{font-size:12px;color:var(--muted);}
 
@@ -583,6 +588,8 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <nav class="nav">
   <div class="nav-brand">🌍 Europe <span>2026</span></div>
   <button class="tab-btn active" onclick="switchTab('trip')">🗓️ Day by Day</button>
+  <button class="tab-btn" onclick="switchTab('places')">📍 Places</button>
+  <button class="tab-btn" onclick="switchTab('restaurants')">🍽️ Restaurants</button>
   <button class="tab-btn" onclick="switchTab('booking')">📋 Booking</button>
   <button class="tab-btn" onclick="switchTab('notes')">📖 Notes</button>
   <button class="tab-btn" onclick="switchTab('budget')">💰 Budget</button>
@@ -701,36 +708,42 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇵🇹</span><span class="cn">Portugal — Lisbon</span><span class="cd">1–3 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
-  <div class="db travel" data-date="2026-05-01">
-    <div class="dh"><span class="dn">Day 1</span><span class="dd">พฤหัส 1 May</span><span class="dt">· Paris → Lisbon ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">ออกจากที่พัก Paris → Orly Airport</div><div class="ev-detail">RER B หรือ Orlybus ~45 นาที · ถึงก่อน 2 ชั่วโมง</div></div></div>
+  <div class="db travel day-collapsed" data-date="2026-05-01">
+    <div class="dh"><span class="dn">Day 1</span><span class="dd">พฤหัส 1 May</span><span class="dt">· Paris → Lisbon ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">ออกจากที่พัก Paris → Orly Airport</div><div class="ev-detail">RER B หรือ Orlybus ~45 นาที · ถึงก่อน 2 ชั่วโมง</div></div></div>
     <div class="ev"><span class="ev-st done" data-bk="bk-fly1" onclick="goBooking('bk-fly1',event)" title="ดูรายละเอียด">✈️</span><span class="ev-time">10:20</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Paris ORY → Lisbon LIS &nbsp;<a class="tbadge done" onclick="goBooking('bk-fly1',event)">TO 7642 ✅</a></div><div class="ev-detail">Transavia · Booking 1998185887 · ~2h 40min</div></div></div>
     <div class="ev"><span class="ev-st info">🛬</span><span class="ev-time">12:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Arrive LIS → Metro สายแดง → Baixa</div><div class="ev-info-box">🚇 ไม่ต้องจอง · ~30min · €1.75</div></div></div>
     <div class="ev"><span class="ev-st done" data-bk="bk-hotel-lisbon" onclick="goBooking('bk-hotel-lisbon',event)">🏨</span><span class="ev-time">13:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Pestana Rua Augusta &nbsp;<a class="tbadge done" onclick="goBooking('bk-hotel-lisbon',event)">✅ จองแล้ว</a></div><div class="ev-detail">Premium Corner City View · Baixa</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🏛️ Baixa + Praça do Comércio + Terreiro do Paço</div><div class="ev-detail">ลานริมทะเล Tagus · Arco da Rua Augusta · ใจกลางเมืองเก่า</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🏛️ Alfama — ย่านเก่าแก่ที่สุดของ Lisbon</div><div class="ev-detail">เดินซอกซอย Medieval · Fado music ตอนเย็น · Miradouro das Portas do Sol วิว</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🍽️ Dinner — แถว Alfama / Bairro Alto</div><div class="ev-detail">Bacalhau (ปลาค็อด) · Pastéis de nata ลองวันแรก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">🏛️ Baixa + Praça do Comércio + Terreiro do Paço</div><div class="ev-detail">ลานริมทะเล Tagus · Arco da Rua Augusta · ใจกลางเมืองเก่า</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">🏛️ Alfama — ย่านเก่าแก่ที่สุดของ Lisbon</div><div class="ev-detail">เดินซอกซอย Medieval · Fado music ตอนเย็น · Miradouro das Portas do Sol วิว</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">🍽️ Dinner — แถว Alfama / Bairro Alto</div><div class="ev-detail">Bacalhau (ปลาค็อด) · Pastéis de nata ลองวันแรก</div></div></div>
+    </div>
   </div>
 
-  <div class="db" data-date="2026-05-02">
-    <div class="dh"><span class="dn">Day 2</span><span class="dd">ศุกร์ 2 May</span><span class="dt">· Lisbon Food Exploring</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🍽️ Pastéis de Belém — ไปก่อน 09:00</div><div class="ev-detail">Rua de Belém 84 · <strong>ต้นตำรับ Pastel de Nata ของแท้</strong> · ต้องกินที่ร้านเท่านั้น รสชาติต่างจากที่อื่น</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🏛️ Mosteiro dos Jerónimos (UNESCO) €10</div><div class="ev-detail">Gothic Manueline architecture · ติดกับ Pastéis de Belém · สวยมาก ห้ามพลาด</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:00</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🍽️ Time Out Market Lisboa — food hall concept</div><div class="ev-detail">Mercado da Ribeira · 40+ ร้านในที่เดียว · business research: multi-concept food hall ที่ดังที่สุดในยุโรป</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot opt"></div><div class="ev-body"><div class="ev-title">🚃 Tram 28 — ชมเมืองผ่านย่านต่างๆ</div><div class="ev-detail">Tram เก่าแก่ iconic ผ่าน Alfama · Chiado · Graça · ซื้อตั๋วบนรถ €3</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🛍️ LX Factory — Market + Street Food + Street Art</div><div class="ev-detail">โรงงานเก่าแปลงเป็น creative space · เปิดศุกร์-อาทิตย์ · food trucks + local brands + live music</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot must"></div><div class="ev-body"><div class="ev-title">🍽️ Dinner — Cervejaria Ramiro</div><div class="ev-detail"><strong>ร้าน seafood icon ≥60 ปี</strong> · ไม่รับจอง เข้าแถว ~30min · gambas, percebes, lobster · Av. Almirante Reis 1</div></div></div>
+  <div class="db day-collapsed" data-date="2026-05-02">
+    <div class="dh"><span class="dn">Day 2</span><span class="dd">ศุกร์ 2 May</span><span class="dt">· Lisbon Food Exploring</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">🍽️ Pastéis de Belém — ไปก่อน 09:00</div><div class="ev-detail">Rua de Belém 84 · <strong>ต้นตำรับ Pastel de Nata ของแท้</strong> · ต้องกินที่ร้านเท่านั้น รสชาติต่างจากที่อื่น</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">🏛️ Mosteiro dos Jerónimos (UNESCO) €10</div><div class="ev-detail">Gothic Manueline architecture · ติดกับ Pastéis de Belém · สวยมาก ห้ามพลาด</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">🍽️ Time Out Market Lisboa — food hall concept</div><div class="ev-detail">Mercado da Ribeira · 40+ ร้านในที่เดียว · business research: multi-concept food hall ที่ดังที่สุดในยุโรป</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">🚃 Tram 28 — ชมเมืองผ่านย่านต่างๆ</div><div class="ev-detail">Tram เก่าแก่ iconic ผ่าน Alfama · Chiado · Graça · ซื้อตั๋วบนรถ €3</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">🛍️ LX Factory — Market + Street Food + Street Art</div><div class="ev-detail">โรงงานเก่าแปลงเป็น creative space · เปิดศุกร์-อาทิตย์ · food trucks + local brands + live music</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">🍽️ Dinner — Cervejaria Ramiro</div><div class="ev-detail"><strong>ร้าน seafood icon ≥60 ปี</strong> · ไม่รับจอง เข้าแถว ~30min · gambas, percebes, lobster · Av. Almirante Reis 1</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-05-03">
-    <div class="dh"><span class="dn">Day 3</span><span class="dd">เสาร์ 3 May</span><span class="dt">· Lisbon → Paris ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot opt"></div><div class="ev-body"><div class="ev-title">🛍️ Mercado de Campo de Ourique — ตลาดเช้า local</div><div class="ev-detail">ย่านที่คน Lisbon อาศัยจริง · ไม่ใช่ tourist · กาแฟ + pastel + cheese บน counter</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🌅 Miradouro de São Pedro de Alcântara</div><div class="ev-detail">วิวที่ดีที่สุดของ Lisbon · ฟรี · ย่าน Bairro Alto บรรยากาศดี</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:30</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🛍️ Príncipe Real — ย่าน antique + design shops</div><div class="ev-detail">ถนนสวย · Jardim do Príncipe Real · ร้าน design local brand</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot rec"></div><div class="ev-body"><div class="ev-title">🍽️ Lunch แถว Chiado — Taberna Rua das Flores (Bib Gourmand)</div><div class="ev-detail">Michelin Bib Gourmand · Portuguese traditional · จองล่วงหน้าแนะนำ</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out โรงแรม + ไปสนามบิน LIS</div><div class="ev-detail">ถึงก่อน 2 ชั่วโมง</div></div></div>
+  <div class="db travel day-collapsed" data-date="2026-05-03">
+    <div class="dh"><span class="dn">Day 3</span><span class="dd">เสาร์ 3 May</span><span class="dt">· Lisbon → Paris ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">🛍️ Mercado de Campo de Ourique — ตลาดเช้า local</div><div class="ev-detail">ย่านที่คน Lisbon อาศัยจริง · ไม่ใช่ tourist · กาแฟ + pastel + cheese บน counter</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">🌅 Miradouro de São Pedro de Alcântara</div><div class="ev-detail">วิวที่ดีที่สุดของ Lisbon · ฟรี · ย่าน Bairro Alto บรรยากาศดี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">🛍️ Príncipe Real — ย่าน antique + design shops</div><div class="ev-detail">ถนนสวย · Jardim do Príncipe Real · ร้าน design local brand</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">🍽️ Lunch แถว Chiado — Taberna Rua das Flores (Bib Gourmand)</div><div class="ev-detail">Michelin Bib Gourmand · Portuguese traditional · จองล่วงหน้าแนะนำ</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:30</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Check-out โรงแรม + ไปสนามบิน LIS</div><div class="ev-detail">ถึงก่อน 2 ชั่วโมง</div></div></div>
     <div class="ev"><span class="ev-st done" data-bk="bk-fly2" onclick="goBooking('bk-fly2',event)">✈️</span><span class="ev-time">19:05</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Lisbon LIS → Paris ORY &nbsp;<a class="tbadge done" onclick="goBooking('bk-fly2',event)">TO 7647 ✅</a></div><div class="ev-detail">Transavia · ~2h 30min · arr 22:35</div></div></div>
     <div class="ev"><span class="ev-st done" data-bk="bk-hotel-paris" onclick="goBooking('bk-hotel-paris',event)">🏨</span><span class="ev-time">23:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Arrive ORY → 129 Rue de Vaugirard &nbsp;<a class="tbadge done" onclick="goBooking('bk-hotel-paris',event)">✅ ฟรี</a></div></div></div>
+    </div>
   </div>
 
   </div><!-- /cb-body -->
@@ -741,26 +754,32 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇫🇷</span><span class="cn">France — Paris</span><span class="cd">3–11 May</span><span class="ck">8 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
-  <div class="db" data-date="2026-05-04">
-    <div class="dh"><span class="dn">Day 4–7</span><span class="dd">อา–พุธ 4–7 May</span><span class="dt">· ธุระ + Food Exploring</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db day-collapsed" data-date="2026-05-04">
+    <div class="dh"><span class="dn">Day 4–7</span><span class="dd">อา–พุธ 4–7 May</span><span class="dt">· ธุระ + Food Exploring</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">–15:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">ธุระ (จบ 15:00 วัน 7 May)</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">เย็น</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Food Exploring Paris — ⚠️ Paris food plan ยังต้องทำ</div></div></div>
+    </div>
   </div>
 
-  <div class="db" data-date="2026-05-08">
-    <div class="dh"><span class="dn">Day 8–10</span><span class="dd">พฤหัส–เสาร์ 8–10 May</span><span class="dt">· Paris Free Days</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db day-collapsed" data-date="2026-05-08">
+    <div class="dh"><span class="dn">Day 8–10</span><span class="dd">พฤหัส–เสาร์ 8–10 May</span><span class="dt">· Paris Free Days</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Food Exploring 3 วันเต็ม</div><div class="ev-detail">Le Marais · Bastille · 11th arr · Saint-Germain · Montmartre</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">Landmark</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Eiffel Tower · Musée d'Orsay · Notre-Dame · Sacré-Cœur</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">Landmark</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Eiffel Tower · Musée d'Orsay · Notre-Dame · Sacré-Cœur</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-05-10">
-    <div class="dh"><span class="dn">คืน 10 May</span><span class="dd">เสาร์ 10 May</span><span class="dt">· Night Train → Nice 🌙</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">ถึง Paris Austerlitz + Check-out ที่พัก</div></div></div>
+  <div class="db travel day-collapsed" data-date="2026-05-10">
+    <div class="dh"><span class="dn">คืน 10 May</span><span class="dd">เสาร์ 10 May</span><span class="dt">· Night Train → Nice 🌙</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">ถึง Paris Austerlitz + Check-out ที่พัก</div></div></div>
     <div class="ev"><span class="ev-st done" data-bk="bk-night-train" onclick="goBooking('bk-night-train',event)">🚂</span><span class="ev-time">~21:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">🌙 Night Train ออก &nbsp;<a class="tbadge done" onclick="goBooking('bk-night-train',event)">✅ จองแล้ว</a></div><div class="ev-detail">Intercités de Nuit · Espace Privatif 2 คน · ถึง Nice 06:30</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-05-11">
-    <div class="dh"><span class="dn">DAY 10</span><span class="dd">อาทิตย์ 11 May</span><span class="dt">· Paris → Nice ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-05-11">
+    <div class="dh"><span class="dn">DAY 10</span><span class="dd">อาทิตย์ 11 May</span><span class="dt">· Paris → Nice ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button><span class="dh-chevron">▼</span></div>
   </div>
 
   </div><!-- /cb-body -->
@@ -771,30 +790,36 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇫🇷</span><span class="cn">France — Nice</span><span class="cd">11–13 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
-  <div class="db travel" data-date="2026-05-11">
-    <div class="dh"><span class="dn">Day 1</span><span class="dd">อาทิตย์ 11 May</span><span class="dt">· Arrive from Night Train</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-05-11">
+    <div class="dh"><span class="dn">Day 1</span><span class="dd">อาทิตย์ 11 May</span><span class="dt">· Arrive from Night Train</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">06:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Arrive Nice-Ville · ฝากกระเป๋า Left Luggage</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:00</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Cours Saleya Market — Socca + café</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-nice" onclick="goBooking('bk-hotel-nice',event)">🏨</span><span class="ev-time">14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Vieux-Nice zone &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-nice',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">แถว Rue Masséna / Place Garibaldi · ขอ early check-in ตอนจอง!</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Promenade des Anglais + Castle Hill วิว</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Dinner — Acchiardo (Vieux-Nice authentic)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Promenade des Anglais + Castle Hill วิว</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Dinner — Acchiardo (Vieux-Nice authentic)</div></div></div>
+    </div>
   </div>
 
-  <div class="db" data-date="2026-05-12">
-    <div class="dh"><span class="dn">Day 2</span><span class="dd">จันทร์ 12 May</span><span class="dt">· Monaco Day Trip</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db day-collapsed" data-date="2026-05-12">
+    <div class="dh"><span class="dn">Day 2</span><span class="dd">จันทร์ 12 May</span><span class="dt">· Monaco Day Trip</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">08:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">TER Nice-Ville → Monaco</div><div class="ev-info-box">🚂 ไม่ต้องจอง · ทุก 15–30 นาที · ~22 นาที · €4.40 · ซื้อที่สถานี</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Palais Princier + Casino (ด้านนอก) + Port Hercule</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Jardins Saint-Martin + Musée Océanographique (optional €18)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Palais Princier + Casino (ด้านนอก) + Port Hercule</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Jardins Saint-Martin + Musée Océanographique (optional €18)</div></div></div>
     <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">17:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">TER กลับ Monaco → Nice-Ville</div><div class="ev-info-box">🎫 ตั๋วใบเดิม valid all day — ไม่ต้องซื้อใหม่</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Dinner — Vieux-Nice / Quai des Deux Emmanuels</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Dinner — Vieux-Nice / Quai des Deux Emmanuels</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-05-13">
-    <div class="dh"><span class="dn">Day 3</span><span class="dd">อังคาร 13 May</span><span class="dt">· Nice → Barcelona ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out โรงแรม Nice</div></div></div>
+  <div class="db travel day-collapsed" data-date="2026-05-13">
+    <div class="dh"><span class="dn">Day 3</span><span class="dd">อังคาร 13 May</span><span class="dt">· Nice → Barcelona ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Check-out โรงแรม Nice</div></div></div>
     <div class="ev"><span class="ev-st info">🚃</span><span class="ev-time">08:15</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Tram T2 Nice-Ville → สนามบิน NCE</div><div class="ev-info-box">🚃 ไม่ต้องจอง · ทุก 6–8 นาที · ~30 นาที · €1.80</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-fly-nce-bcn" onclick="goBooking('bk-fly-nce-bcn',event)">✈️</span><span class="ev-time">~10:30</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Nice NCE → Barcelona BCN &nbsp;<a class="tbadge warn" onclick="goBooking('bk-fly-nce-bcn',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">easyJet / Vueling · ~1h 30min · arr ~12:00 · easyjet.com / vueling.com</div></div></div>
     <div class="ev"><span class="ev-st info">🚌</span><span class="ev-time">~12:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Arrive BCN → Aerobus → Passeig de Gràcia</div><div class="ev-info-box">🚌 ไม่ต้องจอง · ทุก 5–10 นาที · ~35 นาที · €6.75</div></div></div>
+    </div>
   </div>
 
   </div><!-- /cb-body -->
@@ -805,39 +830,47 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇪🇸</span><span class="cn">Spain — Barcelona</span><span class="cd">13–16 May</span><span class="ck">3 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
-  <div class="db" data-date="2026-05-13">
-    <div class="dh"><span class="dn">Day 1</span><span class="dd">อังคาร 13 May</span><span class="dt">· Arrive BCN</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db day-collapsed" data-date="2026-05-13">
+    <div class="dh"><span class="dn">Day 1</span><span class="dd">อังคาร 13 May</span><span class="dt">· Arrive BCN</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-bcn" onclick="goBooking('bk-hotel-bcn',event)">🏨</span><span class="ev-time">~14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Eixample zone &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-bcn',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">แถว Consell de Cent / Passeig de Gràcia · 3 คืน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Passeig de Gràcia — Casa Batlló + Casa Milà ชมด้านนอก</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">El Born + Basílica Santa Maria del Mar</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Dinner El Born — Bar del Pla หรือ El Xampanyet</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Passeig de Gràcia — Casa Batlló + Casa Milà ชมด้านนอก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">El Born + Basílica Santa Maria del Mar</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Dinner El Born — Bar del Pla หรือ El Xampanyet</div></div></div>
+    </div>
   </div>
 
-  <div class="db" data-date="2026-05-14">
-    <div class="dh"><span class="dn">Day 2</span><span class="dd">พุธ 14 May</span><span class="dt">· Gaudí Day</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-sagrada" onclick="goBooking('bk-sagrada',event)">🎟️</span><span class="ev-time">09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Sagrada Família &nbsp;<a class="tbadge warn" onclick="goBooking('bk-sagrada',event)">⚠️ จองด่วน!</a></div><div class="ev-detail">sagradafamilia.org · ก่อนคนแน่น · €26–47/คน</div></div></div>
+  <div class="db day-collapsed" data-date="2026-05-14">
+    <div class="dh"><span class="dn">Day 2</span><span class="dd">พุธ 14 May</span><span class="dt">· Gaudí Day</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st warn" data-bk="bk-sagrada" onclick="goBooking('bk-sagrada',event)">🎟️</span><span class="ev-time">09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Sagrada Família &nbsp;<a class="tbadge warn" onclick="goBooking('bk-sagrada',event)">⚠️ จองด่วน!</a></div><div class="ev-detail">sagradafamilia.org · ก่อนคนแน่น · €26–47/คน</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Lunch Eixample — ห่าง Sagrada 5 นาที</div></div></div>
     <div class="ev"><span class="ev-st info">🚇</span><span class="ev-time">13:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Metro L5 → Diagonal → L3 → Lesseps</div><div class="ev-info-box">🚇 ไม่ต้องจอง · ใช้ T-Casual (10 เที่ยว €12.15)</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-parkguell" onclick="goBooking('bk-parkguell',event)">🎟️</span><span class="ev-time">14:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Park Güell Monumental Zone &nbsp;<a class="tbadge warn" onclick="goBooking('bk-parkguell',event)">⚠️ จองด่วน!</a></div><div class="ev-detail">parkguell.barcelona · €15/คน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">ย่าน Gràcia เดินเล่น — Plaza del Sol</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-montbar" onclick="goBooking('bk-montbar',event)">🍽️</span><span class="ev-time">19:30</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Mont Bar ⭐⭐ Dinner &nbsp;<a class="tbadge warn" onclick="goBooking('bk-montbar',event)">⚠️ ต้องจอง</a></div><div class="ev-detail">Carrer de la Diputació 220 · Tasting Menu €190/คน · montbar.com/en/book-table</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-parkguell" onclick="goBooking('bk-parkguell',event)">🎟️</span><span class="ev-time">14:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Park Güell Monumental Zone &nbsp;<a class="tbadge warn" onclick="goBooking('bk-parkguell',event)">⚠️ จองด่วน!</a></div><div class="ev-detail">parkguell.barcelona · €15/คน</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">ย่าน Gràcia เดินเล่น — Plaza del Sol</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-montbar" onclick="goBooking('bk-montbar',event)">🍽️</span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Mont Bar ⭐⭐ Dinner &nbsp;<a class="tbadge warn" onclick="goBooking('bk-montbar',event)">⚠️ ต้องจอง</a></div><div class="ev-detail">Carrer de la Diputació 220 · Tasting Menu €190/คน · montbar.com/en/book-table</div></div></div>
+    </div>
   </div>
 
-  <div class="db" data-date="2026-05-15">
-    <div class="dh"><span class="dn">Day 3</span><span class="dd">พฤหัส 15 May</span><span class="dt">· Boqueria + Gothic + Beach</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db day-collapsed" data-date="2026-05-15">
+    <div class="dh"><span class="dn">Day 3</span><span class="dd">พฤหัส 15 May</span><span class="dt">· Boqueria + Gothic + Beach</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:00</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">La Boqueria — Bar Pinotxo + El Quim (ก่อน 10 โมง!)</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Gothic Quarter — Pont del Bisbe + Temple d'August</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Gothic Quarter — Pont del Bisbe + Temple d'August</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:30</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">La Cova Fumada Barceloneta — ก่อน 13:00!</div><div class="ev-detail">ต้นกำเนิด Bomba · ไม่รับจอง · มาก่อน 13:00</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Barceloneta Beach + Passeig Marítim</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Dinner — Paella / Seafood ริมทะเล</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Barceloneta Beach + Passeig Marítim</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Dinner — Paella / Seafood ริมทะเล</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-05-16">
-    <div class="dh"><span class="dn">Day 4</span><span class="dd">เสาร์ 16 May</span><span class="dt">· Barcelona → Madrid 🚄 AVE</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-05-16">
+    <div class="dh"><span class="dn">Day 4</span><span class="dd">เสาร์ 16 May</span><span class="dt">· Barcelona → Madrid 🚄 AVE</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Mercat de Santa Caterina เช้า</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out + Metro → Barcelona Sants</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Check-out + Metro → Barcelona Sants</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-ave" onclick="goBooking('bk-ave',event)">🚄</span><span class="ev-time">~11:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">AVE Barcelona Sants → Madrid Atocha &nbsp;<a class="tbadge warn" onclick="goBooking('bk-ave',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">~2h 30min · renfe.com · Preferente แนะนำ · arr ~13:30</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-madrid" onclick="goBooking('bk-hotel-madrid',event)">🏨</span><span class="ev-time">~14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Madrid &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-madrid',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">แถว Centro / Salamanca / Chueca</div></div></div>
+    </div>
   </div>
 
   </div><!-- /cb-body -->
@@ -847,17 +880,21 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <div class="cb" data-country="Spain-Madrid">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇪🇸</span><span class="cn">Spain — Madrid</span><span class="cd">16–18 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
-  <div class="db" data-date="2026-05-16">
-    <div class="dh"><span class="dn">Day 1–2</span><span class="dd">เสาร์–อาทิตย์ 16–17 May</span><span class="dt">· Madrid Food + Culture</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Museo del Prado · Retiro Park · Plaza Mayor · Palacio Real</div></div></div>
+  <div class="db day-collapsed" data-date="2026-05-16">
+    <div class="dh"><span class="dn">Day 1–2</span><span class="dd">เสาร์–อาทิตย์ 16–17 May</span><span class="dt">· Madrid Food + Culture</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Museo del Prado · Retiro Park · Plaza Mayor · Palacio Real</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">Food</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Mercado San Miguel · La Latina tapas · Malasaña cafés</div></div></div>
+    </div>
   </div>
-  <div class="db travel" data-date="2026-05-18">
-    <div class="dh"><span class="dn">Day 3</span><span class="dd">จันทร์ 18 May</span><span class="dt">· Madrid → Copenhagen ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out + Metro L8 → MAD Airport ~30min</div></div></div>
+  <div class="db travel day-collapsed" data-date="2026-05-18">
+    <div class="dh"><span class="dn">Day 3</span><span class="dd">จันทร์ 18 May</span><span class="dt">· Madrid → Copenhagen ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Check-out + Metro L8 → MAD Airport ~30min</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-fly-mad-cph" onclick="goBooking('bk-fly-mad-cph',event)">✈️</span><span class="ev-time">~10:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Madrid MAD → Copenhagen CPH &nbsp;<a class="tbadge warn" onclick="goBooking('bk-fly-mad-cph',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail"><strong>Direct ✅</strong> Iberia/SAS/Ryanair · ~3h 25min · arr ~13:30</div></div></div>
     <div class="ev"><span class="ev-st info">🚇</span><span class="ev-time">~13:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Arrive CPH → Metro M2 → City Centre</div><div class="ev-info-box">🚇 ไม่ต้องจอง · ~15 นาที · ทุก 3–4 นาที</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-cph" onclick="goBooking('bk-hotel-cph',event)">🏨</span><span class="ev-time">~14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Copenhagen &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-cph',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">แถว Nørreport / Indre By / Vesterbro</div></div></div>
+    </div>
   </div>
   </div><!-- /cb-body -->
 </div>
@@ -866,17 +903,21 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <div class="cb" data-country="Denmark">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇩🇰</span><span class="cn">Denmark — Copenhagen</span><span class="cd">18–20 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
-  <div class="db" data-date="2026-05-18">
-    <div class="dh"><span class="dn">Day 1–2</span><span class="dd">จันทร์–อังคาร 18–19 May</span><span class="dt">· New Nordic Food Capital</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db day-collapsed" data-date="2026-05-18">
+    <div class="dh"><span class="dn">Day 1–2</span><span class="dd">จันทร์–อังคาร 18–19 May</span><span class="dt">· New Nordic Food Capital</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">Food</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Torvehallerne · Nyhavn · Vesterbro cafés · Nørrebro street food</div><div class="ev-detail">⚠️ Copenhagen food plan ยังต้องทำ</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">Landmark</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Nyhavn · Christiansborg · Little Mermaid · Tivoli Gardens</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">Landmark</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Nyhavn · Christiansborg · Little Mermaid · Tivoli Gardens</div></div></div>
+    </div>
   </div>
-  <div class="db travel" data-date="2026-05-20">
-    <div class="dh"><span class="dn">Day 3</span><span class="dd">พุธ 20 May</span><span class="dt">· Copenhagen → Vienna ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out + Torvehallerne เช้าสุดท้าย</div></div></div>
+  <div class="db travel day-collapsed" data-date="2026-05-20">
+    <div class="dh"><span class="dn">Day 3</span><span class="dd">พุธ 20 May</span><span class="dt">· Copenhagen → Vienna ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Check-out + Torvehallerne เช้าสุดท้าย</div></div></div>
     <div class="ev"><span class="ev-st info">🚇</span><span class="ev-time">11:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Metro M2 → CPH Airport</div><div class="ev-info-box">🚇 ไม่ต้องจอง · ~15 นาที · ทุก 3–4 นาที</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-fly-cph-vie" onclick="goBooking('bk-fly-cph-vie',event)">✈️</span><span class="ev-time">~13:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Copenhagen CPH → Vienna VIE &nbsp;<a class="tbadge warn" onclick="goBooking('bk-fly-cph-vie',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail"><strong>Direct</strong> · ~2h · arr ~15:00</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-vienna" onclick="goBooking('bk-hotel-vienna',event)">🏨</span><span class="ev-time">~16:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Vienna &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-vienna',event)">⚠️ ยังไม่จอง</a></div></div></div>
+    </div>
   </div>
   </div><!-- /cb-body -->
 </div>
@@ -885,11 +926,11 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <div class="cb" data-country="Austria">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇦🇹</span><span class="cn">Austria — Vienna</span><span class="cd">20–22 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
-    <div class="db travel" data-date="2026-05-20">
-      <div class="dh"><span class="dn">DAY 1</span><span class="dd">พุธ 20 May</span><span class="dt">· Copenhagen → Vienna ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button></div>
+    <div class="db travel day-collapsed" data-date="2026-05-20">
+      <div class="dh"><span class="dn">DAY 1</span><span class="dd">พุธ 20 May</span><span class="dt">· Copenhagen → Vienna ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button><span class="dh-chevron">▼</span></div>
     </div>
-    <div class="db" data-date="2026-05-21">
-      <div class="dh"><span class="dn">DAY 2</span><span class="dd">พฤหัส 21 May</span><span class="dt">· Vienna Exploring</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button></div>
+    <div class="db day-collapsed" data-date="2026-05-21">
+      <div class="dh"><span class="dn">DAY 2</span><span class="dd">พฤหัส 21 May</span><span class="dt">· Vienna Exploring</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button><span class="dh-chevron">▼</span></div>
     </div>
   </div>
 </div>
@@ -898,11 +939,11 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <div class="cb" data-country="Italy-Venice">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Venice</span><span class="cd">22–24 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
-    <div class="db travel" data-date="2026-05-22">
-      <div class="dh"><span class="dn">DAY 1</span><span class="dd">ศุกร์ 22 May</span><span class="dt">· Vienna → Venice ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button></div>
+    <div class="db travel day-collapsed" data-date="2026-05-22">
+      <div class="dh"><span class="dn">DAY 1</span><span class="dd">ศุกร์ 22 May</span><span class="dt">· Vienna → Venice ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button><span class="dh-chevron">▼</span></div>
     </div>
-    <div class="db" data-date="2026-05-23">
-      <div class="dh"><span class="dn">DAY 2</span><span class="dd">เสาร์ 23 May</span><span class="dt">· Venice Exploring</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button></div>
+    <div class="db day-collapsed" data-date="2026-05-23">
+      <div class="dh"><span class="dn">DAY 2</span><span class="dd">เสาร์ 23 May</span><span class="dt">· Venice Exploring</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button><span class="dh-chevron">▼</span></div>
     </div>
   </div>
 </div>
@@ -911,8 +952,8 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <div class="cb" data-country="Italy-Bologna">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Bologna</span><span class="cd">24–25 May</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
-    <div class="db travel" data-date="2026-05-24">
-      <div class="dh"><span class="dn">DAY 1</span><span class="dd">อาทิตย์ 24 May</span><span class="dt">· Venice → Bologna 🚂</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button></div>
+    <div class="db travel day-collapsed" data-date="2026-05-24">
+      <div class="dh"><span class="dn">DAY 1</span><span class="dd">อาทิตย์ 24 May</span><span class="dt">· Venice → Bologna 🚂</span><button class="add-ev-btn" onclick="showAddEvent(this)">+</button><span class="dh-chevron">▼</span></div>
     </div>
   </div>
 </div>
@@ -921,17 +962,21 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <div class="cb" data-country="Italy-Milan">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Milan · Como</span><span class="cd">25–27 May</span><span class="ck">1+1 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
-  <div class="db travel" data-date="2026-05-25">
-    <div class="dh"><span class="dn">Day 1</span><span class="dd">จันทร์ 25 May</span><span class="dt">· Bologna → Milan 🚂 + Duomo + Aperitivo</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-05-25">
+    <div class="dh"><span class="dn">Day 1</span><span class="dd">จันทร์ 25 May</span><span class="dt">· Bologna → Milan 🚂 + Duomo + Aperitivo</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-milan1" onclick="goBooking('bk-hotel-milan1',event)">🏨</span><span class="ev-time">~14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Milan Brera/Navigli &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-milan1',event)">⚠️ ยังไม่จอง</a></div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">เย็น</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Duomo + Galleria + Aperitivo แถว Navigli</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">เย็น</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Duomo + Galleria + Aperitivo แถว Navigli</div></div></div>
+    </div>
   </div>
-  <div class="db travel" data-date="2026-05-26">
-    <div class="dh"><span class="dn">Day 2</span><span class="dd">อังคาร 26 May</span><span class="dt">· Milan → Como</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-05-26">
+    <div class="dh"><span class="dn">Day 2</span><span class="dd">อังคาร 26 May</span><span class="dt">· Milan → Como</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Milan</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-train-como" onclick="goBooking('bk-train-como',event)">🚄</span><span class="ev-time">~10:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Trenord Milan → Como San Giovanni &nbsp;<a class="tbadge warn" onclick="goBooking('bk-train-como',event)">ซื้อล่วงหน้า</a></div><div class="ev-detail">~35 นาที · ~€5 · trenord.it</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-como" onclick="goBooking('bk-hotel-como',event)">🏨</span><span class="ev-time">11:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Como ริมทะเลสาบ &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-como',event)">⚠️ ยังไม่จอง</a></div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">บ่าย</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Ferry Lake Como + Bellagio day trip</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">บ่าย</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Ferry Lake Como + Bellagio day trip</div></div></div>
+    </div>
   </div>
   </div><!-- /cb-body -->
 </div>
@@ -941,55 +986,69 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland</span><span class="cd">27 May–2 Jun</span><span class="ck">7 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
-  <div class="db travel" data-date="2026-05-27">
-    <div class="dh"><span class="dn">27 May</span><span class="dd">อังคาร</span><span class="dt">· Como → Lucerne ~3h</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-05-27">
+    <div class="dh"><span class="dn">27 May</span><span class="dd">อังคาร</span><span class="dt">· Como → Lucerne ~3h</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Como</div></div></div>
     <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Train Como → Lucerne (~3h · Swiss Travel Pass จาก border)</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม — ไม่ต้องจองขบวน · ซื้อ Pass ที่ sbb.ch</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-lucerne" onclick="goBooking('bk-hotel-lucerne',event)">🏨</span><span class="ev-time">~13:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Lucerne Old Town &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-lucerne',event)">⚠️ ยังไม่จอง</a></div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">บ่าย</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Chapel Bridge + Lake Lucerne + Lion Monument</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">บ่าย</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Chapel Bridge + Lake Lucerne + Lion Monument</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-05-28">
-    <div class="dh"><span class="dn">28 May</span><span class="dd">พุธ</span><span class="dt">· Lucerne → Interlaken ~2h</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-05-28">
+    <div class="dh"><span class="dn">28 May</span><span class="dd">พุธ</span><span class="dt">· Lucerne → Interlaken ~2h</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Lucerne</div></div></div>
     <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~09:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Train Lucerne → Interlaken Ost (~2h)</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-interlaken" onclick="goBooking('bk-hotel-interlaken',event)">🏨</span><span class="ev-time">~11:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Interlaken ใกล้ Westbahnhof &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-interlaken',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">2 คืน</div></div></div>
+    </div>
   </div>
 
-  <div class="db" data-date="2026-05-29">
-    <div class="dh"><span class="dn">29 May</span><span class="dd">พฤหัส</span><span class="dt">· 🏔️ Jungfraujoch</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-jungfrau" onclick="goBooking('bk-jungfrau',event)">🏔️</span><span class="ev-time">07:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Jungfraujoch 3,454m UNESCO &nbsp;<a class="tbadge warn" onclick="goBooking('bk-jungfrau',event)">⚠️ จอง jungfrau.ch</a></div><div class="ev-detail">Full day · ~CHF 225/คน</div></div></div>
+  <div class="db day-collapsed" data-date="2026-05-29">
+    <div class="dh"><span class="dn">29 May</span><span class="dd">พฤหัส</span><span class="dt">· 🏔️ Jungfraujoch</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st warn" data-bk="bk-jungfrau" onclick="goBooking('bk-jungfrau',event)">🏔️</span><span class="ev-time">07:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Jungfraujoch 3,454m UNESCO &nbsp;<a class="tbadge warn" onclick="goBooking('bk-jungfrau',event)">⚠️ จอง jungfrau.ch</a></div><div class="ev-detail">Full day · ~CHF 225/คน</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-05-30">
-    <div class="dh"><span class="dn">30 May</span><span class="dd">ศุกร์</span><span class="dt">· Zermatt Day Trip → Bern</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">06:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Interlaken + ฝากกระเป๋า → ออก Zermatt</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Zermatt + Matterhorn + Gornergrat Railway</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุมรถไฟ · Gornergrat เพิ่ม CHF 46</div></div></div>
+  <div class="db travel day-collapsed" data-date="2026-05-30">
+    <div class="dh"><span class="dn">30 May</span><span class="dd">ศุกร์</span><span class="dt">· Zermatt Day Trip → Bern</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">06:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Check-out Interlaken + ฝากกระเป๋า → ออก Zermatt</div></div></div>
+    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Zermatt + Matterhorn + Gornergrat Railway</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุมรถไฟ · Gornergrat เพิ่ม CHF 46</div></div></div>
     <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~15:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Zermatt → Interlaken (รับกระเป๋า) → Bern (~3h)</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-bern" onclick="goBooking('bk-hotel-bern',event)">🏨</span><span class="ev-time">~19:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Bern UNESCO Old Town &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-bern',event)">⚠️ ยังไม่จอง</a></div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-05-31">
-    <div class="dh"><span class="dn">31 May</span><span class="dd">เสาร์</span><span class="dt">· Bern → Zürich</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Bern Old Town เช้า — Zytglogge + Federal Palace</div></div></div>
+  <div class="db travel day-collapsed" data-date="2026-05-31">
+    <div class="dh"><span class="dn">31 May</span><span class="dd">เสาร์</span><span class="dt">· Bern → Zürich</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Bern Old Town เช้า — Zytglogge + Federal Palace</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Bern</div></div></div>
     <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">13:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Train Bern → Zürich HB ~1h</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-zurich" onclick="goBooking('bk-hotel-zurich',event)">🏨</span><span class="ev-time">~14:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Zürich Altstadt/West &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-zurich',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">2 คืน</div></div></div>
+    </div>
   </div>
 
-  <div class="db" data-date="2026-06-01">
-    <div class="dh"><span class="dn">1 Jun</span><span class="dd">อาทิตย์</span><span class="dt">· Zürich วันเต็ม</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Altstadt + Lake Zürich + Kunsthaus + Zürich West cafés</div></div></div>
+  <div class="db day-collapsed" data-date="2026-06-01">
+    <div class="dh"><span class="dn">1 Jun</span><span class="dd">อาทิตย์</span><span class="dt">· Zürich วันเต็ม</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Altstadt + Lake Zürich + Kunsthaus + Zürich West cafés</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-06-02">
-    <div class="dh"><span class="dn">2 Jun</span><span class="dd">อังคาร</span><span class="dt">· 🚂 Bernina Express → Milan</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-06-02">
+    <div class="dh"><span class="dn">2 Jun</span><span class="dd">อังคาร</span><span class="dt">· 🚂 Bernina Express → Milan</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Zürich</div></div></div>
     <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">SBB IC Zürich HB → Chur ~1h 15min</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม · ไม่ต้องจองล่วงหน้า</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:15</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">เดินชม Chur Old Town + Lunch รอรถไฟ 13:30</div></div></div>
     <div class="ev"><span class="ev-st done" data-bk="bk-bernina" onclick="goBooking('bk-bernina',event)">🚂</span><span class="ev-time">13:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">🚂 Bernina Express Chur → Tirano &nbsp;<a class="tbadge done" onclick="goBooking('bk-bernina',event)">✅ จองแล้ว</a></div><div class="ev-detail">UNESCO · ~4.5h · Landwasser Viaduct · arr 18:00 · ขอที่นั่งฝั่งซ้าย</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-train-tirano" onclick="goBooking('bk-train-tirano',event)">🚄</span><span class="ev-time">~18:15</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Trenord Tirano → Milan Centrale &nbsp;<a class="tbadge warn" onclick="goBooking('bk-train-tirano',event)">ซื้อล่วงหน้า</a></div><div class="ev-detail">~2.5h · ถึง Milan ~20:30 · trenord.it</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-milan2" onclick="goBooking('bk-hotel-milan2',event)">🏨</span><span class="ev-time">~21:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Milan (post-Bernina) &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-milan2',event)">⚠️ ยังไม่จอง</a></div></div></div>
+    </div>
   </div>
 
   </div><!-- /cb-body -->
@@ -1000,25 +1059,31 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Rome</span><span class="cd">3–7 Jun</span><span class="ck">4 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
-  <div class="db travel" data-date="2026-06-03">
-    <div class="dh"><span class="dn">3 Jun</span><span class="dd">พุธ</span><span class="dt">· Milan → Rome ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">06:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Milan + Malpensa Express → MXP ~30min</div></div></div>
+  <div class="db travel day-collapsed" data-date="2026-06-03">
+    <div class="dh"><span class="dn">3 Jun</span><span class="dd">พุธ</span><span class="dt">· Milan → Rome ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">06:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Check-out Milan + Malpensa Express → MXP ~30min</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-fly-mxp-fco" onclick="goBooking('bk-fly-mxp-fco',event)">✈️</span><span class="ev-time">~08:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Milan MXP → Rome FCO &nbsp;<a class="tbadge warn" onclick="goBooking('bk-fly-mxp-fco',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">ITA / Ryanair · ~1h 10min · arr ~09:15</div></div></div>
     <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~09:45</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Leonardo Express FCO → Roma Termini</div><div class="ev-info-box">🚂 ไม่ต้องจอง · ทุก 30 นาที · ~32 นาที · €14</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-rome" onclick="goBooking('bk-hotel-rome',event)">🏨</span><span class="ev-time">~10:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Rome Trastevere/Prati &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-rome',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">4 คืน · หลีกเลี่ยง Termini zone</div></div></div>
+    </div>
   </div>
 
-  <div class="db" data-date="2026-06-03">
-    <div class="dh"><span class="dn">3–7 Jun</span><span class="dd">4 วัน</span><span class="dt">· Rome Classical + Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">Landmark</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Vatican + Sistine · Colosseum · Trevi เช้า · Trastevere · Borghese</div></div></div>
+  <div class="db day-collapsed" data-date="2026-06-03">
+    <div class="dh"><span class="dn">3–7 Jun</span><span class="dd">4 วัน</span><span class="dt">· Rome Classical + Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">Landmark</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Vatican + Sistine · Colosseum · Trevi เช้า · Trastevere · Borghese</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">Food</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Supplì · Cacio e pepe · Pizza al taglio · Campo de' Fiori market เช้า</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-06-07">
-    <div class="dh"><span class="dn">7 Jun</span><span class="dd">อาทิตย์</span><span class="dt">· Rome → Naples 🚄</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-06-07">
+    <div class="dh"><span class="dn">7 Jun</span><span class="dd">อาทิตย์</span><span class="dt">· Rome → Naples 🚄</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Rome</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-train-rome-naples" onclick="goBooking('bk-train-rome-naples',event)">🚄</span><span class="ev-time">~10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Rome → Naples &nbsp;<a class="tbadge warn" onclick="goBooking('bk-train-rome-naples',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">~1h 10min · trenitalia.com · arr ~11:10</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-naples" onclick="goBooking('bk-hotel-naples',event)">🏨</span><span class="ev-time">~11:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Naples 1 คืน &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-naples',event)">⚠️ ยังไม่จอง</a></div></div></div>
+    </div>
   </div>
 
   </div><!-- /cb-body -->
@@ -1029,25 +1094,31 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Naples + Amalfi</span><span class="cd">7–22 Jun</span><span class="ck">14+2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
-  <div class="db" data-date="2026-06-08">
-    <div class="dh"><span class="dn">8–22 Jun</span><span class="dd">จันทร์–จันทร์</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db day-collapsed" data-date="2026-06-08">
+    <div class="dh"><span class="dn">8–22 Jun</span><span class="dd">จันทร์–จันทร์</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st warn" data-bk="bk-airbnb-naples" onclick="goBooking('bk-airbnb-naples',event)">🏠</span><span class="ev-time">8 Jun</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Move-in Airbnb Chiaia/Posillipo &nbsp;<a class="tbadge warn" onclick="goBooking('bk-airbnb-naples',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">14 คืน ~€100/คืน · airbnb.com</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">Food</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Pizza da Michele · Friggitoria · Sfogliatella · Mercato Porta Nolana</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-06-12">
-    <div class="dh"><span class="dn">12–14 Jun</span><span class="dd">ศุกร์–อาทิตย์</span><span class="dt">· Amalfi Coast Weekend 🌊</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-06-12">
+    <div class="dh"><span class="dn">12–14 Jun</span><span class="dd">ศุกร์–อาทิตย์</span><span class="dt">· Amalfi Coast Weekend 🌊</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st info">⛴️</span><span class="ev-time">12 Jun 16:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Ferry Naples → Amalfi</div><div class="ev-info-box">⛴️ ซื้อที่ท่าเรือหรือ alilauro.it · ~1.5h</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-amalfi" onclick="goBooking('bk-hotel-amalfi',event)">🏨</span><span class="ev-time">Hotel</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Amalfi 2 คืน &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-amalfi',event)">⚠️ ยังไม่จอง</a></div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13 Jun</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Positano + Ravello</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14 Jun</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Pompeii + Vesuvius → Naples ~20:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13 Jun</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Positano + Ravello</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14 Jun</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Pompeii + Vesuvius → Naples ~20:00</div></div></div>
+    </div>
   </div>
 
-  <div class="db travel" data-date="2026-06-22">
-    <div class="dh"><span class="dn">22 Jun</span><span class="dd">จันทร์</span><span class="dt">· Naples → Sydney ✈ กลับบ้าน!</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button></div>
+  <div class="db travel day-collapsed" data-date="2026-06-22">
+    <div class="dh"><span class="dn">22 Jun</span><span class="dd">จันทร์</span><span class="dt">· Naples → Sydney ✈ กลับบ้าน!</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">เช้า</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Airbnb</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-fly-nap-syd" onclick="goBooking('bk-fly-nap-syd',event)">✈️</span><span class="ev-time">tbd</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Naples NAP → Sydney SYD &nbsp;<a class="tbadge warn" onclick="goBooking('bk-fly-nap-syd',event)">⚠️ ด่วนที่สุด!</a></div><div class="ev-detail"><strong>Cathay Pacific (via HKG) หรือ Singapore Airlines (via SIN) เท่านั้น</strong><br>ห้าม Emirates/Qatar/Etihad</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">~24 Jun</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">🇦🇺 Arrive Sydney — กลับบ้าน ✅</div></div></div>
+    </div>
   </div>
 
   </div><!-- /cb-body -->
@@ -1056,6 +1127,27 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div><!-- /wrap -->
 </div><!-- /tab-trip -->
 
+<!-- ============================================================
+     TAB : PLACES (auto-filled from events with type place/landmark)
+============================================================ -->
+<div id="tab-places" class="section">
+<div class="wrap">
+<div class="page-title">📍 Places & Landmarks</div>
+<div class="page-sub">สถานที่ท่องเที่ยวทั้งหมดจากแผน — auto-fill จาก Day by Day</div>
+<div id="places-list-auto" style="margin-top:1.5rem;"></div>
+</div>
+</div>
+
+<!-- ============================================================
+     TAB : RESTAURANTS (auto-filled from events with type restaurant/food)
+============================================================ -->
+<div id="tab-restaurants" class="section">
+<div class="wrap">
+<div class="page-title">🍽️ Restaurants</div>
+<div class="page-sub">ร้านอาหารทั้งหมดจากแผน — auto-fill จาก Day by Day</div>
+<div id="restaurants-list-auto" style="margin-top:1.5rem;"></div>
+</div>
+</div>
 
 <!-- ============================================================
      TAB 2 : BOOKING (merged checklist + details)
@@ -1689,14 +1781,19 @@ function switchTab(t){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+t).classList.add('active');
-  const idx={'trip':0,'booking':1,'notes':2,'budget':3};
+  const idx={'trip':0,'places':1,'restaurants':2,'booking':3,'notes':4,'budget':5};
   document.querySelectorAll('.tab-btn')[idx[t]].classList.add('active');
   if(t==='budget')renderBudgetTab();
+  if(t==='places')buildPlacesTab();
+  if(t==='restaurants')buildRestaurantsTab();
 }
 
 // ===== COUNTRY EXPAND/COLLAPSE =====
 function toggleCountry(chEl){
   chEl.parentElement.classList.toggle('collapsed');
+}
+function toggleDay(dhEl){
+  dhEl.closest('.db').classList.toggle('day-collapsed');
 }
 
 // ===== JUMP TO BOOKING =====
@@ -2287,6 +2384,17 @@ function filterEvents(type,chip){
   });
 }
 
+// ===== DAY TOGGLE — make .dh clickable =====
+function initDayToggle(){
+  document.querySelectorAll('.dh').forEach(dh=>{
+    dh.addEventListener('click',function(e){
+      // Don't toggle if clicking the + button
+      if(e.target.closest('.add-ev-btn'))return;
+      toggleDay(this);
+    });
+  });
+}
+
 // ===== ADD EDIT TO HARDCODED EVENTS (click title) =====
 function addEditButtonsToHardcoded(){
   document.querySelectorAll('.ev:not(.user-ev)').forEach(ev=>{
@@ -2375,6 +2483,75 @@ async function saveHardcodedEdit(btn){
   }
   form.remove();
   origEv.style.display='none';
+}
+
+// ===== BUILD PLACES & RESTAURANTS TABS (auto-fill from hardcoded + user events) =====
+function collectEventsFromDOM(types){
+  const items=[];
+  document.querySelectorAll('.cb').forEach(cb=>{
+    const country=cb.querySelector('.cn')?.textContent||'';
+    cb.querySelectorAll('.ev').forEach(ev=>{
+      const dot=ev.querySelector('.ev-dot');
+      if(!dot)return;
+      let dotType='';
+      types.forEach(t=>{if(dot.classList.contains(t))dotType=t;});
+      if(!dotType)return;
+      const title=ev.querySelector('.ev-title')?.childNodes[0]?.textContent?.trim()||ev.querySelector('.ev-title')?.textContent?.trim()||'';
+      const detail=ev.querySelector('.ev-detail')?.textContent?.trim()||'';
+      const time=ev.querySelector('.ev-time')?.textContent?.trim()||'';
+      const date=ev.closest('.db')?.dataset.date||'';
+      const stEl=ev.querySelector('.ev-st');
+      const hasBooking=stEl&&(stEl.classList.contains('warn')||stEl.classList.contains('done'));
+      const isBooked=stEl&&stEl.classList.contains('done');
+      items.push({title,detail,time,date,dotType,country,hasBooking,isBooked});
+    });
+  });
+  return items;
+}
+function buildPlacesTab(){
+  const wrap=document.getElementById('places-list-auto');
+  if(!wrap)return;
+  const items=collectEventsFromDOM(['place','landmark']);
+  if(!items.length){wrap.innerHTML='<div style="text-align:center;padding:3rem;color:var(--muted)">ยังไม่มี Places/Landmarks</div>';return;}
+  // Group by country
+  const groups={};
+  items.forEach(it=>{
+    const city=it.country||'Other';
+    if(!groups[city])groups[city]=[];
+    groups[city].push(it);
+  });
+  let html='';
+  for(const [city,list] of Object.entries(groups)){
+    html+=`<div class="bks"><div class="bks-title">${city}</div>`;
+    list.forEach(it=>{
+      const icon=it.dotType==='landmark'?'🏛️':'📍';
+      const badge=it.dotType==='landmark'?'<span class="bk-cat landmark">Landmark</span>':'<span class="bk-cat place">Place</span>';
+      html+=`<div class="bki"><div class="bki-header" onclick="this.parentElement.classList.toggle('open')"><div class="bk-check"></div>${badge}<div class="bk-body"><div class="bk-title">${icon} ${it.title}</div>${it.detail?`<div class="bk-detail">${it.detail}</div>`:''}</div><div class="bk-meta"><div class="bk-date">${it.date||''}</div></div><span class="bk-chevron">▼</span></div></div>`;
+    });
+    html+='</div>';
+  }
+  wrap.innerHTML=html;
+}
+function buildRestaurantsTab(){
+  const wrap=document.getElementById('restaurants-list-auto');
+  if(!wrap)return;
+  const items=collectEventsFromDOM(['restaurant','food']);
+  if(!items.length){wrap.innerHTML='<div style="text-align:center;padding:3rem;color:var(--muted)">ยังไม่มี Restaurants</div>';return;}
+  const groups={};
+  items.forEach(it=>{
+    const city=it.country||'Other';
+    if(!groups[city])groups[city]=[];
+    groups[city].push(it);
+  });
+  let html='';
+  for(const [city,list] of Object.entries(groups)){
+    html+=`<div class="bks"><div class="bks-title">${city}</div>`;
+    list.forEach(it=>{
+      html+=`<div class="bki"><div class="bki-header" onclick="this.parentElement.classList.toggle('open')"><div class="bk-check"></div><span class="bk-cat restaurant">🍽️ Restaurant</span><div class="bk-body"><div class="bk-title">🍽️ ${it.title}</div>${it.detail?`<div class="bk-detail">${it.detail}</div>`:''}</div><div class="bk-meta"><div class="bk-date">${it.date||''}</div></div><span class="bk-chevron">▼</span></div></div>`;
+    });
+    html+='</div>';
+  }
+  wrap.innerHTML=html;
 }
 
 // ===== MAP =====
@@ -2877,6 +3054,7 @@ async function init(){
   buildBookingTab();
   apply();
   addEditButtonsToHardcoded();
+  initDayToggle();
   initMap();
   loadNotes();
   loadEvents();
