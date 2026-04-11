@@ -815,119 +815,165 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <div class="cb" data-country="Nice">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇫🇷</span><span class="cn">France — Nice</span><span class="cd">11–13 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    Côte d'Azur — Socca ร้อนๆ จากเตาฟืน · Cours Saleya ตลาดเช้า · Vieux-Nice ซอยสีสัน · วิว Castle Hill
+  </div>
 
   <div class="db travel day-collapsed" data-date="2026-05-11">
-    <div class="dh"><span class="dn">11 MAY</span><span class="dd">จันทร์ 11 May</span><span class="dt">· Arrive from Paris ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">11 MAY</span><span class="dd">จันทร์ 11 May</span><span class="dt">· Arrive from Paris + Vieux-Nice Evening</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Arrive Nice · ฝากกระเป๋า Left Luggage</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:00</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Cours Saleya Market — Socca + café</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-nice" onclick="goBooking('bk-hotel-nice',event)">🏨</span><span class="ev-time">14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Vieux-Nice zone &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-nice',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">แถว Rue Masséna / Place Garibaldi · ขอ early check-in ตอนจอง!</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Promenade des Anglais + Castle Hill วิว</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Dinner — Acchiardo (Vieux-Nice authentic)</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">ถึง Nice เที่ยง → socca แรก Lou Pilha Leva → Promenade des Anglais + Castle Hill วิว → ค่ำ Chez Acchiardo</div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-fly-par-nce" onclick="goBooking('bk-fly-par-nce',event)">✈️</span><span class="ev-time">12:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Arrive Nice จาก Paris</div><div class="ev-detail">ถึง Nice Côte d'Azur Airport · bus/tram เข้าเมือง ~30 นาที</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-nice" onclick="goBooking('bk-hotel-nice',event)">🏨</span><span class="ev-time">13:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Nice · Vieux-Nice zone</div><div class="ev-detail">แนะนำโซน Vieux-Nice ใกล้ Cours Saleya + ร้านอาหาร</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Lou Pilha Leva</div><div class="ev-detail">10 Rue du Collet · socca + pissaladière กินยืนโต๊ะไม้ · "take and go" ในภาษา Nissart · EUR 3-6</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Promenade des Anglais</div><div class="ev-detail">เดินริมทะเลสาย iconic · เก้าอี้สีฟ้า · วิว Baie des Anges</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Castle Hill (Colline du Château)</div><div class="ev-detail">วิว Nice + ทะเล 360° · น้ำตก · ฟรี · ขึ้นบันไดหรือลิฟต์</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Place Masséna</div><div class="ev-detail">จัตุรัสหลักของ Nice · รูปปั้นคนนั่งบนเสา (เรืองแสงตอนกลางคืน!) · Promenade du Paillon</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Chez Acchiardo</div><div class="ev-detail">38 Rue Droite · Niçoise ดั้งเดิม family-run · daube niçoise + petits farcis · เปิดจันทร์! (ปิด ส-อา) · EUR 15-25</div></div></div>
     </div>
   </div>
 
   <div class="db day-collapsed" data-date="2026-05-12">
-    <div class="dh"><span class="dn">12 MAY</span><span class="dd">อังคาร 12 May</span><span class="dt">· Monaco Day Trip</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">12 MAY</span><span class="dd">อังคาร 12 May</span><span class="dt">· Cours Saleya + Èze Village + Monaco</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">08:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">TER Nice-Ville → Monaco</div><div class="ev-info-box">🚂 ไม่ต้องจอง · ทุก 15–30 นาที · ~22 นาที · €4.40 · ซื้อที่สถานี</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Palais Princier + Casino (ด้านนอก) + Port Hercule</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Jardins Saint-Martin + Musée Océanographique (optional €18)</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">17:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">TER กลับ Monaco → Nice-Ville</div><div class="ev-info-box">🎫 ตั๋วใบเดิม valid all day — ไม่ต้องซื้อใหม่</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Dinner — Vieux-Nice / Quai des Deux Emmanuels</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">ตลาดเช้า Cours Saleya → bus ขึ้น Èze Village วิว 360° → ลงไป Monaco → Marché de la Condamine → Casino → กลับ Nice dinner</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Cours Saleya Market</div><div class="ev-detail">ตลาดอาหารเช้า (อังคาร = วันตลาด!) · ผัก ผลไม้ ดอกไม้ ชีส มะกอก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Socca จาก Chez Theresa</div><div class="ev-detail">รถเข็นเตาฟืนในตลาด Cours Saleya · socca ของจริง since 1925 · EUR 3</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Èze Village</div><div class="ev-detail">Bus 82 จาก Nice (20 นาที) · หมู่บ้านบนหน้าผา · Jardin Exotique วิว Côte d'Azur 360° · EUR 6</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Monaco</div><div class="ev-detail">Bus จาก Èze ลงไป Monaco (15 นาที) · Prince's Palace + Casino Monte-Carlo</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Marché de la Condamine</div><div class="ev-detail">Place d'Armes · lunch ราคาถูกใน Monaco! · Barbagiuans (ขนมท้องถิ่น) + Maison des Pâtes · EUR 7-15</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Casino Monte-Carlo + Jardins</div><div class="ev-detail">ถ่ายรูปด้านหน้า + สวนรอบๆ · เข้าชม EUR 17 (optional)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">กลับ Nice</div><div class="ev-detail">Train Monaco → Nice (~20 นาที)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Chez Pipo</div><div class="ev-detail">13 Rue Bavastro · socca since 1923 · communal tables · cash only · EUR 3-5</div></div></div>
     </div>
   </div>
 
   <div class="db travel day-collapsed" data-date="2026-05-13">
-    <div class="dh"><span class="dn">13 MAY</span><span class="dd">พุธ 13 May</span><span class="dt">· Nice → Barcelona ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">13 MAY</span><span class="dd">พุธ 13 May</span><span class="dt">· Morning Nice + ✈ Barcelona</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Check-out โรงแรม Nice</div></div></div>
-    <div class="ev"><span class="ev-st info">🚃</span><span class="ev-time">08:15</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Tram T2 Nice-Ville → สนามบิน NCE</div><div class="ev-info-box">🚃 ไม่ต้องจอง · ทุก 6–8 นาที · ~30 นาที · €1.80</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-fly-nce-bcn" onclick="goBooking('bk-fly-nce-bcn',event)">✈️</span><span class="ev-time">~10:30</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Nice NCE → Barcelona BCN &nbsp;<a class="tbadge warn" onclick="goBooking('bk-fly-nce-bcn',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">easyJet / Vueling · ~1h 30min · arr ~12:00 · easyjet.com / vueling.com</div></div></div>
-    <div class="ev"><span class="ev-st info">🚌</span><span class="ev-time">~12:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Arrive BCN → Aerobus → Passeig de Gràcia</div><div class="ev-info-box">🚌 ไม่ต้องจอง · ทุก 5–10 นาที · ~35 นาที · €6.75</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้า specialty coffee + ซื้อ Pan Bagnat เอาขึ้นเครื่อง → บินไป Barcelona</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 La Claque Café</div><div class="ev-detail">Vieux-Nice · specialty coffee + pastries · EUR 5-8</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">ซื้อ Pan Bagnat</div><div class="ev-detail">sandwich Niçoise ดั้งเดิม · ซื้อจาก bakery เอาขึ้นเครื่อง!</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Nice</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-fly-nce-bcn" onclick="goBooking('bk-fly-nce-bcn',event)">✈️</span><span class="ev-time">11:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Nice → Barcelona</div><div class="ev-detail">~1.5 ชม. · ถึง Barcelona ~12:30 (เวลาท้องถิ่น)</div></div></div>
     </div>
   </div>
 
-  </div><!-- /cb-body -->
+  </div>
 </div>
 
 <!-- ====== BARCELONA ====== -->
 <div class="cb" data-country="Spain-Barcelona">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇪🇸</span><span class="cn">Spain — Barcelona</span><span class="cd">13–16 May</span><span class="ck">3 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    Gaudí + Tapas + ทะเล — Bomba ต้นตำรับที่ La Cova Fumada · Vermut culture · Mercat de Santa Caterina · churros con chocolate since 1870s
+  </div>
 
-  <div class="db day-collapsed" data-date="2026-05-13">
-    <div class="dh"><span class="dn">13 MAY</span><span class="dd">พุธ 13 May</span><span class="dt">· Arrive BCN</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+  <div class="db travel day-collapsed" data-date="2026-05-13">
+    <div class="dh"><span class="dn">13 MAY</span><span class="dd">พุธ 13 May</span><span class="dt">· Arrive + Gothic Quarter Tapas</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-bcn" onclick="goBooking('bk-hotel-bcn',event)">🏨</span><span class="ev-time">~14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Eixample zone &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-bcn',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">แถว Consell de Cent / Passeig de Gràcia · 3 คืน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Passeig de Gràcia — Casa Batlló + Casa Milà ชมด้านนอก</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">El Born + Basílica Santa Maria del Mar</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Dinner El Born — Bar del Pla หรือ El Xampanyet</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">บ่ายถึง Barcelona → เดิน Gothic Quarter → pintxos Basque ที่ Euskal Etxea → tapas สมัยใหม่ Bar del Pla</div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-bcn" onclick="goBooking('bk-hotel-bcn',event)">🏨</span><span class="ev-time">14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Barcelona · Eixample</div><div class="ev-detail">แนะนำโซน Eixample — ใกล้ Sagrada + Passeig de Gràcia + metro สะดวก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Gothic Quarter</div><div class="ev-detail">Barcelona Cathedral + ซอยโรมัน + Plaça Reial · เดินเล่นหลงทาง</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Euskal Etxea</div><div class="ev-detail">Gothic Quarter · pintxos Basque หยิบจากบาร์ EUR 2.50/อัน · จ่ายตามไม้จิ้ม</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Bar del Pla</div><div class="ev-detail">Carrer de Montcada 2 · croquetas Idiazábal + Iberian pork · natural wine · จองล่วงหน้า · EUR 20-30</div></div></div>
     </div>
   </div>
 
   <div class="db day-collapsed" data-date="2026-05-14">
-    <div class="dh"><span class="dn">14 MAY</span><span class="dd">พฤหัส 14 May</span><span class="dt">· Gaudí Day</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">14 MAY</span><span class="dd">พฤหัส 14 May</span><span class="dt">· Sagrada + Park Güell + Barceloneta</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st warn" data-bk="bk-sagrada" onclick="goBooking('bk-sagrada',event)">🎟️</span><span class="ev-time">09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Sagrada Família &nbsp;<a class="tbadge warn" onclick="goBooking('bk-sagrada',event)">⚠️ จองด่วน!</a></div><div class="ev-detail">sagradafamilia.org · ก่อนคนแน่น · €26–47/คน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Lunch Eixample — ห่าง Sagrada 5 นาที</div></div></div>
-    <div class="ev"><span class="ev-st info">🚇</span><span class="ev-time">13:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Metro L5 → Diagonal → L3 → Lesseps</div><div class="ev-info-box">🚇 ไม่ต้องจอง · ใช้ T-Casual (10 เที่ยว €12.15)</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-parkguell" onclick="goBooking('bk-parkguell',event)">🎟️</span><span class="ev-time">14:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Park Güell Monumental Zone &nbsp;<a class="tbadge warn" onclick="goBooking('bk-parkguell',event)">⚠️ จองด่วน!</a></div><div class="ev-detail">parkguell.barcelona · €15/คน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">ย่าน Gràcia เดินเล่น — Plaza del Sol</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-montbar" onclick="goBooking('bk-montbar',event)">🍽️</span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Mont Bar ⭐⭐ Dinner &nbsp;<a class="tbadge warn" onclick="goBooking('bk-montbar',event)">⚠️ ต้องจอง</a></div><div class="ev-detail">Carrer de la Diputació 220 · Tasting Menu €190/คน · montbar.com/en/book-table</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">churros เช้า → Sagrada Familia → lunch Cal Pep ไม่มีเมนู → Park Güell → Barceloneta → La Cova Fumada bomba ต้นตำรับ!</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Granja Viader</div><div class="ev-detail">Carrer d'En Xuclà 4 · churros con chocolate since 1870s · ลอง Cacaolat (ช็อกนมที่เขาคิดขึ้น!) · EUR 5-8</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-sagrada" onclick="goBooking('bk-sagrada',event)">🏛️</span><span class="ev-time">09:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Sagrada Familia</div><div class="ev-detail">ต้องจองล่วงหน้า! · Gaudí masterpiece · EUR 26-47 · 1.5-2 ชม.</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Casa Batlló</div><div class="ev-detail">Passeig de Gràcia 43 · Gaudí masterpiece ด้านหน้าเหมือนกระดูก · EUR 35 · ระหว่างทางไป El Born</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Cal Pep</div><div class="ev-detail">Plaça de les Olles 8, El Born · นั่งบาร์ไม่มีเมนู เชฟเลือกให้ · baby squid + omelette · คิว 30 นาที คุ้ม · EUR 30-40</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-parkguell" onclick="goBooking('bk-parkguell',event)">🏛️</span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Park Güell</div><div class="ev-detail">ต้องจองล่วงหน้า! · Gaudí mosaic + วิว Barcelona · EUR 15</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Barceloneta Beach</div><div class="ev-detail">หาดในเมือง · เดินเล่น + sunset</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ La Cova Fumada</div><div class="ev-detail">Carrer del Baluard 56 · ไม่มีป้ายหน้าร้าน! · ร้านต้นกำเนิด BOMBA EUR 2.20/ลูก · เปิด พฤ-ศ 18-20:00 · ไม่รับจอง</div></div></div>
     </div>
   </div>
 
   <div class="db day-collapsed" data-date="2026-05-15">
-    <div class="dh"><span class="dn">15 MAY</span><span class="dd">ศุกร์ 15 May</span><span class="dt">· Boqueria + Gothic + Beach</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">15 MAY</span><span class="dd">ศุกร์ 15 May</span><span class="dt">· Food Crawl Day + Montjuïc</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:00</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">La Boqueria — Bar Pinotxo + El Quim (ก่อน 10 โมง!)</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Gothic Quarter — Pont del Bisbe + Temple d'August</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:30</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">La Cova Fumada Barceloneta — ก่อน 13:00!</div><div class="ev-detail">ต้นกำเนิด Bomba · ไม่รับจอง · มาก่อน 13:00</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Barceloneta Beach + Passeig Marítim</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Dinner — Paella / Seafood ริมทะเล</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">ตลาด Santa Caterina → vermut Morro Fi → paella จริงที่ Mana 75 → Barceloneta → Bunkers del Carmel sunset → Montjuïc Magic Fountain</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Mercat de Santa Caterina</div><div class="ev-detail">ตลาดหลังคาคลื่นสวยมาก · ดีกว่า Boqueria ไม่ tourist trap · ผลไม้ ชีส jamón</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Vermut — Morro Fi</div><div class="ev-detail">Carrer del Consell de Cent 171 · vermouth on tap + conservas (กระป๋อง seafood) · EUR 5</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Mana 75 — Paella</div><div class="ev-detail">Barceloneta · paella ของจริง ไม่ใช่ tourist trap · สั่ง lunch เท่านั้น สั่งขั้นต่ำ 2 คน · EUR 12-18/คน</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เดินเล่น Barceloneta beach</div><div class="ev-detail">ชายหาดในเมือง · พักผ่อน</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Bunkers del Carmel</div><div class="ev-detail">จุดชมวิว secret ที่ดีที่สุดใน Barcelona · locals only · sunset · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Bodega La Puntual</div><div class="ev-detail">El Born · seafood tapas + octopus · EUR 20-30</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Montjuïc Magic Fountain</div><div class="ev-detail">show น้ำพุเต้นประกอบเพลง + แสงสี · ศ-ส 21:00 · ฟรี!</div></div></div>
     </div>
   </div>
 
   <div class="db travel day-collapsed" data-date="2026-05-16">
-    <div class="dh"><span class="dn">16 MAY</span><span class="dd">เสาร์ 16 May</span><span class="dt">· Barcelona → Madrid 🚄 AVE</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">16 MAY</span><span class="dd">เสาร์ 16 May</span><span class="dt">· Vermut Morning + 🚂 Madrid</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Mercat de Santa Caterina เช้า</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Check-out + Metro → Barcelona Sants</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-ave" onclick="goBooking('bk-ave',event)">🚄</span><span class="ev-time">~11:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">AVE Barcelona Sants → Madrid Atocha &nbsp;<a class="tbadge warn" onclick="goBooking('bk-ave',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">~2h 30min · renfe.com · Preferente แนะนำ · arr ~13:30</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-madrid" onclick="goBooking('bk-hotel-madrid',event)">🏨</span><span class="ev-time">~14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Madrid &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-madrid',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">แถว Centro / Salamanca / Chueca</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เสาร์เช้า = hora del vermut! → vermutería → AVE ไป Madrid</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Hora del Vermut — Vermuteria del Tano</div><div class="ev-detail">Gràcia · เสาร์เช้า = ritual vermut ของ Barcelona · vermouth + olives + tapas · EUR 5-10</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Barcelona</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-ave" onclick="goBooking('bk-ave',event)">🚂</span><span class="ev-time">12:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">AVE Barcelona → Madrid</div><div class="ev-detail">Barcelona Sants → Madrid Atocha · ~2.5 ชม. · ถึง ~15:00</div></div></div>
     </div>
   </div>
 
-  </div><!-- /cb-body -->
+  </div>
 </div>
 
 <!-- ====== MADRID ====== -->
 <div class="cb" data-country="Spain-Madrid">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇪🇸</span><span class="cn">Spain — Madrid</span><span class="cd">16–18 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
-  <div class="db day-collapsed" data-date="2026-05-16">
-    <div class="dh"><span class="dn">16 MAY</span><span class="dd">เสาร์ 16 May</span><span class="dt">· Madrid Food + Culture</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    เมืองหลวง Spain — Bocadillo de calamares EUR 2.70 · Calle Cava Baja ถนน tapas 50+ ร้าน · Churros San Ginés 24 ชม. · Prado + Royal Palace
+  </div>
+
+  <div class="db travel day-collapsed" data-date="2026-05-16">
+    <div class="dh"><span class="dn">16 MAY</span><span class="dd">เสาร์ 16 May</span><span class="dt">· Arrive + Cava Baja Tapas Crawl</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Museo del Prado · Retiro Park · Plaza Mayor · Palacio Real</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">Food</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Mercado San Miguel · La Latina tapas · Malasaña cafés</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">ถึง Atocha → bocadillo de calamares ข้ามถนน → check-in → เย็น Cava Baja tapas crawl → ดึก churros San Ginés</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">ถึง Madrid Atocha จาก Barcelona</div><div class="ev-detail">AVE ~2.5 ชม.</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:15</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ El Brillante</div><div class="ev-detail">ข้ามถนนจาก Atocha! · bocadillo de calamares EUR 6.50 · เปิด 24 ชม.</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-madrid" onclick="goBooking('bk-hotel-madrid',event)">🏨</span><span class="ev-time">16:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Madrid · Centro</div><div class="ev-detail">แนะนำโซน Sol / La Latina — ใกล้ tapas + metro</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Plaza Mayor</div><div class="ev-detail">จัตุรัสกลางเมือง · arcade รอบด้าน · สวยมาก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Puerta del Sol</div><div class="ev-detail">กม.0 ของ Spain · รูปหมีกับต้น Madroño · หัวใจของ Madrid</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Calle Cava Baja — Tapas Crawl</div><div class="ev-detail">La Latina · ถนน tapas 50+ ร้าน · 1 drink + 1-2 tapas/ร้าน แล้วย้าย</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:45</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">→ Taberna La Concha</div><div class="ev-detail">Cava Baja 7 · vermouth + boquerones (anchovies)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:15</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">→ Pez Tortilla</div><div class="ev-detail">Cava Baja 42 · tortilla española ไข่เยิ้ม ที่ดีที่สุด</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:45</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">→ El Mesón del Champiñón</div><div class="ev-detail">เห็ดกระเทียมอบใน cave · ร้านดังบน Cava Baja</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">22:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Chocolatería San Ginés</div><div class="ev-detail">Pasadizo de San Ginés 5 · churros + porras con chocolate · since 1894 · เปิด 24 ชม. · EUR 4-5</div></div></div>
     </div>
   </div>
+
   <div class="db day-collapsed" data-date="2026-05-17">
-    <div class="dh"><span class="dn">17 MAY</span><span class="dd">อาทิตย์ 17 May</span><span class="dt">· Madrid Food + Culture</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">17 MAY</span><span class="dd">อาทิตย์ 17 May</span><span class="dt">· Prado + Retiro + Classic Tapas</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">Retiro Park เช้า → ตลาด Cebada → Casa Labra croquetas EUR 1.50! → Prado → Templo de Debod sunset → Bar La Campana calamares EUR 2.70!</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Retiro Park</div><div class="ev-detail">เดินเล่นเช้า · Crystal Palace + ล่องเรือทะเลสาบ · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Mercado de la Cebada</div><div class="ev-detail">La Latina · ตลาดของจริง (ไม่ใช่ San Miguel tourist trap!) · อาทิตย์คึกคักมาก · EUR 5-7</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Casa Labra</div><div class="ev-detail">Calle de Tetuán 12 · croquetas bacalao since 1860 · คิวยาวเร็ว · EUR 1.50! · ที่ก่อตั้งพรรค Socialist</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Casa del Abuelo</div><div class="ev-detail">ใกล้ Sol · gambas al ajillo since 1906 · กุ้งกระเทียม + sweet wine · EUR 7-10</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Museo del Prado</div><div class="ev-detail">พิพิธภัณฑ์ศิลปะระดับโลก · Velázquez, Goya, El Greco · EUR 15 · 2-3 ชม.</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Bar La Campana</div><div class="ev-detail">Calle Botoneras ใกล้ Plaza Mayor · bocadillo de calamares ที่ดีที่สุด EUR 2.70!! · คิวยาวแต่เร็ว</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Royal Palace (Palacio Real)</div><div class="ev-detail">พระราชวังใหญ่ที่สุดในยุโรปตะวันตก · EUR 12 · ปิด 18:00 (ดูด้านนอก+สวนได้)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Templo de Debod — Sunset</div><div class="ev-detail">วิหารอียิปต์ 2,200 ปี! · sunset ที่ดีที่สุดใน Madrid · ฟรี · ห้ามพลาด!</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Casa Revuelta</div><div class="ev-detail">ใกล้ Plaza Mayor · cod fritters ระดับตำนาน · เล็ก คนเยอะ ยืนกินที่บาร์</div></div></div>
     </div>
   </div>
+
   <div class="db travel day-collapsed" data-date="2026-05-18">
-    <div class="dh"><span class="dn">18 MAY</span><span class="dd">จันทร์ 18 May</span><span class="dt">· Madrid → Copenhagen ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">18 MAY</span><span class="dd">จันทร์ 18 May</span><span class="dt">· Churros Morning + ✈ Copenhagen</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Check-out + Metro L8 → MAD Airport ~30min</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-fly-mad-cph" onclick="goBooking('bk-fly-mad-cph',event)">✈️</span><span class="ev-time">~10:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Madrid MAD → Copenhagen CPH &nbsp;<a class="tbadge warn" onclick="goBooking('bk-fly-mad-cph',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail"><strong>Direct ✅</strong> Iberia/SAS/Ryanair · ~3h 25min · arr ~13:30</div></div></div>
-    <div class="ev"><span class="ev-st info">🚇</span><span class="ev-time">~13:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Arrive CPH → Metro M2 → City Centre</div><div class="ev-info-box">🚇 ไม่ต้องจอง · ~15 นาที · ทุก 3–4 นาที</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-cph" onclick="goBooking('bk-hotel-cph',event)">🏨</span><span class="ev-time">~14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Copenhagen &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-cph',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">แถว Nørreport / Indre By / Vesterbro</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้า churros สุดท้าย San Ginés → check-out → บิน Copenhagen</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Chocolatería San Ginés</div><div class="ev-detail">churros เช้า (ถ้าเมื่อคืนไม่ได้ไป) · since 1894 · EUR 4-5</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Madrid</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-fly-mad-cph" onclick="goBooking('bk-fly-mad-cph',event)">✈️</span><span class="ev-time">12:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Madrid → Copenhagen</div><div class="ev-detail">~3.5 ชม. · ถึง Copenhagen ~17:30 (เวลาท้องถิ่น)</div></div></div>
     </div>
   </div>
-  </div><!-- /cb-body -->
+
+  </div>
 </div>
 
 <!-- ====== COPENHAGEN ====== -->
