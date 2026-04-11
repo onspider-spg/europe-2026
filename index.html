@@ -123,6 +123,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .ev-dot.hotel::before{content:'🏨';}
 .ev-dot.food::before{content:'🍽️';}
 .ev-dot.act::before{content:'🎯';}
+.ev-dot.place::before{content:'📍';}
+.ev-dot.landmark::before{content:'🏛️';}
+.ev-dot.restaurant::before{content:'🍽️';}
 .ev-dot.must::before{content:'⭐';}
 .ev-dot.rec::before{content:'👍';}
 .ev-dot.opt::before{content:'💡';}
@@ -354,6 +357,25 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 .user-ev-actions{display:inline-flex;gap:2px;margin-left:6px;}
 .user-ev-actions button{border:none;background:none;cursor:pointer;font-size:10px;opacity:.4;transition:opacity .15s;padding:0 2px;}
 .user-ev-actions button:hover{opacity:1;}
+
+/* Priority chips */
+.priority-chips{display:flex;gap:4px;flex-wrap:wrap;}
+.priority-chip{padding:3px 10px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:10px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--muted);}
+.priority-chip:hover{border-color:var(--accent);color:var(--accent);}
+.priority-chip.selected{color:#fff;}
+.priority-chip[data-val="must"].selected{background:var(--must);border-color:var(--must);}
+.priority-chip[data-val="rec"].selected{background:var(--rec);border-color:var(--rec);}
+.priority-chip[data-val="opt"].selected{background:var(--opt);border-color:var(--opt);color:#92400e;}
+/* Booking checkbox */
+.ev-booking-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);}
+.ev-booking-row input[type="checkbox"]{accent-color:var(--accent);}
+/* Booking status badges on events */
+.ev-bk-badge{font-size:11px;margin-left:4px;}
+/* Priority badge on events */
+.ev-priority-badge{font-size:9px;padding:1px 6px;border-radius:10px;margin-left:4px;font-weight:600;}
+.ev-priority-badge.must{background:#fef2f2;color:var(--must);}
+.ev-priority-badge.rec{background:#fff7ed;color:var(--rec);}
+.ev-priority-badge.opt{background:#fffbeb;color:#92400e;}
 
 @media(max-width:600px){
   .notes-layout{flex-direction:column;}
@@ -629,8 +651,9 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="legend-item">✈️ Flight</div>
   <div class="legend-item">🚄 Train</div>
   <div class="legend-item">🏨 Hotel</div>
-  <div class="legend-item">🍽️ Food</div>
-  <div class="legend-item">🎯 Activity</div>
+  <div class="legend-item">📍 Place</div>
+  <div class="legend-item">🏛️ Landmark</div>
+  <div class="legend-item">🍽️ Restaurant</div>
   <div class="legend-item">⭐ ห้ามพลาด</div>
   <div class="legend-item">👍 แนะนำ</div>
   <div class="legend-item">💡 ถ้ามีเวลา</div>
@@ -1941,14 +1964,29 @@ function showAddEvent(btn){
     form.innerHTML=`
       <div class="form-row"><div class="time-select-row"><select class="ev-hour-input">${hourOpts}</select><span class="time-colon">:</span><select class="ev-min-input"><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select></div><input type="text" class="ev-title-input" placeholder="Title" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;flex:1"></div>
       <div class="form-row full" style="margin-top:6px"><textarea class="ev-detail-input" placeholder="Detail (optional)" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;min-height:40px;width:100%;resize:vertical"></textarea></div>
-      <div style="display:flex;gap:8px;margin-top:6px;align-items:center">
-        <select class="ev-dot-input" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px"><option value="act">Activity</option><option value="food">Food</option><option value="fly">Flight</option><option value="train">Train</option><option value="hotel">Hotel</option><option value="must">Must See</option><option value="rec">Recommended</option><option value="opt">Optional</option></select>
+      <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
+        <select class="ev-dot-input" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px"><option value="place">📍 Place</option><option value="landmark">🏛️ Landmark</option><option value="restaurant">🍽️ Restaurant</option><option value="fly">✈️ Flight</option><option value="train">🚂 Train</option><option value="hotel">🏨 Hotel</option></select>
+        <div class="priority-chips">
+          <span class="priority-chip" data-val="must" onclick="togglePriority(this)" title="Must-see">⭐ Must-see</span>
+          <span class="priority-chip" data-val="rec" onclick="togglePriority(this)" title="Recommended">👍 Recommended</span>
+          <span class="priority-chip" data-val="opt" onclick="togglePriority(this)" title="Optional">💡 Optional</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:8px;align-items:center">
+        <label class="ev-booking-row"><input type="checkbox" class="ev-booking-input"> Request Booking</label>
+        <span style="flex:1"></span>
         <button style="padding:4px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer" onclick="saveEvent(this)">💾 Save</button>
         <button style="padding:4px 12px;background:#fff;color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer" onclick="this.closest('.add-ev-form').classList.remove('show')">Cancel</button>
       </div>`;
     db.appendChild(form);
   }
   form.classList.toggle('show');
+}
+function togglePriority(chip){
+  const chips=chip.parentElement.querySelectorAll('.priority-chip');
+  if(chip.classList.contains('selected')){chip.classList.remove('selected');return;}
+  chips.forEach(c=>c.classList.remove('selected'));
+  chip.classList.add('selected');
 }
 async function saveEvent(btn){
   const form=btn.closest('.add-ev-form');
@@ -1960,23 +1998,53 @@ async function saveEvent(btn){
   const title=form.querySelector('.ev-title-input').value.trim();
   const detail=form.querySelector('.ev-detail-input').value.trim();
   const dotType=form.querySelector('.ev-dot-input').value;
+  const priorityChip=form.querySelector('.priority-chip.selected');
+  const priority=priorityChip?priorityChip.dataset.val:null;
+  const requestBooking=form.querySelector('.ev-booking-input').checked;
   if(!title){alert('กรุณาใส่ Title');return;}
   const country=cb?.dataset.country||'';
   const dayDate=db?.dataset.date||'';
-  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType};
+  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null};
   const res=await sbInsert('trip_events',[data]);
-  if(res&&res[0]){renderUserEvent(res[0],db);}
+  if(res&&res[0]){
+    renderUserEvent(res[0],db);
+    // Auto-add to Booking page if requested
+    if(requestBooking){
+      const bkId='bk-ev-'+res[0].id;
+      const catMap={place:'activities',landmark:'activities',restaurant:'activities',fly:'flights',train:'trains',hotel:'hotels'};
+      const bkData={id:bkId,status:false,category:catMap[dotType]||'activities',label:title,date_info:dayDate||'',is_custom:true,updated_at:new Date().toISOString()};
+      DB[bkId]=bkData;
+      await sbInsert('trip_bookings',[bkData]);
+      buildBookingTab();
+      apply();
+    }
+  }
   form.classList.remove('show');
-  form.querySelector('.ev-time-input').value='';
   form.querySelector('.ev-title-input').value='';
   form.querySelector('.ev-detail-input').value='';
+  form.querySelector('.ev-booking-input').checked=false;
+  form.querySelectorAll('.priority-chip').forEach(c=>c.classList.remove('selected'));
 }
 function renderUserEvent(ev,dbEl){
   const row=document.createElement('div');
   row.className='ev user-ev';
   row.dataset.eventId=ev.id;
   row.dataset.time=ev.time||'99:99';
-  row.innerHTML=`<span class="ev-st none"></span><span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title">${ev.title}<span class="user-ev-actions"><button onclick="deleteEvent(${ev.id})" title="Delete">🗑️</button></span></div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
+  // Booking status icon
+  const bkId='bk-ev-'+ev.id;
+  let stHtml;
+  if(ev.request_booking){
+    const booked=DB[bkId]?.status||(ev.booking_status==='done');
+    stHtml=booked?`<span class="ev-st done" data-bk="${bkId}" onclick="goBooking('${bkId}',event)">✓</span>`:`<span class="ev-st warn" data-bk="${bkId}" onclick="goBooking('${bkId}',event)">!</span>`;
+  } else {
+    stHtml='<span class="ev-st none"></span>';
+  }
+  // Priority badge
+  const prioMap={must:{label:'Must-see',cls:'must'},rec:{label:'Recommended',cls:'rec'},opt:{label:'Optional',cls:'opt'}};
+  const prio=ev.priority&&prioMap[ev.priority]?`<span class="ev-priority-badge ${prioMap[ev.priority].cls}">${prioMap[ev.priority].label}</span>`:'';
+  // Booking badge text
+  const bkBadge=ev.request_booking?(DB[bkId]?.status||(ev.booking_status==='done')?'<span class="ev-bk-badge">✅ จองแล้ว</span>':'<span class="ev-bk-badge">⚠️ ยังไม่จอง</span>'):'';
+  row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title">${ev.title}${prio}${bkBadge}<span class="user-ev-actions"><button onclick="deleteEvent(${ev.id})" title="Delete">🗑️</button></span></div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
   // Insert sorted by time — find correct position among all .ev elements
   const evTime=ev.time||'99:99';
   const allEvs=dbEl.querySelectorAll('.ev');
@@ -1997,6 +2065,14 @@ function renderUserEvent(ev,dbEl){
 async function deleteEvent(id){
   if(!confirm('ลบ Event นี้?'))return;
   await sbDelete('trip_events','id',id);
+  // Also remove linked booking if exists
+  const bkId='bk-ev-'+id;
+  if(DB[bkId]){
+    await sbDelete('trip_bookings','id',bkId);
+    delete DB[bkId];
+    buildBookingTab();
+    apply();
+  }
   const el=document.querySelector(`.user-ev[data-event-id="${id}"]`);
   if(el)el.remove();
 }
