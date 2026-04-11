@@ -1078,48 +1078,93 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <!-- ====== ZURICH ====== -->
+<!-- ====== ZÜRICH ====== -->
 <div class="cb" data-country="Swiss-Zurich">
-  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Zurich</span><span class="cd">31 May–2 Jun</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Zürich</span><span class="cd">31 May–2 Jun</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    เมืองริมทะเลสาบ + แม่น้ำ Limmat — Fondue · Raclette · Bratwurst ระดับตำนาน · ช็อกโกแลต Sprüngli · เมืองเก่า Altstadt สวยมาก
+  </div>
+
   <div class="db travel day-collapsed" data-date="2026-05-31">
-    <div class="dh"><span class="dn">31 MAY</span><span class="dd">อาทิตย์ 31 May</span><span class="dt">· Bern → Zurich</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">31 MAY</span><span class="dd">อาทิตย์ 31 May</span><span class="dt">· Arrive + Altstadt Evening</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Bern Old Town เช้า — Zytglogge + Federal Palace</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Bern</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">13:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Train Bern → Zurich HB ~1h</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-zurich" onclick="goBooking('bk-hotel-zurich',event)">🏨</span><span class="ev-time">~14:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Zurich Altstadt/West &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-zurich',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">2 คืน</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">จาก Bern → ถึง Zürich เที่ยง → Bratwurst + เดินเมืองเก่า + ช็อกโกแลต Sprüngli → ค่ำ Zeughauskeller</div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-train-bern-zurich" onclick="goBooking('bk-train-bern-zurich',event)">🚂</span><span class="ev-time">11:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Bern → Zürich</div><div class="ev-detail">~1 ชม. · ถึง Zürich HB ~12:00</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-zurich" onclick="goBooking('bk-hotel-zurich',event)">🏨</span><span class="ev-time">12:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Zürich · Altstadt/West</div><div class="ev-detail">แนะนำโซน Altstadt (เมืองเก่า) หรือ Zürich West (trendy)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Sternen Grill</div><div class="ev-detail">Bratwurst ที่ดีที่สุดใน Zürich · คิวยาวแต่เร็ว · กินยืนๆ ริมถนน · CHF 8-10</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Bahnhofstrasse</div><div class="ev-detail">ถนนช้อปปิ้งหลัก · window shopping · luxury brands</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Lindenhof</div><div class="ev-detail">จุดชมวิวเมืองเก่า · วิว Limmat River + หลังคาเมือง · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Altstadt Niederdorf</div><div class="ev-detail">เดินซอยเมืองเก่า cobblestone · โบสถ์ Grossmünster · บรรยากาศดีมาก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Confiserie Sprüngli</div><div class="ev-detail">ช็อกโกแลต/confectionery ระดับตำนาน since 1836 · ลอง Luxemburgerli (mini macaron) · CHF 5-10</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เดินริม Lake Zürich</div><div class="ev-detail">Zürichhorn park · sunset ริมทะเลสาบ · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Zeughauskeller</div><div class="ev-detail">อาคาร armory เก่า since 1487 · Zürcher Geschnetzeltes (เนื้อลูกวัวซอสครีม) + Rösti · CHF 25-35</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Langstrasse / Niederdorf bars</div><div class="ev-detail">ย่าน nightlife · cocktails + เดินเล่น</div></div></div>
     </div>
   </div>
+
   <div class="db day-collapsed" data-date="2026-06-01">
-    <div class="dh"><span class="dn">1 JUN</span><span class="dd">จันทร์ 1 Jun</span><span class="dt">· Zurich วันเต็ม</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">1 JUN</span><span class="dd">จันทร์ 1 Jun</span><span class="dt">· Zürich Full Day</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Altstadt + Lake Zurich + Kunsthaus + Zurich West cafes</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">Fraumünster → ล่องเรือ Lake Zürich → Hiltl มังสวิรัติเก่าสุดในโลก → Fondue → Uetliberg ยอดเขา 360°</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Breakfast at hotel</div><div class="ev-detail">หรือ local café ใน Niederdorf</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Fraumünster</div><div class="ev-detail">โบสถ์กระจกสี Chagall สวยมาก · CHF 5</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 ล่องเรือ Lake Zürich</div><div class="ev-detail">short cruise 1.5 ชม. · วิว Alps + เมือง · CHF 8-15</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Hiltl</div><div class="ev-detail">ร้านมังสวิรัติที่เก่าแก่ที่สุดในโลก since 1898! · buffet lunch · ไม่ต้องเป็น vegetarian ก็อร่อย · CHF 20-30</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Zürich West / Viadukt</div><div class="ev-detail">ย่าน trendy ใต้สะพานรถไฟเก่า · ร้าน indie + ตลาด Im Viadukt</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Cheese Fondue — Swiss Chuchi</div><div class="ev-detail">Hotel Adler, Niederdorf · fondue ดั้งเดิม + raclette · CHF 25-35</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Uetliberg</div><div class="ev-detail">รถไฟขึ้นยอดเขา ~20 นาทีจาก HB · วิว Zürich + Alps 360° · ฟรี (ใช้ ZVV pass)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Dinner — Kronenhalle</div><div class="ev-detail">brasserie ระดับตำนาน since 1924 · มี Picasso/Chagall บนผนัง · Wiener Schnitzel · CHF 35-50</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เดินริม Limmat River</div><div class="ev-detail">วิวกลางคืนสวย · gelato + เดินเล่น</div></div></div>
     </div>
   </div>
+
   <div class="db travel day-collapsed" data-date="2026-06-02">
-    <div class="dh"><span class="dn">2 JUN</span><span class="dd">อังคาร 2 Jun</span><span class="dt">· Bernina Express → Milan</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">2 JUN</span><span class="dd">อังคาร 2 Jun</span><span class="dt">· Zürich → Chur → Bernina Express 🚂</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Zurich</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">SBB IC Zurich HB → Chur ~1h 15min</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม · ไม่ต้องจองล่วงหน้า</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:15</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">เดินชม Chur Old Town + Lunch รอรถไฟ 13:30</div></div></div>
-    <div class="ev"><span class="ev-st done" data-bk="bk-bernina" onclick="goBooking('bk-bernina',event)">🚂</span><span class="ev-time">13:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Bernina Express Chur → Tirano &nbsp;<a class="tbadge done" onclick="goBooking('bk-bernina',event)">จองแล้ว</a></div><div class="ev-detail">UNESCO · ~4.5h · Landwasser Viaduct · arr 18:00 · ขอที่นั่งฝั่งซ้าย</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-train-tirano" onclick="goBooking('bk-train-tirano',event)">🚄</span><span class="ev-time">~18:15</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Trenord Tirano → Milan Centrale &nbsp;<a class="tbadge warn" onclick="goBooking('bk-train-tirano',event)">ซื้อล่วงหน้า</a></div><div class="ev-detail">~2.5h · ถึง Milan ~20:30 · trenord.it</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้า check-out → train ไป Chur 1h15 → เดินเล่นเมืองเก่า Chur → Bernina Express 13:30 → Tirano</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Breakfast + Pack</div><div class="ev-detail">เก็บของ เตรียมออก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Zürich</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Zürich HB → Chur</div><div class="ev-detail">~1h15 · ถึง Chur ~10:15</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เดินเล่นเมืองเก่า Chur</div><div class="ev-detail">เมืองเก่าที่สุดใน Switzerland · ซอย cobblestone + cafés</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Lunch ใน Chur</div><div class="ev-detail">ร้านเล็กๆ ในเมืองเก่า · Bündner specialties</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-bernina" onclick="goBooking('bk-bernina',event)">🚂</span><span class="ev-time">13:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">⭐ Bernina Express</div><div class="ev-detail">Chur → Tirano · UNESCO scenic route · ~4.5 ชม. · ถึง Tirano ~18:00</div></div></div>
     </div>
   </div>
-  </div><!-- /cb-body -->
+
+  </div>
 </div>
 
 <!-- ====== MILAN POST-BERNINA ====== -->
 <div class="cb" data-country="Italy-Milan2">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Milan</span><span class="cd">2–3 Jun</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
-  <div class="db travel day-collapsed" data-date="2026-06-02b">
-    <div class="dh"><span class="dn">2 JUN</span><span class="dd">อังคาร 2 Jun</span><span class="dt">· post-Bernina · ถึง Milan ~21:00</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    แวะนอน 1 คืนหลัง Bernina Express — ถึงดึก ออกเช้า · ย่าน Navigli ริมคลองเปิดดึก
+  </div>
+
+  <div class="db travel day-collapsed" data-date="2026-06-02">
+    <div class="dh"><span class="dn">2 JUN</span><span class="dd">อังคาร 2 Jun</span><span class="dt">· Bernina → Milan Evening</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-milan2" onclick="goBooking('bk-hotel-milan2',event)">🏨</span><span class="ev-time">~21:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Milan (post-Bernina) &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-milan2',event)">⚠️ ยังไม่จอง</a></div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">ถึง Milan ดึก → check-in → late dinner ย่าน Navigli ริมคลอง</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">ถึง Milano Centrale จาก Tirano</div><div class="ev-detail">train ~2.5 ชม. จาก Tirano (Bernina ถึง Tirano 18:00)</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-milan2" onclick="goBooking('bk-hotel-milan2',event)">🏨</span><span class="ev-time">21:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Milan · ใกล้ Navigli</div><div class="ev-detail">แนะนำโซน Navigli — ร้านเปิดดึก เดินริมคลองได้</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Late Dinner — Pizzeria Spontini</div><div class="ev-detail">Via Gaspare Spontini 4 · pizza หนานุ่ม viral TikTok since 1953 · เปิดดึก · EUR 8-12</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">22:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เดินริมคลอง Navigli</div><div class="ev-detail">บรรยากาศดีตอนกลางคืน · bar + gelato ริมน้ำ</div></div></div>
     </div>
   </div>
-  </div><!-- /cb-body -->
+
+  <div class="db travel day-collapsed" data-date="2026-06-03">
+    <div class="dh"><span class="dn">3 JUN</span><span class="dd">พุธ 3 Jun</span><span class="dt">· Milan → Rome 🚂</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้าไม่รีบ → espresso สุดท้าย → Frecciarossa 3 ชม. ถึง Rome บ่าย</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Espresso + Brioche</div><div class="ev-detail">local bar ใกล้โรงแรม · caffè สุดท้ายใน Milan</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Milan</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-train-milan-rome" onclick="goBooking('bk-train-milan-rome',event)">🚂</span><span class="ev-time">10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Milan → Rome</div><div class="ev-detail">Milano Centrale → Roma Termini · ~3 ชม. · ถึง ~13:00</div></div></div>
+    </div>
+  </div>
+
+  </div>
 </div>
 
 <!-- ====== ROME ====== -->
@@ -1134,12 +1179,12 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="db travel day-collapsed" data-date="2026-06-03">
     <div class="dh"><span class="dn">3 JUN</span><span class="dd">พุธ 3 Jun</span><span class="dt">· Arrive + Trastevere Evening</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">โซน Trastevere ทั้งวัน — ย่านอาหาร local ที่สุดของ Rome · เดินกิน supplì → pizza al taglio → ปิดท้าย carbonara ที่ Da Enzo</div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-train-milan-rome" onclick="goBooking('bk-train-milan-rome',event)">🚂</span><span class="ev-time">09:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Milan → Rome</div><div class="ev-detail">Milano Centrale → Roma Termini · ~3 ชม. · ถึง ~12:00</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-rome" onclick="goBooking('bk-hotel-rome',event)">🏨</span><span class="ev-time">12:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Rome · Trastevere area</div><div class="ev-detail">แนะนำโซน Trastevere — ใกล้ร้านอาหาร local + เดินริม Tiber ได้</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ I Supplì</div><div class="ev-detail">Via di S. Francesco a Ripa 137 · supplì al telefono ข้าวปั้นทอดชีสยืด since 1979 · ลอง carbonara supplì ด้วย · EUR 5-8</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Pizza al taglio — Sesamo Trastevere</div><div class="ev-detail">pizza ตัดชิ้นกินเดินๆ · margherita + potato/rosemary · EUR 4-6</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Piazza Santa Maria in Trastevere</div><div class="ev-detail">โบสถ์โมเสคสวยมาก · เดินเล่นซอย cobblestone</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้าไม่รีบ check-out Milan → Frecciarossa 3 ชม. → ถึง Rome บ่าย → เดินกิน supplì + pizza al taglio → ค่ำ carbonara Da Enzo</div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-train-milan-rome" onclick="goBooking('bk-train-milan-rome',event)">🚂</span><span class="ev-time">10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Milan → Rome</div><div class="ev-detail">Milano Centrale → Roma Termini · ~3 ชม. · ถึง ~13:00</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-rome" onclick="goBooking('bk-hotel-rome',event)">🏨</span><span class="ev-time">13:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Rome · Trastevere area</div><div class="ev-detail">แนะนำโซน Trastevere — ใกล้ร้านอาหาร local + เดินริม Tiber ได้</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ I Supplì</div><div class="ev-detail">Via di S. Francesco a Ripa 137 · supplì al telefono ข้าวปั้นทอดชีสยืด since 1979 · ลอง carbonara supplì ด้วย · EUR 5-8</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Pizza al taglio — Sesamo Trastevere</div><div class="ev-detail">pizza ตัดชิ้นกินเดินๆ · margherita + potato/rosemary · EUR 4-6</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Piazza Santa Maria in Trastevere</div><div class="ev-detail">โบสถ์โมเสคสวยมาก · เดินเล่นซอย cobblestone</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เดินริม Tiber + Ponte Sisto</div><div class="ev-detail">Golden hour walk · วิวสวย</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Aperitivo · Piazza Santa Maria</div><div class="ev-detail">Spritz + snacks ที่ลานหน้าโบสถ์ · EUR 8-12</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Da Enzo al 29</div><div class="ev-detail">Via dei Vascellari 29 · Carbonara + Cacio e Pepe ระดับตำนาน · ไม่รับจอง ต้องไปคิวก่อน 19:15 · EUR 25-35/คน</div></div></div>
@@ -1202,10 +1247,11 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="db travel day-collapsed" data-date="2026-06-07">
     <div class="dh"><span class="dn">7 JUN</span><span class="dd">อาทิตย์ 7 Jun</span><span class="dt">· Rome → Naples 🚂</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">cornetto สุดท้ายใน Rome → Frecciarossa 1h10 → ถึง Naples เที่ยง</div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้าไม่รีบ · กินข้าวเช้า + เดินเล่น Trastevere สุดท้าย → Frecciarossa เที่ยง → ถึง Naples บ่าย</div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Final Breakfast</div><div class="ev-detail">cornetto + caffè สุดท้ายใน Rome · ยืนที่เคาน์เตอร์</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Rome</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-train-rome-naples" onclick="goBooking('bk-train-rome-naples',event)">🚂</span><span class="ev-time">11:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Rome → Naples</div><div class="ev-detail">Roma Termini → Napoli Centrale · ~1h10 · ถึง ~12:10</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Morning walk Trastevere</div><div class="ev-detail">เดินเล่นซอย Trastevere เช้าๆ สุดท้าย · ถ่ายรูป · ซื้อของฝาก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Rome</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-train-rome-naples" onclick="goBooking('bk-train-rome-naples',event)">🚂</span><span class="ev-time">12:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Rome → Naples</div><div class="ev-detail">Roma Termini → Napoli Centrale · ~1h10 · ถึง ~13:10</div></div></div>
     </div>
   </div>
 
@@ -2008,6 +2054,7 @@ const ITEMS_META=[
   {id:'bk-train-bologna-milan',cat:'train',icon:'🚄',label:'Bologna → Milan',date:'25 May',category:'trains'},
   {id:'bk-train-como',cat:'train',icon:'🚄',label:'Trenord Milan → Como',date:'26 May',category:'trains'},
   {id:'bk-train-tirano',cat:'train',icon:'🚄',label:'Trenord Tirano → Milan',date:'2 Jun',category:'trains'},
+  {id:'bk-train-bern-zurich',cat:'train',icon:'🚄',label:'Bern → Zürich',date:'31 May',category:'trains'},
   {id:'bk-train-rome-naples',cat:'train',icon:'🚄',label:'Frecciarossa Rome → Naples',date:'7 Jun',category:'trains'},
   // HOTELS
   {id:'bk-hotel-lisbon',cat:'hotel',icon:'🏨',label:'Lisbon · Pestana Rua Augusta',date:'1–3 May',category:'hotels'},
