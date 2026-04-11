@@ -661,7 +661,29 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <div class="legend" id="ev-filters">
-  <div style="font-size:10px;font-weight:600;color:var(--text);margin-bottom:2px;">🏷️ กดเพื่อ Filter</div>
+  <div style="display:flex;align-items:center;gap:8px;width:100%;margin-bottom:4px;">
+    <div style="font-size:10px;font-weight:600;color:var(--text);">🏷️ Filter</div>
+    <select id="city-filter" onchange="filterByCity(this.value)" style="padding:3px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--muted);background:#fff;cursor:pointer;">
+      <option value="">🌍 ทุกเมือง</option>
+      <option value="Portugal">🇵🇹 Lisbon</option>
+      <option value="France">🇫🇷 Paris</option>
+      <option value="Nice">🇫🇷 Nice</option>
+      <option value="Spain-Barcelona">🇪🇸 Barcelona</option>
+      <option value="Spain-Madrid">🇪🇸 Madrid</option>
+      <option value="Denmark">🇩🇰 Copenhagen</option>
+      <option value="Austria">🇦🇹 Vienna</option>
+      <option value="Italy-Venice">🇮🇹 Venice</option>
+      <option value="Italy-Bologna">🇮🇹 Bologna</option>
+      <option value="Italy-Milan">🇮🇹 Milan + Como</option>
+      <option value="Switzerland">🇨🇭 Switzerland</option>
+      <option value="Italy-Rome">🇮🇹 Rome</option>
+      <option value="Italy-Naples">🇮🇹 Naples</option>
+    </select>
+    <span style="font-size:10px;color:var(--muted);">
+      <span class="ev-st warn" style="width:16px;height:14px;font-size:9px;cursor:default;display:inline-flex">!</span> ยังไม่จอง
+      <span class="ev-st done" style="width:16px;height:14px;font-size:9px;cursor:default;display:inline-flex">✓</span> จองแล้ว
+    </span>
+  </div>
   <span class="filter-chip active" data-filter="all" onclick="filterEvents('all',this)">All</span>
   <span class="filter-chip" data-filter="fly" onclick="filterEvents('fly',this)">✈️ Flight</span>
   <span class="filter-chip" data-filter="train" onclick="filterEvents('train',this)">🚄 Train</span>
@@ -669,16 +691,9 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <span class="filter-chip" data-filter="place" onclick="filterEvents('place',this)">📍 Place</span>
   <span class="filter-chip" data-filter="landmark" onclick="filterEvents('landmark',this)">🏛️ Landmark</span>
   <span class="filter-chip" data-filter="restaurant" onclick="filterEvents('restaurant',this)">🍽️ Restaurant</span>
-  <div style="width:100%;border-top:1px solid var(--border);margin:4px 0"></div>
   <span class="filter-chip" data-filter="must" onclick="filterEvents('must',this)">Must-see</span>
   <span class="filter-chip" data-filter="rec" onclick="filterEvents('rec',this)">Recommended</span>
   <span class="filter-chip" data-filter="opt" onclick="filterEvents('opt',this)">Optional</span>
-  <div style="width:100%;border-top:1px solid var(--border);margin:4px 0"></div>
-  <div class="legend-item" style="font-size:10px;color:var(--muted);">
-    <span class="ev-st warn" style="width:18px;height:16px;font-size:10px;cursor:default">!</span> ยังไม่จอง
-    &nbsp;·&nbsp;
-    <span class="ev-st done" style="width:18px;height:16px;font-size:10px;cursor:default">✓</span> จองแล้ว
-  </div>
 </div>
 
 <!-- ====== PORTUGAL ====== -->
@@ -752,7 +767,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <!-- ====== NICE ====== -->
-<div class="cb" data-country="France">
+<div class="cb" data-country="Nice">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇫🇷</span><span class="cn">France — Nice</span><span class="cd">11–13 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
@@ -786,7 +801,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <!-- ====== BARCELONA ====== -->
-<div class="cb" data-country="Spain">
+<div class="cb" data-country="Spain-Barcelona">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇪🇸</span><span class="cn">Spain — Barcelona</span><span class="cd">13–16 May</span><span class="ck">3 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
@@ -829,7 +844,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <!-- ====== MADRID ====== -->
-<div class="cb" data-country="Spain">
+<div class="cb" data-country="Spain-Madrid">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇪🇸</span><span class="cn">Spain — Madrid</span><span class="cd">16–18 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
   <div class="db" data-date="2026-05-16">
@@ -903,7 +918,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <!-- ====== MILAN + COMO ====== -->
-<div class="cb" data-country="Italy">
+<div class="cb" data-country="Italy-Milan">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Milan · Como</span><span class="cd">25–27 May</span><span class="ck">1+1 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
   <div class="db travel" data-date="2026-05-25">
@@ -981,7 +996,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <!-- ====== ROME ====== -->
-<div class="cb" data-country="Italy">
+<div class="cb" data-country="Italy-Rome">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Rome</span><span class="cd">3–7 Jun</span><span class="ck">4 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
@@ -1010,7 +1025,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <!-- ====== NAPLES ====== -->
-<div class="cb" data-country="Italy">
+<div class="cb" data-country="Italy-Naples">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Naples + Amalfi</span><span class="cd">7–22 Jun</span><span class="ck">14+2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
 
@@ -2197,6 +2212,19 @@ async function saveEditEvent(id,btn){
   }
   buildBookingTab();
   apply();
+}
+
+// ===== FILTER BY CITY =====
+function filterByCity(country){
+  document.querySelectorAll('.cb').forEach(cb=>{
+    if(!country){
+      cb.style.display='';
+    } else {
+      const match=cb.dataset.country===country;
+      cb.style.display=match?'':'none';
+      if(match)cb.classList.remove('collapsed');
+    }
+  });
 }
 
 // ===== FILTER EVENTS =====
