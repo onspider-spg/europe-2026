@@ -652,7 +652,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div class="stats-popup-item" id="fl-bk-fly-nce-bcn"><span class="sp-flag">✈️</span><span class="sp-name">Nice → Barcelona</span><span class="sp-date">14 May</span><span class="sp-badge warn">⚠️</span></div>
     <div class="stats-popup-item" id="fl-bk-fly-mad-cph"><span class="sp-flag">✈️</span><span class="sp-name">Madrid → Copenhagen</span><span class="sp-date">21 May</span><span class="sp-badge warn">⚠️</span></div>
     <div class="stats-popup-item" id="fl-bk-fly-cph-mxp"><span class="sp-flag">✈️</span><span class="sp-name">Copenhagen → Milan</span><span class="sp-date">24 May</span><span class="sp-badge warn">⚠️</span></div>
-    <div class="stats-popup-item" id="fl-bk-fly-mxp-fco"><span class="sp-flag">✈️</span><span class="sp-name">Milan → Rome</span><span class="sp-date">3 Jun</span><span class="sp-badge warn">⚠️</span></div>
+    <div class="stats-popup-item" id="fl-bk-train-milan-rome"><span class="sp-flag">🚄</span><span class="sp-name">Milan → Rome</span><span class="sp-date">3 Jun</span><span class="sp-badge warn">⚠️</span></div>
     <div class="stats-popup-item" id="fl-bk-fly-nap-syd"><span class="sp-flag">✈️</span><span class="sp-name">Naples → Sydney</span><span class="sp-date">22 Jun</span><span class="sp-badge warn">⚠️</span></div>
   </div>
 </div>
@@ -1126,73 +1126,86 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <div class="cb" data-country="Italy-Rome">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Rome</span><span class="cd">3–7 Jun</span><span class="ck">4 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    เมืองหลวงแห่งอารยธรรมโรมัน — Carbonara ต้นตำรับ · Pizza al taglio · Supplì ข้าวปั้นทอดชีสยืด · Gelato artigianale ทุกหัวมุม
+  </div>
 
+  <!-- 3 JUN -->
   <div class="db travel day-collapsed" data-date="2026-06-03">
     <div class="dh"><span class="dn">3 JUN</span><span class="dd">พุธ 3 Jun</span><span class="dt">· Arrive + Trastevere Evening</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Check-out Milan + MXP</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Rome · Trastevere area</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Maritozzo + Espresso — Il Maritozzaro</div><div class="ev-detail">Via Ettore Rolli 50 · EUR 5-7</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Supplì — I Suppli</div><div class="ev-detail">Via di S. Francesco a Ripa 137 · suppli al telefono + carbonara supplì · EUR 5-8</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Pizza al taglio — Sesamo Trastevere</div><div class="ev-detail">EUR 4-6</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Passeggiata along Tiber + Ponte Sisto</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Aperitivo · Piazza Santa Maria in Trastevere</div><div class="ev-detail">Spritz EUR 8-12</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Dinner — Da Enzo al 29</div><div class="ev-detail">Via dei Vascellari 29 · Carbonara + Cacio e Pepe · ไม่รับจอง มาก่อน 19:15 · EUR 25-35/คน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Gelato — Fatamorgana Trastevere</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">โซน Trastevere ทั้งวัน — ย่านอาหาร local ที่สุดของ Rome · เดินกิน supplì → pizza al taglio → ปิดท้าย carbonara ที่ Da Enzo</div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-train-milan-rome" onclick="goBooking('bk-train-milan-rome',event)">🚂</span><span class="ev-time">09:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Milan → Rome</div><div class="ev-detail">Milano Centrale → Roma Termini · ~3 ชม. · ถึง ~12:00</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-rome" onclick="goBooking('bk-hotel-rome',event)">🏨</span><span class="ev-time">12:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Rome · Trastevere area</div><div class="ev-detail">แนะนำโซน Trastevere — ใกล้ร้านอาหาร local + เดินริม Tiber ได้</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ I Supplì</div><div class="ev-detail">Via di S. Francesco a Ripa 137 · supplì al telefono ข้าวปั้นทอดชีสยืด since 1979 · ลอง carbonara supplì ด้วย · EUR 5-8</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Pizza al taglio — Sesamo Trastevere</div><div class="ev-detail">pizza ตัดชิ้นกินเดินๆ · margherita + potato/rosemary · EUR 4-6</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Piazza Santa Maria in Trastevere</div><div class="ev-detail">โบสถ์โมเสคสวยมาก · เดินเล่นซอย cobblestone</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เดินริม Tiber + Ponte Sisto</div><div class="ev-detail">Golden hour walk · วิวสวย</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Aperitivo · Piazza Santa Maria</div><div class="ev-detail">Spritz + snacks ที่ลานหน้าโบสถ์ · EUR 8-12</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Da Enzo al 29</div><div class="ev-detail">Via dei Vascellari 29 · Carbonara + Cacio e Pepe ระดับตำนาน · ไม่รับจอง ต้องไปคิวก่อน 19:15 · EUR 25-35/คน</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Gelato — Fatamorgana</div><div class="ev-detail">gelato organic รสแปลกๆ seasonal · หลายสาขาใน Trastevere</div></div></div>
     </div>
   </div>
 
+  <!-- 4 JUN -->
   <div class="db day-collapsed" data-date="2026-06-04">
-    <div class="dh"><span class="dn">4 JUN</span><span class="dd">พฤหัส 4 Jun</span><span class="dt">· Vatican + Prati + Testaccio</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">4 JUN</span><span class="dd">พฤหัส 4 Jun</span><span class="dt">· Vatican + Testaccio Food Crawl</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Espresso + Cornetto · local bar</div><div class="ev-detail">EUR 3-4</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Vatican Museums + Sistine Chapel</div><div class="ev-detail">ต้องจองล่วงหน้า! EUR 25 · 3-4 ชม.</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">St. Peter's Basilica</div><div class="ev-detail">ฟรี · ปีนโดม EUR 8</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Lunch — Pizzarium (Bonci)</div><div class="ev-detail">Via della Meloria 43 · Best pizza al taglio · EUR 8-12</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Gelato — Come il Latte</div><div class="ev-detail">Via Silvio Pellico 24</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Testaccio Market</div><div class="ev-detail">Casa Manco (pizza) + Mordi e Vai (panini)</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Trapizzino Testaccio</div><div class="ev-detail">Via Giovanni Branca 88 · pollo alla cacciatora · EUR 8-12</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Dinner — Felice a Testaccio</div><div class="ev-detail">Via Mastro Giorgio 29 · Famous cacio e pepe (mixed tableside) · จองล่วงหน้า · EUR 30-40/คน</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้า Vatican + Sistine Chapel → กลางวัน Pizzarium Bonci → บ่ายบุก Testaccio Market + Trapizzino → ค่ำ cacio e pepe tableside ที่ Felice</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Espresso + Cornetto</div><div class="ev-detail">local bar ใน Trastevere · ยืนดื่มที่เคาน์เตอร์แบบคนอิตาลี · EUR 3-4</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-vatican" onclick="goBooking('bk-vatican',event)">🏛️</span><span class="ev-time">08:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Vatican Museums + Sistine Chapel</div><div class="ev-detail">ต้องจองล่วงหน้า! · จองเว็บ 60 วันก่อน · EUR 25 · 3-4 ชม. · Raphael Rooms + Gallery of Maps + เพดาน Sistine</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ St. Peter's Basilica</div><div class="ev-detail">ฟรี · ปีนโดม EUR 8 วิวทั้งเมือง</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Pizzarium Bonci</div><div class="ev-detail">Via della Meloria 43, Prati · pizza al taglio ที่ดีที่สุด · แป้งหมัก 72 ชม. · มีคิวแต่เร็ว · EUR 8-12</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Gelato — Come il Latte</div><div class="ev-detail">Via Silvio Pellico 24 · ครีมมี่สุดๆ ไม่ใส่สารเสถียร</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Testaccio Market</div><div class="ev-detail">ตลาดอาหาร local ที่สุด · Casa Manco (pizza) · Mordi e Vai (panini เนื้อตุ๋น)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Trapizzino</div><div class="ev-detail">Via Giovanni Branca 88 · ร้านต้นตำรับ! แป้ง pizza สามเหลี่ยมยัดไส้ · pollo alla cacciatora · EUR 8-12</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-felice" onclick="goBooking('bk-felice',event)">🍽️</span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Felice a Testaccio</div><div class="ev-detail">Via Mastro Giorgio 29 · cacio e pepe คนผัดให้ดูหน้าโต๊ะ! · since 1936 · จองล่วงหน้า · EUR 30-40/คน</div></div></div>
     </div>
   </div>
 
+  <!-- 5 JUN -->
   <div class="db day-collapsed" data-date="2026-06-05">
-    <div class="dh"><span class="dn">5 JUN</span><span class="dd">ศุกร์ 5 Jun</span><span class="dt">· Colosseum + Jewish Ghetto + Centro Storico</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">5 JUN</span><span class="dd">ศุกร์ 5 Jun</span><span class="dt">· Ancient Rome + Jewish Ghetto</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Trevi Fountain</div><div class="ev-detail">เช้ามาก ไม่มีคนเลย!</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Breakfast — Pasticceria Regoli</div><div class="ev-detail">Via dello Statuto 60 · Best maritozzo in Rome · EUR 5-8</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Colosseum + Roman Forum + Palatine Hill</div><div class="ev-detail">ต้องจองล่วงหน้า! EUR 16 · 3 ชม.</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Lunch — Nonna Betta</div><div class="ev-detail">Via del Portico d'Ottavia 16 · Jewish Quarter · carciofi alla giudia · EUR 25-35/คน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Supplizio</div><div class="ev-detail">Via dei Banchi Vecchi 143 · Gourmet supplì</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Pantheon</div><div class="ev-detail">จอง timed entry EUR 5</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Piazza Navona · Bernini Fountain</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Spanish Steps + Via dei Condotti</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Aperitivo · Piazza Navona area</div><div class="ev-detail">EUR 8-12</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Dinner — Armando al Pantheon</div><div class="ev-detail">Salita dei Crescenzi 31 · Carbonara ระดับตำนาน · จองล่วงหน้า! · EUR 30-40/คน</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">Trevi เช้ามืดไม่มีคน → Colosseum → กลางวัน Jewish Quarter · carciofi → เย็น Pantheon + Piazza Navona → ค่ำ Armando</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Trevi Fountain</div><div class="ev-detail">มาเช้ามืดไม่มีคนเลย! · ถ่ายรูปสบาย · โยนเหรียญ</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Pasticceria Regoli</div><div class="ev-detail">Via dello Statuto 60 · maritozzo (ขนมปังครีม) ที่ดีที่สุดใน Rome · since 1916 · EUR 5-8</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-colosseum" onclick="goBooking('bk-colosseum',event)">🏛️</span><span class="ev-time">09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Colosseum + Roman Forum + Palatine Hill</div><div class="ev-detail">ต้องจองล่วงหน้า! · ticketing.colosseo.it · EUR 16 · combo ticket 3 แห่ง · 3 ชม.</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Nonna Betta</div><div class="ev-detail">Via del Portico d'Ottavia 16 · Jewish Quarter · carciofi alla giudia + Roman-Jewish cuisine · EUR 25-35/คน</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Supplizio</div><div class="ev-detail">Via dei Banchi Vecchi 143 · supplì gourmet (carbonara, arrabbiata) · EUR 5-8</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Pantheon</div><div class="ev-detail">จอง timed entry EUR 5 · รู oculus กลางโดม · ตื่นตาตื่นใจ</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Piazza Navona</div><div class="ev-detail">น้ำพุ Bernini · Fountain of the Four Rivers · นั่ง people-watching</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Spanish Steps + Via dei Condotti</div><div class="ev-detail">บันไดสเปน + ถนนช้อปปิ้ง luxury (window shopping)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Aperitivo</div><div class="ev-detail">Piazza Navona area · Spritz + snacks · EUR 8-12</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-armando" onclick="goBooking('bk-armando',event)">🍽️</span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Armando al Pantheon</div><div class="ev-detail">Salita dei Crescenzi 31 · carbonara ระดับตำนาน since 1961 · จองล่วงหน้า! · EUR 30-40/คน</div></div></div>
     </div>
   </div>
 
+  <!-- 6 JUN -->
   <div class="db day-collapsed" data-date="2026-06-06">
-    <div class="dh"><span class="dn">6 JUN</span><span class="dd">เสาร์ 6 Jun</span><span class="dt">· Campo de' Fiori + Food Day + Farewell</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">6 JUN</span><span class="dd">เสาร์ 6 Jun</span><span class="dt">· Campo de' Fiori + Farewell Dinner</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Espresso — Sant'Eustachio Il Caffè</div><div class="ev-detail">Piazza di Sant'Eustachio 82 · since 1938</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Campo de' Fiori morning market</div><div class="ev-detail">ตลาดเช้า ผัก ผลไม้ ดอกไม้</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Antico Forno Roscioli</div><div class="ev-detail">Via dei Chiavari 34 · Best pizza bianca in Rome · EUR 3-5</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Lunch — Grappolo d'Oro</div><div class="ev-detail">Piazza della Cancelleria 80 · cacio e pepe · EUR 20-30/คน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Il Maritozzo Rosso · Trastevere</div><div class="ev-detail">creative maritozzi + pistachio</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Gianicolo Hill sunset</div><div class="ev-detail">Best panoramic view of Rome</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Aperitivo — Bar San Calisto</div><div class="ev-detail">Trastevere institution</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Farewell Dinner — Roma Sparita</div><div class="ev-detail">Piazza di Santa Cecilia 24 · Cacio e pepe in crispy cheese bowl! · จองล่วงหน้า! · EUR 30-40/คน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">22:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Final Gelato — Otaleg · Trastevere</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">ตลาดเช้า Campo de' Fiori → pizza bianca Roscioli → บ่ายขึ้น Gianicolo Hill ดู sunset → ค่ำ Roma Sparita cacio e pepe in cheese bowl!</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Sant'Eustachio Il Caffè</div><div class="ev-detail">Piazza di Sant'Eustachio 82 · กาแฟที่ดีที่สุดใน Rome since 1938 · gran caffè</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Campo de' Fiori ตลาดเช้า</div><div class="ev-detail">ตลาดทุกวัน (Mon-Sat) · ผัก ผลไม้ ดอกไม้ เครื่องเทศ · ถ่ายรูปสวย</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Antico Forno Roscioli</div><div class="ev-detail">Via dei Chiavari 34 · pizza bianca (แป้ง+น้ำมันมะกอก) ที่ดีที่สุดใน Rome · since 1824 · EUR 3-5</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Grappolo d'Oro</div><div class="ev-detail">Piazza della Cancelleria 80 · cacio e pepe + pasta · slow-food trattoria · EUR 20-30/คน</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Il Maritozzo Rosso</div><div class="ev-detail">Trastevere · maritozzo creative (pistachio cream, savory amatriciana) · EUR 5-8</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Gianicolo Hill Sunset</div><div class="ev-detail">เดินขึ้นจาก Trastevere · วิว Rome 360° ยามพระอาทิตย์ตก · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Bar San Calisto</div><div class="ev-detail">Trastevere · bar local สุดๆ institution · Spritz · EUR 6-10</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-romasparita" onclick="goBooking('bk-romasparita',event)">🍽️</span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Roma Sparita — Farewell Dinner!</div><div class="ev-detail">Piazza di Santa Cecilia 24 · cacio e pepe เสิร์ฟใน crispy cheese bowl! · จองล่วงหน้า! · EUR 30-40/คน</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">22:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Final Gelato — Otaleg</div><div class="ev-detail">Trastevere · "Gelato" สะกดกลับ · natural seasonal flavors</div></div></div>
     </div>
   </div>
 
+  <!-- 7 JUN -->
   <div class="db travel day-collapsed" data-date="2026-06-07">
-    <div class="dh"><span class="dn">7 JUN</span><span class="dd">อาทิตย์ 7 Jun</span><span class="dt">· Depart to Naples</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">7 JUN</span><span class="dd">อาทิตย์ 7 Jun</span><span class="dt">· Rome → Naples 🚂</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Final breakfast · cornetto + caffè</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Rome</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Rome → Naples</div><div class="ev-detail">~1h10</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">cornetto สุดท้ายใน Rome → Frecciarossa 1h10 → ถึง Naples เที่ยง</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Final Breakfast</div><div class="ev-detail">cornetto + caffè สุดท้ายใน Rome · ยืนที่เคาน์เตอร์</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Rome</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-train-rome-naples" onclick="goBooking('bk-train-rome-naples',event)">🚂</span><span class="ev-time">11:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Rome → Naples</div><div class="ev-detail">Roma Termini → Napoli Centrale · ~1h10 · ถึง ~12:10</div></div></div>
     </div>
   </div>
 
@@ -1986,7 +1999,7 @@ const ITEMS_META=[
   {id:'bk-fly-mad-cph',cat:'fly',icon:'✈️',label:'Madrid → Copenhagen',date:'18 May',category:'flights'},
   {id:'bk-fly-cph-vie',cat:'fly',icon:'✈️',label:'Copenhagen → Vienna',date:'20 May',category:'flights'},
   {id:'bk-fly-vie-vce',cat:'fly',icon:'✈️',label:'Vienna → Venice',date:'22 May',category:'flights'},
-  {id:'bk-fly-mxp-fco',cat:'fly',icon:'✈️',label:'Milan MXP → Rome FCO',date:'3 Jun',category:'flights'},
+  {id:'bk-train-milan-rome',cat:'train',icon:'🚄',label:'Frecciarossa Milan → Rome',date:'3 Jun',category:'trains'},
   {id:'bk-fly-nap-syd',cat:'fly',icon:'✈️',label:'Naples NAP → Sydney SYD',date:'22 Jun',category:'flights'},
   // TRAINS
   {id:'bk-bernina',cat:'train',icon:'🚂',label:'Bernina Express Chur → Tirano',date:'2 Jun',category:'trains'},
@@ -2022,6 +2035,11 @@ const ITEMS_META=[
   {id:'bk-parkguell',cat:'act',icon:'🎟️',label:'Park Güell',date:'14 May',category:'activities'},
   {id:'bk-montbar',cat:'food',icon:'🍽️',label:'Mont Bar ⭐⭐',date:'14–16 May',category:'activities'},
   {id:'bk-jungfrau',cat:'act',icon:'🏔️',label:'Jungfraujoch',date:'29 May',category:'activities'},
+  {id:'bk-vatican',cat:'act',icon:'🏛️',label:'Vatican Museums + Sistine Chapel',date:'4 Jun',category:'activities'},
+  {id:'bk-colosseum',cat:'act',icon:'🏛️',label:'Colosseum + Roman Forum',date:'5 Jun',category:'activities'},
+  {id:'bk-felice',cat:'restaurant',icon:'🍽️',label:'Felice a Testaccio',date:'4 Jun',category:'activities'},
+  {id:'bk-armando',cat:'restaurant',icon:'🍽️',label:'Armando al Pantheon',date:'5 Jun',category:'activities'},
+  {id:'bk-romasparita',cat:'restaurant',icon:'🍽️',label:'Roma Sparita',date:'6 Jun',category:'activities'},
 ];
 
 // ===== BUILD BOOKING TAB =====
