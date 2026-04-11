@@ -692,7 +692,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
       <option value="Italy-Milan">🇮🇹 Milan</option>
       <option value="Italy-Como">🇮🇹 Como</option>
       <option value="Swiss-Lucerne">🇨🇭 Lucerne</option>
-      <option value="Swiss-Interlaken">🇨🇭 Interlaken</option>
+      <option value="Swiss-Grindelwald">🇨🇭 Grindelwald</option>
       <option value="Swiss-Bern">🇨🇭 Bern</option>
       <option value="Swiss-Zurich">🇨🇭 Zürich</option>
       <option value="Italy-Milan2">🇮🇹 Milan (post-Bernina)</option>
@@ -1025,39 +1025,62 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <!-- ====== LUCERNE ====== -->
+<!-- ====== LUCERNE ====== -->
 <div class="cb" data-country="Swiss-Lucerne">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Lucerne</span><span class="cd">27–28 May</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    เมืองริมทะเลสาบ + สะพานไม้ Chapel Bridge เก่าแก่ที่สุดในยุโรป · ภูเขา Pilatus + Rigi · fondue + raclette
+  </div>
+
   <div class="db travel day-collapsed" data-date="2026-05-27">
-    <div class="dh"><span class="dn">27 MAY</span><span class="dd">พุธ 27 May</span><span class="dt">· Como → Lucerne ~3h</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">27 MAY</span><span class="dd">พุธ 27 May</span><span class="dt">· Como → Lucerne</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Como</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Train Como → Lucerne (~3h · Swiss Travel Pass จาก border)</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม — ไม่ต้องจองขบวน · ซื้อ Pass ที่ sbb.ch</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-lucerne" onclick="goBooking('bk-hotel-lucerne',event)">🏨</span><span class="ev-time">~13:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Lucerne Old Town &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-lucerne',event)">⚠️ ยังไม่จอง</a></div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">บ่าย</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Chapel Bridge + Lake Lucerne + Lion Monument</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">จาก Como ข้าม Alps → ถึง Lucerne บ่าย → Chapel Bridge + เดินเมืองเก่า → fondue dinner</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Como → Lucerne</div><div class="ev-detail">~3 ชม. (เปลี่ยนที่ Milano/Arth-Goldau) · วิว Alps สวยมาก</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-lucerne" onclick="goBooking('bk-hotel-lucerne',event)">🏨</span><span class="ev-time">13:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Lucerne · Old Town</div><div class="ev-detail">แนะนำโซน Old Town ใกล้ Chapel Bridge</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Chapel Bridge (Kapellbrücke)</div><div class="ev-detail">สะพานไม้เก่าแก่ที่สุดในยุโรป · ภาพวาดบนเพดาน · Water Tower · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ เดินเมืองเก่า Lucerne</div><div class="ev-detail">Kornmarkt + Weinmarkt + กำแพงเมืองเก่า Museggmauer (ขึ้นหอคอยได้) · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Lion Monument</div><div class="ev-detail">รูปสลักสิงโตบนหน้าผา · Mark Twain เรียกว่า "the most mournful piece of stone in the world"</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ เดินริม Lake Lucerne</div><div class="ev-detail">sunset ริมทะเลสาบ · วิว Alps + Pilatus · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Fondue dinner — Stadtkeller</div><div class="ev-detail">Old Town · fondue + raclette ดั้งเดิม · Swiss folk music · CHF 30-45</div></div></div>
     </div>
   </div>
+
   </div><!-- /cb-body -->
 </div>
 
-<!-- ====== INTERLAKEN ====== -->
-<div class="cb" data-country="Swiss-Interlaken">
-  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Interlaken</span><span class="cd">28–30 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
+<!-- ====== GRINDELWALD ====== -->
+<div class="cb" data-country="Swiss-Grindelwald">
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Grindelwald</span><span class="cd">28–30 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    หมู่บ้าน Alpine ติดเทือกเขา Eiger — ประตูสู่ Jungfraujoch · ตื่นมาเห็นภูเขาหิมะ · Bachalpsee ทะเลสาบบนเขา
+  </div>
+
   <div class="db travel day-collapsed" data-date="2026-05-28">
-    <div class="dh"><span class="dn">28 MAY</span><span class="dd">พฤหัส 28 May</span><span class="dt">· Lucerne → Interlaken ~2h</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">28 MAY</span><span class="dd">พฤหัส 28 May</span><span class="dt">· Lucerne → Grindelwald</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Lucerne</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~09:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Train Lucerne → Interlaken Ost (~2h)</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-interlaken" onclick="goBooking('bk-hotel-interlaken',event)">🏨</span><span class="ev-time">~11:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Interlaken ใกล้ Westbahnhof &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-interlaken',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">2 คืน</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">Lucerne Express → เปลี่ยนที่ Interlaken Ost → ถึง Grindelwald บ่าย → เดินเล่นหมู่บ้าน + dinner วิว Eiger</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Lucerne → Grindelwald</div><div class="ev-detail">Lucerne-Interlaken Express → เปลี่ยนที่ Interlaken Ost → Grindelwald · ~2.5-3 ชม. · วิวสวยตลอดทาง</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-grindelwald" onclick="goBooking('bk-hotel-grindelwald',event)">🏨</span><span class="ev-time">13:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Grindelwald</div><div class="ev-detail">โรงแรมวิว Eiger · แนะนำโซนกลางหมู่บ้าน</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ เดินเล่นหมู่บ้าน Grindelwald</div><div class="ev-detail">บ้านไม้ chalet + ดอกไม้ + วิว Eiger north face · บรรยากาศ Alpine แท้ๆ</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Grindelwald Gorge</div><div class="ev-detail">หุบเขาแคบ + suspended spider web net · ธรรมชาติสวย · CHF 8</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Dinner — Barry's Grindelwald</div><div class="ev-detail">กลางหมู่บ้าน · Swiss cuisine + วิวภูเขา · CHF 25-40</div></div></div>
     </div>
   </div>
+
   <div class="db day-collapsed" data-date="2026-05-29">
-    <div class="dh"><span class="dn">29 MAY</span><span class="dd">ศุกร์ 29 May</span><span class="dt">· Jungfraujoch</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">29 MAY</span><span class="dd">ศุกร์ 29 May</span><span class="dt">· ⭐ Jungfraujoch — Top of Europe</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st warn" data-bk="bk-jungfrau" onclick="goBooking('bk-jungfrau',event)">🏔️</span><span class="ev-time">07:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Jungfraujoch 3,454m UNESCO &nbsp;<a class="tbadge warn" onclick="goBooking('bk-jungfrau',event)">⚠️ จอง jungfrau.ch</a></div><div class="ev-detail">Full day · ~CHF 225/คน</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">Eiger Express 45 นาที → Jungfraujoch 3,454m → วิว Aletsch Glacier · บ่ายกลับมา Bachalpsee หรือ First Cliff Walk</div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-jungfrau" onclick="goBooking('bk-jungfrau',event)">🏔️</span><span class="ev-time">08:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Jungfraujoch — Top of Europe</div><div class="ev-detail">Eiger Express จาก Grindelwald Terminal · แค่ 45 นาที! · 3,454m · Aletsch Glacier + Ice Palace · จองล่วงหน้า · CHF 225</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">กลับ Grindelwald</div><div class="ev-detail">Eiger Express กลับ · ~45 นาที</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Grindelwald First — Cliff Walk + Bachalpsee</div><div class="ev-detail">Gondola ขึ้น First · Cliff Walk ทางเดินริมหน้าผา · ถ้ามีเวลา เดินต่อไป Bachalpsee 1 ชม. (ทะเลสาบเงาภูเขา)</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Dinner — Onkel Tom's Hütte</div><div class="ev-detail">Grindelwald · thin-crust pizza ที่ดีที่สุดในหมู่บ้าน · CHF 20-35</div></div></div>
     </div>
   </div>
+
   </div><!-- /cb-body -->
 </div>
 
@@ -1065,15 +1088,25 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 <div class="cb" data-country="Swiss-Bern">
   <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Bern</span><span class="cd">30–31 May</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    เมืองหลวง Switzerland · UNESCO World Heritage Old Town · หมีสัญลักษณ์เมือง · Zytglogge หอนาฬิกาโบราณ
+  </div>
+
   <div class="db travel day-collapsed" data-date="2026-05-30">
-    <div class="dh"><span class="dn">30 MAY</span><span class="dd">เสาร์ 30 May</span><span class="dt">· Zermatt Day Trip → Bern</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">30 MAY</span><span class="dd">เสาร์ 30 May</span><span class="dt">· Grindelwald → Bern</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">06:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Check-out Interlaken + ฝากกระเป๋า → ออก Zermatt</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Zermatt + Matterhorn + Gornergrat Railway</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุมรถไฟ · Gornergrat เพิ่ม CHF 46</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~15:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Zermatt → Interlaken (รับกระเป๋า) → Bern (~3h)</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-bern" onclick="goBooking('bk-hotel-bern',event)">🏨</span><span class="ev-time">~19:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Bern UNESCO Old Town &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-bern',event)">⚠️ ยังไม่จอง</a></div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">จาก Grindelwald → เปลี่ยน Interlaken Ost → ถึง Bern เที่ยง → UNESCO Old Town + Zytglogge + BärenPark</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Grindelwald → Bern</div><div class="ev-detail">เปลี่ยนที่ Interlaken Ost · ~1h40 · ถึง Bern ~11:40</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-bern" onclick="goBooking('bk-hotel-bern',event)">🏨</span><span class="ev-time">12:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Bern · UNESCO Old Town</div><div class="ev-detail">แนะนำโซน Old Town ใกล้ Zytglogge</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Zytglogge (หอนาฬิกา)</div><div class="ev-detail">หอนาฬิกาโบราณ 800 ปี · ดูตุ๊กตาเต้นตอน xx:00 น. · สัญลักษณ์ Bern</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ เดิน UNESCO Old Town</div><div class="ev-detail">ทางเดินมีหลังคา 6 กม. (Lauben) · น้ำพุ 11 ตัว (Fountains) · ร้านค้าในซุ้ม</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Bern Münster (มหาวิหาร)</div><div class="ev-detail">Gothic cathedral · ปีนหอคอย 344 ขั้น วิว Alps + Old Town · CHF 5</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 BärenPark (สวนหมี)</div><div class="ev-detail">หมี = สัญลักษณ์ Bern · สวนริมแม่น้ำ Aare · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Rosengarten</div><div class="ev-detail">สวนกุหลาบบนเนิน · วิว Old Town + แม่น้ำ Aare โค้ง · sunset spot</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Dinner — Kornhauskeller</div><div class="ev-detail">ร้านอาหารในชั้นใต้ดินของอาคาร Baroque สวยมาก · Swiss cuisine · CHF 30-45</div></div></div>
     </div>
   </div>
+
   </div><!-- /cb-body -->
 </div>
 
@@ -1247,11 +1280,12 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="db travel day-collapsed" data-date="2026-06-07">
     <div class="dh"><span class="dn">7 JUN</span><span class="dd">อาทิตย์ 7 Jun</span><span class="dt">· Rome → Naples 🚂</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้าไม่รีบ · กินข้าวเช้า + เดินเล่น Trastevere สุดท้าย → Frecciarossa เที่ยง → ถึง Naples บ่าย</div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้าสบายๆ · brunch Trastevere สุดท้าย → เดินเล่น → lunch Tonnarello → Frecciarossa บ่าย → ถึง Naples เย็น</div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Final Breakfast</div><div class="ev-detail">cornetto + caffè สุดท้ายใน Rome · ยืนที่เคาน์เตอร์</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Morning walk Trastevere</div><div class="ev-detail">เดินเล่นซอย Trastevere เช้าๆ สุดท้าย · ถ่ายรูป · ซื้อของฝาก</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Rome</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-train-rome-naples" onclick="goBooking('bk-train-rome-naples',event)">🚂</span><span class="ev-time">12:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Rome → Naples</div><div class="ev-detail">Roma Termini → Napoli Centrale · ~1h10 · ถึง ~13:10</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Lunch — Tonnarello</div><div class="ev-detail">Via della Paglia 77 · Trastevere · pasta สุดท้ายใน Rome · EUR 15-25</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Rome</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-train-rome-naples" onclick="goBooking('bk-train-rome-naples',event)">🚂</span><span class="ev-time">14:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Rome → Naples</div><div class="ev-detail">Roma Termini → Napoli Centrale · ~1h10 · ถึง ~15:10</div></div></div>
     </div>
   </div>
 
@@ -1259,94 +1293,196 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 </div>
 
 <!-- ====== NAPLES ====== -->
+<!-- ====== NAPLES ====== -->
 <div class="cb" data-country="Italy-Naples">
-  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Naples + Amalfi</span><span class="cd">7–22 Jun</span><span class="ck">14+2 คืน</span><span class="ch-chevron">▼</span></div>
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Naples + Amalfi</span><span class="cd">7–22 Jun</span><span class="ck">16 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
+  <div style="padding:8px 14px 12px 20px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;">
+    เมืองหลวงแห่ง Pizza — เรียนทำพิซซ่าที่ AVPN 2 สัปดาห์ · Street food ระดับโลก · Sfogliatella · Babà · กาแฟ EUR 0.90
+  </div>
+  <div style="padding:4px 14px 12px 20px;font-size:11px;color:var(--muted);line-height:1.8;">
+    <strong>🏠 Airbnb Options (Chiaia / Piazza del Plebiscito):</strong><br>
+    1. <a href="https://www.airbnb.com.au/rooms/9728687?check_in=2026-06-07&check_out=2026-06-23&adults=2" target="_blank">Casa Toledo — ⭐4.94 (501 รีวิว) · A$3,562</a><br>
+    2. <a href="https://www.airbnb.com.au/rooms/16252568?check_in=2026-06-07&check_out=2026-06-23&adults=2" target="_blank">Casetta Incantata charme@chiaia — ⭐4.97 (246 รีวิว) · A$3,909</a><br>
+    3. <a href="https://www.airbnb.com.au/rooms/26843459?check_in=2026-06-07&check_out=2026-06-23&adults=2" target="_blank">The Place — ⭐4.97 (172 รีวิว) · A$3,768</a>
+  </div>
 
+  <!-- 7 JUN -->
+  <div class="db travel day-collapsed" data-date="2026-06-07">
+    <div class="dh"><span class="dn">7 JUN</span><span class="dd">อาทิตย์ 7 Jun</span><span class="dt">· Rome → Naples 🚂 Arrive!</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">ถึง Naples บ่าย → check-in Chiaia → สำรวจย่าน + pizza แรกใน Naples!</div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-train-rome-naples" onclick="goBooking('bk-train-rome-naples',event)">🚂</span><span class="ev-time">14:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Frecciarossa Rome → Naples</div><div class="ev-detail">Roma Termini → Napoli Centrale · ~1h10 · ถึง ~15:10</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-airbnb-naples" onclick="goBooking('bk-airbnb-naples',event)">🏨</span><span class="ev-time">15:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Airbnb · Chiaia / Piazza del Plebiscito</div><div class="ev-detail">Metro Municipio หรือ Toledo · ใกล้ Lungomare + ท่าเรือ</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Lungomare + Castel dell'Ovo</div><div class="ev-detail">เดินริมทะเล · วิว Vesuvius · Borgo Marinari ท่าเรือเล็กๆ · ฟรี</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Pizzeria Starita a Materdei</div><div class="ev-detail">Via Materdei 27 · since 1901 · montanara (ทอดแล้วอบ) · pizza แรกใน Naples! · EUR 5-10</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Piazza del Plebiscito ยามค่ำ</div><div class="ev-detail">จัตุรัสใหญ่สว่างไสว · Royal Palace + Galleria Umberto I</div></div></div>
+    </div>
+  </div>
+
+  <!-- 8 JUN -->
   <div class="db day-collapsed" data-date="2026-06-08">
-    <div class="dh"><span class="dn">8 JUN</span><span class="dd">จันทร์ 8 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">8 JUN</span><span class="dd">จันทร์ 8 Jun</span><span class="dt">· 🍕 AVPN Day 1 + Centro Storico</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st warn" data-bk="bk-airbnb-naples" onclick="goBooking('bk-airbnb-naples',event)">🏠</span><span class="ev-time">8 Jun</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Move-in Airbnb Chiaia/Posillipo &nbsp;<a class="tbadge warn" onclick="goBooking('bk-airbnb-naples',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">14 คืน ~€100/คืน · airbnb.com</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">Food</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">Pizza da Michele · Friggitoria · Sfogliatella · Mercato Porta Nolana</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่าวันแรก! → เย็นเดิน Centro Storico + Spaccanapoli + street food</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00 · Metro Toledo→Materdei + เดิน ~18 นาที</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Spaccanapoli + Via dei Tribunali</div><div class="ev-detail">เดินจากโรงเรียนลงมา Centro Storico ได้เลย · street food ทุกซอย</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Zia Esterina Sorbillo — Pizza Fritta</div><div class="ev-detail">Piazza Trieste e Trento · ทอดต่อหน้า viral TikTok · EUR 3-5</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Tandem Ragù</div><div class="ev-detail">Via Giovanni Paladino · ragù napoletano ตุ๋น 6-8 ชม. · EUR 12-20</div></div></div>
     </div>
   </div>
+
+  <!-- 9 JUN -->
   <div class="db day-collapsed" data-date="2026-06-09">
-    <div class="dh"><span class="dn">9 JUN</span><span class="dd">อังคาร 9 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">9 JUN</span><span class="dd">อังคาร 9 Jun</span><span class="dt">· 🍕 AVPN Day 2 + Quartieri Spagnoli</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่า → เย็นบุก Quartieri Spagnoli · Da Nennella pasta e patate ระดับตำนาน</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Quartieri Spagnoli</div><div class="ev-detail">ซอยแคบๆ ผ้าตากข้ามถนน · shrines · street life · ปลอดภัยตอนเย็น</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Poppella — Babà + Fiocco di Neve</div><div class="ev-detail">Via Arena della Sanità · babà rum + fiocco di neve (ครีมอัดไส้) · EUR 3-5</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Da Nennella</div><div class="ev-detail">Quartieri Spagnoli · pasta e patate con provola · บรรยากาศสุดมัน ตะโกนสั่ง · EUR 10-15</div></div></div>
     </div>
   </div>
+
+  <!-- 10 JUN -->
   <div class="db day-collapsed" data-date="2026-06-10">
-    <div class="dh"><span class="dn">10 JUN</span><span class="dd">พุธ 10 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">10 JUN</span><span class="dd">พุธ 10 Jun</span><span class="dt">· 🍕 AVPN Day 3 + Napoli Sotterranea</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่า → ทัวร์ใต้ดิน Naples 6 PM → sfogliatella ร้อนๆ</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Attanasio — Sfogliatella</div><div class="ev-detail">Via Ferrovia · sfogliatella riccia ร้อนๆ ดีที่สุดใน Naples · ทั้ง riccia + frolla · EUR 2-4</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Napoli Sotterranea</div><div class="ev-detail">Piazza San Gaetano 68 · ทัวร์ใต้ดิน 90 นาที · EUR 10 · จองรอบ 18:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Concettina ai Tre Santi</div><div class="ev-detail">Sanità · pizza ใกล้โรงเรียน · กินหลังทัวร์ · EUR 8-15</div></div></div>
     </div>
   </div>
+
+  <!-- 11 JUN -->
   <div class="db day-collapsed" data-date="2026-06-11">
-    <div class="dh"><span class="dn">11 JUN</span><span class="dd">พฤหัส 11 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">11 JUN</span><span class="dd">พฤหัส 11 Jun</span><span class="dt">· 🍕 AVPN Day 4 + Vomero Sunset</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่า → Funicular ขึ้น Vomero · Castel Sant'Elmo วิว 360° → 1947 Pizza Fritta</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Vomero — Funicular + Castel Sant'Elmo</div><div class="ev-detail">Funicolare Centrale จาก Via Toledo · วิว Naples + Vesuvius 360° · ถึง 19:30</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ 1947 Pizza Fritta</div><div class="ev-detail">Via Pietro Colletta 29 · Forcella · ricotta + cicoli + pepper ดั้งเดิม · EUR 3-5</div></div></div>
     </div>
   </div>
 
-  <div class="db travel day-collapsed" data-date="2026-06-12">
-    <div class="dh"><span class="dn">12 JUN</span><span class="dd">ศุกร์ 12 Jun</span><span class="dt">· Amalfi Coast Weekend 🌊</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+  <!-- 12 JUN -->
+  <div class="db day-collapsed" data-date="2026-06-12">
+    <div class="dh"><span class="dn">12 JUN</span><span class="dd">ศุกร์ 12 Jun</span><span class="dt">· 🍕 AVPN Day 5 + Museo Archeologico</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st info">⛴️</span><span class="ev-time">16:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Ferry Naples → Amalfi</div><div class="ev-info-box">⛴️ ซื้อที่ท่าเรือหรือ alilauro.it · ~1.5h</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-amalfi" onclick="goBooking('bk-hotel-amalfi',event)">🏨</span><span class="ev-time">Hotel</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Amalfi 2 คืน &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-amalfi',event)">⚠️ ยังไม่จอง</a></div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่า → Museo Archeologico (เปิดถึง 19:30) → Osteria della Mattonella</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Museo Archeologico Nazionale</div><div class="ev-detail">Piazza Museo · Pompeii mosaics + Farnese collection · เปิดถึง 19:30 · EUR 18 · ปิดอังคาร</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Osteria della Mattonella</div><div class="ev-detail">Quartieri Spagnoli · เมนูเปลี่ยนทุกวัน · กระเบื้อง majolica สวย · EUR 15-25</div></div></div>
     </div>
   </div>
+
+  <!-- 13 JUN -->
   <div class="db travel day-collapsed" data-date="2026-06-13">
-    <div class="dh"><span class="dn">13 JUN</span><span class="dd">เสาร์ 13 Jun</span><span class="dt">· Amalfi Coast Weekend 🌊</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">13 JUN</span><span class="dd">เสาร์ 13 Jun</span><span class="dt">· 🏖️ Amalfi Coast Day Trip</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Positano + Ravello</div></div></div>
-    </div>
-  </div>
-  <div class="db travel day-collapsed" data-date="2026-06-14">
-    <div class="dh"><span class="dn">14 JUN</span><span class="dd">อาทิตย์ 14 Jun</span><span class="dt">· Amalfi Coast Weekend 🌊</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
-    <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Pompeii + Vesuvius → Naples ~20:00</div></div></div>
-    </div>
-  </div>
-  <div class="db day-collapsed" data-date="2026-06-15">
-    <div class="dh"><span class="dn">15 JUN</span><span class="dd">จันทร์ 15 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
-    <div class="db-content">
-    </div>
-  </div>
-  <div class="db day-collapsed" data-date="2026-06-16">
-    <div class="dh"><span class="dn">16 JUN</span><span class="dd">อังคาร 16 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
-    <div class="db-content">
-    </div>
-  </div>
-  <div class="db day-collapsed" data-date="2026-06-17">
-    <div class="dh"><span class="dn">17 JUN</span><span class="dd">พุธ 17 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
-    <div class="db-content">
-    </div>
-  </div>
-  <div class="db day-collapsed" data-date="2026-06-18">
-    <div class="dh"><span class="dn">18 JUN</span><span class="dd">พฤหัส 18 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
-    <div class="db-content">
-    </div>
-  </div>
-  <div class="db day-collapsed" data-date="2026-06-19">
-    <div class="dh"><span class="dn">19 JUN</span><span class="dd">ศุกร์ 19 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
-    <div class="db-content">
-    </div>
-  </div>
-  <div class="db day-collapsed" data-date="2026-06-20">
-    <div class="dh"><span class="dn">20 JUN</span><span class="dd">เสาร์ 20 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
-    <div class="db-content">
-    </div>
-  </div>
-  <div class="db day-collapsed" data-date="2026-06-21">
-    <div class="dh"><span class="dn">21 JUN</span><span class="dd">อาทิตย์ 21 Jun</span><span class="dt">· Naples ธุระ + Street Food</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
-    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">Ferry จาก Molo Beverello → Positano → Amalfi → กลับ Naples เย็น</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:30</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">⭐ Ferry Naples → Positano</div><div class="ev-detail">Molo Beverello · ~1.5 ชม. · EUR 20-25 · จองล่วงหน้า!</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Positano</div><div class="ev-detail">เดินเล่นหมู่บ้านสีพาสเทลลงเขา · หาดทราย · lunch ริมทะเล</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Ferry Positano → Amalfi</div><div class="ev-detail">~30 นาที · วิวชายฝั่งสวยมาก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Amalfi</div><div class="ev-detail">Duomo di Amalfi + เดินเล่นซอย + gelato + limoncello</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Ferry Amalfi → Naples</div><div class="ev-detail">กลับ Molo Beverello · ~2 ชม.</div></div></div>
     </div>
   </div>
 
-  <div class="db travel day-collapsed" data-date="2026-06-22">
-    <div class="dh"><span class="dn">22 JUN</span><span class="dd">จันทร์ 22 Jun</span><span class="dt">· Naples → Sydney ✈ กลับบ้าน!</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+  <!-- 14 JUN -->
+  <div class="db travel day-collapsed" data-date="2026-06-14">
+    <div class="dh"><span class="dn">14 JUN</span><span class="dd">อาทิตย์ 14 Jun</span><span class="dt">· 🏝️ Procida Island Day Trip</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">เช้า</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Airbnb</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-fly-nap-syd" onclick="goBooking('bk-fly-nap-syd',event)">✈️</span><span class="ev-time">tbd</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">✈ Naples NAP → Sydney SYD &nbsp;<a class="tbadge warn" onclick="goBooking('bk-fly-nap-syd',event)">⚠️ ด่วนที่สุด!</a></div><div class="ev-detail"><strong>Cathay Pacific (via HKG) หรือ Singapore Airlines (via SIN) เท่านั้น</strong><br>ห้าม Emirates/Qatar/Etihad</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">~24 Jun</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">🇦🇺 Arrive Sydney — กลับบ้าน ✅</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เกาะเล็กๆ สีสัน ไม่ crowded เหมือน Capri · Marina Corricella จากหนัง Il Postino</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">⭐ Ferry Naples → Procida</div><div class="ev-detail">Molo Beverello · ~40 นาที · EUR 15-20</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Marina Corricella</div><div class="ev-detail">หมู่บ้านชาวประมงสีพาสเทล · จากหนัง Il Postino · ถ่ายรูปสวยมาก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Lunch seafood ริมทะเล</div><div class="ev-detail">ร้านอาหารใน Corricella · ปลาสดๆ · EUR 20-30</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">ว่ายน้ำ + เดินเล่น</div><div class="ev-detail">หาด Chiaia di Procida หรือ Pozzo Vecchio</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Ferry Procida → Naples</div><div class="ev-detail">กลับ Molo Beverello · ~40 นาที</div></div></div>
+    </div>
+  </div>
+
+  <!-- 15-21 JUN: Week 2 - individual days with evening plans -->
+  <div class="db day-collapsed" data-date="2026-06-15">
+    <div class="dh"><span class="dn">15 JUN</span><span class="dd">จันทร์ 15 Jun</span><span class="dt">· 🍕 AVPN Week 2 + San Gregorio Armeno</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่า → ถนน presepe (ตุ๊กตาคริสต์มาส handmade) + cuoppo street food</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 San Gregorio Armeno</div><div class="ev-detail">ถนน presepe · ร้านทำตุ๊กตา nativity handmade · ของฝากเก๋</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Cuoppo — Fiorenzano</div><div class="ev-detail">ของทอดในกรวยกระดาษ · zeppoline, crocchè, sciurilli · EUR 5-8</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 50 Kalò</div><div class="ev-detail">Piazza Sannazaro · Chiaia waterfront · modern Neapolitan pizza · EUR 10-18</div></div></div>
+    </div>
+  </div>
+
+  <div class="db day-collapsed" data-date="2026-06-16">
+    <div class="dh"><span class="dn">16 JUN</span><span class="dd">อังคาร 16 Jun</span><span class="dt">· 🍕 AVPN + Lungomare Sunset</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่า → sunset walk Lungomare → seafood dinner Borgo Marinari</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Lungomare sunset walk</div><div class="ev-detail">เดินจาก Castel dell'Ovo ไป Mergellina · sunset ~20:40</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Seafood dinner — Borgo Marinari</div><div class="ev-detail">ร้านอาหารใต้ Castel dell'Ovo · ริมทะเล · EUR 25-40</div></div></div>
+    </div>
+  </div>
+
+  <div class="db day-collapsed" data-date="2026-06-17">
+    <div class="dh"><span class="dn">17 JUN</span><span class="dd">พุธ 17 Jun</span><span class="dt">· 🍕 AVPN + Pintauro + Via Toledo</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่า → sfogliatella Pintauro + เดิน Via Toledo + Galleria Umberto</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Pintauro — Sfogliatella</div><div class="ev-detail">Via Toledo · sfogliatella เก่าแก่ · EUR 2-3</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">Via Toledo + Galleria Umberto I</div><div class="ev-detail">ถนนช้อปปิ้ง + arcade สวยมาก</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Dinner — Pizzeria Di Matteo</div><div class="ev-detail">Via Tribunali · Bill Clinton เคยมากิน · pizza + frittatina · EUR 5-10</div></div></div>
+    </div>
+  </div>
+
+  <div class="db day-collapsed" data-date="2026-06-18">
+    <div class="dh"><span class="dn">18 JUN</span><span class="dd">พฤหัส 18 Jun</span><span class="dt">· 🍕 AVPN + Free Evening</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่า → เย็นว่าง ลองร้านใหม่หรือพักผ่อน</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">☕ Caffè Gambrinus</div><div class="ev-detail">Piazza Trieste e Trento · grand café สวยมาก · espresso EUR 1.50 (ที่นี่แพงกว่าปกติ แต่บรรยากาศคุ้ม)</div></div></div>
+    </div>
+  </div>
+
+  <div class="db day-collapsed" data-date="2026-06-19">
+    <div class="dh"><span class="dn">19 JUN</span><span class="dd">ศุกร์ 19 Jun</span><span class="dt">· 🍕 AVPN + Free Evening</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เรียนพิซซ่า → เย็นว่าง ลองร้านใหม่หรือพักผ่อน</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">🍕 AVPN Pizza Course</div><div class="ev-detail">Via Capodimonte 19a · 8:00-16:00</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">☕ Caffè Mexico</div><div class="ev-detail">Piazza Garibaldi · espresso ระดับตำนาน · EUR 0.90</div></div></div>
+    </div>
+  </div>
+
+  <div class="db day-collapsed" data-date="2026-06-20">
+    <div class="dh"><span class="dn">20 JUN</span><span class="dd">เสาร์ 20 Jun</span><span class="dt">· Free Day — Pompeii</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">วันหยุด! · Pompeii day trip · Circumvesuviana 35 นาที</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">⭐ Circumvesuviana → Pompeii</div><div class="ev-detail">Napoli Centrale → Pompei Scavi · ~35 นาที · EUR 4</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:45</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Pompeii Archaeological Site</div><div class="ev-detail">เปิด 9:00-19:00 · EUR 18 · 3-4 ชม. · จองล่วงหน้า</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">กลับ Naples</div><div class="ev-detail">Circumvesuviana · ~35 นาที</div></div></div>
+    </div>
+  </div>
+
+  <div class="db day-collapsed" data-date="2026-06-21">
+    <div class="dh"><span class="dn">21 JUN</span><span class="dd">อาทิตย์ 21 Jun</span><span class="dt">· Free Day — Last Day in Naples</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">วันสุดท้ายใน Naples · กินให้ครบ + เก็บของฝาก + sunset สุดท้าย</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Brunch สบายๆ</div><div class="ev-detail">ร้านใกล้ Airbnb · cornetto + caffè</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เดินเล่นซื้อของฝาก</div><div class="ev-detail">limoncello, pasta, coffee beans, sfogliatella</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Farewell Dinner</div><div class="ev-detail">ร้านโปรดที่อยากกลับไปกินอีก!</div></div></div>
+    </div>
+  </div>
+
+  <!-- 22 JUN -->
+  <div class="db travel day-collapsed" data-date="2026-06-22">
+    <div class="dh"><span class="dn">22 JUN</span><span class="dd">จันทร์ 22 Jun</span><span class="dt">· Naples → Sydney ✈</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">บ๊ายบาย Naples 🥲 → กลับ Sydney</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">Last espresso in Naples</div><div class="ev-detail">caffè สุดท้าย EUR 0.90 · ยืนที่เคาน์เตอร์</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Airbnb</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-fly-nap-syd" onclick="goBooking('bk-fly-nap-syd',event)">✈️</span><span class="ev-time">12:00</span><div class="ev-dot fly"></div><div class="ev-body"><div class="ev-title">Naples NAP → Sydney SYD</div><div class="ev-detail">Cathay Pacific (via HKG) หรือ Singapore Airlines (via SIN) · ถึง ~24 Jun</div></div></div>
     </div>
   </div>
 
@@ -2069,7 +2205,7 @@ const ITEMS_META=[
   {id:'bk-hotel-milan',cat:'hotel',icon:'🏨',label:'Milan · Brera/Navigli',date:'25–26 May',category:'hotels'},
   {id:'bk-hotel-como',cat:'hotel',icon:'🏨',label:'Como · ริมทะเลสาบ',date:'26–27 May',category:'hotels'},
   {id:'bk-hotel-lucerne',cat:'hotel',icon:'🏨',label:'Lucerne · Old Town',date:'27–28 May',category:'hotels'},
-  {id:'bk-hotel-interlaken',cat:'hotel',icon:'🏨',label:'Interlaken',date:'28–30 May',category:'hotels'},
+  {id:'bk-hotel-grindelwald',cat:'hotel',icon:'🏨',label:'Grindelwald',date:'28–30 May',category:'hotels'},
   {id:'bk-hotel-bern',cat:'hotel',icon:'🏨',label:'Bern · UNESCO Old Town',date:'30–31 May',category:'hotels'},
   {id:'bk-hotel-zurich',cat:'hotel',icon:'🏨',label:'Zürich · Altstadt/West',date:'31 May–2 Jun',category:'hotels'},
   {id:'bk-hotel-milan2',cat:'hotel',icon:'🏨',label:'Milan (post-Bernina)',date:'2–3 Jun',category:'hotels'},
@@ -2554,7 +2690,7 @@ const COUNTRY_CITIES={
   'Denmark':['Denmark'],
   'Austria':['Austria'],
   'Italy':['Italy-Venice','Italy-Bologna','Italy-Milan','Italy-Como','Italy-Milan2','Italy-Rome','Italy-Naples'],
-  'Switzerland':['Swiss-Lucerne','Swiss-Interlaken','Swiss-Bern','Swiss-Zurich']
+  'Switzerland':['Swiss-Lucerne','Swiss-Grindelwald','Swiss-Bern','Swiss-Zurich']
 };
 function filterByCountry(c){
   // Reset city filter
@@ -2832,7 +2968,7 @@ function initMap(){
     {name:'Milan',flag:'🇮🇹',lat:45.4642,lng:9.1900,dates:'25–26 May',nights:'1 คืน'},
     {name:'Como',flag:'🇮🇹',lat:45.8080,lng:9.0852,dates:'26–27 May',nights:'1 คืน'},
     {name:'Lucerne',flag:'🇨🇭',lat:47.0502,lng:8.3093,dates:'27–28 May',nights:'1 คืน'},
-    {name:'Interlaken',flag:'🇨🇭',lat:46.6863,lng:7.8632,dates:'28–30 May',nights:'2 คืน'},
+    {name:'Grindelwald',flag:'🇨🇭',lat:46.6240,lng:8.0413,dates:'28-30 May',nights:'2 คืน'},
     {name:'Bern',flag:'🇨🇭',lat:46.9480,lng:7.4474,dates:'30–31 May',nights:'1 คืน'},
     {name:'Zürich',flag:'🇨🇭',lat:47.3769,lng:8.5417,dates:'31 May–2 Jun',nights:'2 คืน'},
     {name:'Rome',flag:'🇮🇹',lat:41.9028,lng:12.4964,dates:'3–7 Jun',nights:'4 คืน'},
