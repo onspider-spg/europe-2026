@@ -178,6 +178,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .bk-cat.hotel{background:var(--hotel-bg);color:var(--hotel);}
 .bk-cat.food{background:var(--food-bg);color:var(--food);}
 .bk-cat.act{background:var(--act-bg);color:var(--act);border:1px solid var(--border);}
+.bk-cat.place{background:#eff6ff;color:#1a4f8a;border:1px solid #bfdbfe;}
+.bk-cat.landmark{background:#faf5ff;color:#6b21a8;border:1px solid #e9d5ff;}
+.bk-cat.restaurant{background:var(--food-bg);color:var(--food);}
 .bk-cat.done-c{background:var(--done-bg);color:var(--done);}
 .bk-body{flex:1;}
 .bk-title{font-size:13px;font-weight:500;margin-bottom:2px;}
@@ -376,6 +379,15 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 .ev-priority-badge.must{background:#fef2f2;color:var(--must);}
 .ev-priority-badge.rec{background:#fff7ed;color:var(--rec);}
 .ev-priority-badge.opt{background:#fffbeb;color:#92400e;}
+/* Filter chips in legend */
+.filter-chip{cursor:pointer;padding:3px 10px;border-radius:20px;border:1px solid var(--border);transition:all .15s;user-select:none;}
+.filter-chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.filter-chip.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.ev.filtered-out{display:none!important;}
+/* Edit event form overlay */
+.edit-ev-form{border:1px solid var(--accent);border-radius:8px;padding:10px;margin:4px 0;background:#fff;}
+.edit-ev-form .form-row{display:grid;grid-template-columns:80px 1fr;gap:8px;margin-bottom:6px;}
+.edit-ev-form .form-row.full{grid-template-columns:1fr;}
 
 @media(max-width:600px){
   .notes-layout{flex-direction:column;}
@@ -646,29 +658,24 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="map-body"><div id="trip-map" class="trip-map"></div></div>
 </div>
 
-<div class="legend">
-  <div style="font-size:10px;font-weight:600;color:var(--text);width:100%;margin-bottom:6px;">🏷️ ไอคอนแต่ละประเภท</div>
-  <div class="legend-item">✈️ Flight</div>
-  <div class="legend-item">🚄 Train</div>
-  <div class="legend-item">🏨 Hotel</div>
-  <div class="legend-item">📍 Place</div>
-  <div class="legend-item">🏛️ Landmark</div>
-  <div class="legend-item">🍽️ Restaurant</div>
-  <div class="legend-item">⭐ ห้ามพลาด</div>
-  <div class="legend-item">👍 แนะนำ</div>
-  <div class="legend-item">💡 ถ้ามีเวลา</div>
-  <div style="width:100%;border-top:1px solid var(--border);margin:6px 0"></div>
-  <div class="legend-item">
-    <span class="ev-st warn" style="width:22px;height:18px;font-size:11px;cursor:default">✈️</span>
-    ยังไม่จอง — <strong style="color:var(--warn)">กดเพื่อดูรายละเอียด</strong>
-  </div>
-  <div class="legend-item">
-    <span class="ev-st done" style="width:22px;height:18px;font-size:11px;cursor:default">✈️</span>
-    จองแล้ว ✅
-  </div>
-  <div class="legend-item">
-    <span class="ev-st info" style="width:22px;height:18px;font-size:11px">🚂</span>
-    ไม่ต้องจองล่วงหน้า
+<div class="legend" id="ev-filters">
+  <div style="font-size:10px;font-weight:600;color:var(--text);margin-bottom:2px;">🏷️ กดเพื่อ Filter</div>
+  <span class="filter-chip active" data-filter="all" onclick="filterEvents('all',this)">All</span>
+  <span class="filter-chip" data-filter="fly" onclick="filterEvents('fly',this)">✈️ Flight</span>
+  <span class="filter-chip" data-filter="train" onclick="filterEvents('train',this)">🚄 Train</span>
+  <span class="filter-chip" data-filter="hotel" onclick="filterEvents('hotel',this)">🏨 Hotel</span>
+  <span class="filter-chip" data-filter="place" onclick="filterEvents('place',this)">📍 Place</span>
+  <span class="filter-chip" data-filter="landmark" onclick="filterEvents('landmark',this)">🏛️ Landmark</span>
+  <span class="filter-chip" data-filter="restaurant" onclick="filterEvents('restaurant',this)">🍽️ Restaurant</span>
+  <div style="width:100%;border-top:1px solid var(--border);margin:4px 0"></div>
+  <span class="filter-chip" data-filter="must" onclick="filterEvents('must',this)">Must-see</span>
+  <span class="filter-chip" data-filter="rec" onclick="filterEvents('rec',this)">Recommended</span>
+  <span class="filter-chip" data-filter="opt" onclick="filterEvents('opt',this)">Optional</span>
+  <div style="width:100%;border-top:1px solid var(--border);margin:4px 0"></div>
+  <div class="legend-item" style="font-size:10px;color:var(--muted);">
+    <span class="ev-st warn" style="width:18px;height:16px;font-size:10px;cursor:default">!</span> ยังไม่จอง
+    &nbsp;·&nbsp;
+    <span class="ev-st done" style="width:18px;height:16px;font-size:10px;cursor:default">✓</span> จองแล้ว
   </div>
 </div>
 
@@ -1714,7 +1721,7 @@ function buildBookingTab(){
   Object.keys(DB).forEach(id=>{
     if(DB[id].is_custom && !allItems.find(m=>m.id===id)){
       const d=DB[id];
-      allItems.push({id,cat:catToCss(d.category),icon:catToIcon(d.category),label:d.label||id,date:d.date_info||'',category:d.category||'activities'});
+      allItems.push({id,cat:d.dot_type||catToCss(d.category),icon:catToIcon(d.category),label:d.label||id,date:d.date_info||'',category:d.category||'activities'});
     }
   });
 
@@ -1734,7 +1741,7 @@ function buildBookingTab(){
       const d=DB[m.id]||{};
       const ok=d.status;
       const catCss=ok?'done-c':m.cat;
-      const catLabel=ok?'✅ จองแล้ว':(m.cat==='fly'?'✈ Flight':m.cat==='train'?'🚄 Train':m.cat==='hotel'?'🏨 Hotel':m.cat==='food'?'🍽️ Restaurant':'🎟️ Activity');
+      const catLabel=ok?'✅ จองแล้ว':dotToLabel(m.cat);
       html+=`<div class="bki ${ok?'is-done':''}" id="${m.id}">
         <div class="bki-header" onclick="this.parentElement.classList.toggle('open')">
           <div class="bk-check">${ok?'✓':''}</div>
@@ -1767,6 +1774,8 @@ function buildBookingTab(){
 
 function catToCss(c){return{flights:'fly',trains:'train',hotels:'hotel',activities:'act'}[c]||'act';}
 function catToIcon(c){return{flights:'✈️',trains:'🚄',hotels:'🏨',activities:'🎟️'}[c]||'🎟️';}
+function dotToCss(d){return{fly:'fly',train:'train',hotel:'hotel',food:'food',restaurant:'restaurant',place:'place',landmark:'landmark',act:'act'}[d]||'act';}
+function dotToLabel(d){return{fly:'✈ Flight',train:'🚄 Train',hotel:'🏨 Hotel',food:'🍽️ Restaurant',restaurant:'🍽️ Restaurant',place:'📍 Place',landmark:'🏛️ Landmark',act:'🎟️ Activity'}[d]||'🎟️ Activity';}
 
 // ===== COST SUMMARY =====
 function updateCostSummary(){
@@ -2012,7 +2021,7 @@ async function saveEvent(btn){
     if(requestBooking){
       const bkId='bk-ev-'+res[0].id;
       const catMap={place:'activities',landmark:'activities',restaurant:'activities',fly:'flights',train:'trains',hotel:'hotels'};
-      const bkData={id:bkId,status:false,category:catMap[dotType]||'activities',label:title,date_info:dayDate||'',is_custom:true,updated_at:new Date().toISOString()};
+      const bkData={id:bkId,status:false,category:catMap[dotType]||'activities',label:title,date_info:dayDate||'',is_custom:true,dot_type:dotType,updated_at:new Date().toISOString()};
       DB[bkId]=bkData;
       await sbInsert('trip_bookings',[bkData]);
       buildBookingTab();
@@ -2030,12 +2039,15 @@ function renderUserEvent(ev,dbEl){
   row.className='ev user-ev';
   row.dataset.eventId=ev.id;
   row.dataset.time=ev.time||'99:99';
-  // Booking status icon
+  row.dataset.dotType=ev.dot_type||'act';
+  if(ev.priority)row.dataset.priority=ev.priority;
+  // Booking status icon — show type-specific icon
   const bkId='bk-ev-'+ev.id;
+  const typeIcon={place:'📍',landmark:'🏛️',restaurant:'🍽️',fly:'✈️',train:'🚂',hotel:'🏨'}[ev.dot_type]||'🎯';
   let stHtml;
   if(ev.request_booking){
     const booked=DB[bkId]?.status||(ev.booking_status==='done');
-    stHtml=booked?`<span class="ev-st done" data-bk="${bkId}" onclick="goBooking('${bkId}',event)">✓</span>`:`<span class="ev-st warn" data-bk="${bkId}" onclick="goBooking('${bkId}',event)">!</span>`;
+    stHtml=booked?`<span class="ev-st done" data-bk="${bkId}" onclick="goBooking('${bkId}',event)">${typeIcon}</span>`:`<span class="ev-st warn" data-bk="${bkId}" onclick="goBooking('${bkId}',event)">${typeIcon}</span>`;
   } else {
     stHtml='<span class="ev-st none"></span>';
   }
@@ -2044,7 +2056,7 @@ function renderUserEvent(ev,dbEl){
   const prio=ev.priority&&prioMap[ev.priority]?`<span class="ev-priority-badge ${prioMap[ev.priority].cls}">${prioMap[ev.priority].label}</span>`:'';
   // Booking badge text
   const bkBadge=ev.request_booking?(DB[bkId]?.status||(ev.booking_status==='done')?'<span class="ev-bk-badge">✅ จองแล้ว</span>':'<span class="ev-bk-badge">⚠️ ยังไม่จอง</span>'):'';
-  row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title">${ev.title}${prio}${bkBadge}<span class="user-ev-actions"><button onclick="deleteEvent(${ev.id})" title="Delete">🗑️</button></span></div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
+  row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title">${ev.title}${prio}${bkBadge}<span class="user-ev-actions"><button onclick="editEvent(${ev.id})" title="Edit">✏️</button><button onclick="deleteEvent(${ev.id})" title="Delete">🗑️</button></span></div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
   // Insert sorted by time — find correct position among all .ev elements
   const evTime=ev.time||'99:99';
   const allEvs=dbEl.querySelectorAll('.ev');
@@ -2075,6 +2087,233 @@ async function deleteEvent(id){
   }
   const el=document.querySelector(`.user-ev[data-event-id="${id}"]`);
   if(el)el.remove();
+}
+
+// ===== EDIT EVENT =====
+async function editEvent(id){
+  const row=document.querySelector(`.user-ev[data-event-id="${id}"]`);
+  if(!row||row.querySelector('.edit-ev-form'))return;
+  // Fetch current data from Supabase
+  const evArr=await sbFetch('trip_events?id=eq.'+id);
+  if(!evArr||!evArr[0])return;
+  const ev=evArr[0];
+  let hourOpts='';for(let h=0;h<24;h++){const v=String(h).padStart(2,'0');hourOpts+=`<option value="${v}" ${(ev.time||'00:00').split(':')[0]===v?'selected':''}>${v}</option>`;}
+  const mins=['00','15','30','45'];
+  const curMin=(ev.time||'00:00').split(':')[1]||'00';
+  let minOpts=mins.map(m=>`<option value="${m}" ${curMin===m?'selected':''}>${m}</option>`).join('');
+  const types=[['place','📍 Place'],['landmark','🏛️ Landmark'],['restaurant','🍽️ Restaurant'],['fly','✈️ Flight'],['train','🚂 Train'],['hotel','🏨 Hotel']];
+  const typeOpts=types.map(([v,l])=>`<option value="${v}" ${ev.dot_type===v?'selected':''}>${l}</option>`).join('');
+  const form=document.createElement('div');
+  form.className='edit-ev-form';
+  form.innerHTML=`
+    <div class="form-row"><div class="time-select-row"><select class="ev-hour-input">${hourOpts}</select><span class="time-colon">:</span><select class="ev-min-input">${minOpts}</select></div><input type="text" class="ev-title-input" value="${ev.title.replace(/"/g,'&quot;')}" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;flex:1"></div>
+    <div class="form-row full" style="margin-top:6px"><textarea class="ev-detail-input" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;min-height:40px;width:100%;resize:vertical">${ev.detail||''}</textarea></div>
+    <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
+      <select class="ev-dot-input" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px">${typeOpts}</select>
+      <div class="priority-chips">
+        <span class="priority-chip ${ev.priority==='must'?'selected':''}" data-val="must" onclick="togglePriority(this)">⭐ Must-see</span>
+        <span class="priority-chip ${ev.priority==='rec'?'selected':''}" data-val="rec" onclick="togglePriority(this)">👍 Recommended</span>
+        <span class="priority-chip ${ev.priority==='opt'?'selected':''}" data-val="opt" onclick="togglePriority(this)">💡 Optional</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:8px;align-items:center">
+      <label class="ev-booking-row"><input type="checkbox" class="ev-booking-input" ${ev.request_booking?'checked':''}> Request Booking</label>
+      <span style="flex:1"></span>
+      <button style="padding:4px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer" onclick="saveEditEvent(${id},this)">💾 Save</button>
+      <button style="padding:4px 12px;background:#fff;color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer" onclick="this.closest('.edit-ev-form').remove()">Cancel</button>
+    </div>`;
+  row.after(form);
+}
+async function saveEditEvent(id,btn){
+  const form=btn.closest('.edit-ev-form');
+  const hh=form.querySelector('.ev-hour-input').value;
+  const mm=form.querySelector('.ev-min-input').value;
+  const time=hh+':'+mm;
+  const title=form.querySelector('.ev-title-input').value.trim();
+  const detail=form.querySelector('.ev-detail-input').value.trim();
+  const dotType=form.querySelector('.ev-dot-input').value;
+  const priorityChip=form.querySelector('.priority-chip.selected');
+  const priority=priorityChip?priorityChip.dataset.val:null;
+  const requestBooking=form.querySelector('.ev-booking-input').checked;
+  if(!title){alert('กรุณาใส่ Title');return;}
+  const data={time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null};
+  await sbFetch('trip_events?id=eq.'+id,{method:'PATCH',body:JSON.stringify(data)});
+  // Update booking entry if needed
+  const bkId='bk-ev-'+id;
+  if(requestBooking&&!DB[bkId]){
+    const row=form.previousElementSibling;
+    const dayDate=row?.closest('.db')?.dataset.date||'';
+    const catMap={place:'activities',landmark:'activities',restaurant:'activities',fly:'flights',train:'trains',hotel:'hotels'};
+    const bkData={id:bkId,status:false,category:catMap[dotType]||'activities',label:title,date_info:dayDate,is_custom:true,updated_at:new Date().toISOString()};
+    DB[bkId]=bkData;
+    await sbInsert('trip_bookings',[bkData]);
+  } else if(!requestBooking&&DB[bkId]){
+    await sbDelete('trip_bookings','id',bkId);
+    delete DB[bkId];
+  } else if(requestBooking&&DB[bkId]){
+    DB[bkId].label=title;
+    await sbFetch('trip_bookings?id=eq.'+bkId,{method:'PATCH',body:JSON.stringify({label:title})});
+  }
+  // Re-render: remove old row, create new
+  const oldRow=document.querySelector(`.user-ev[data-event-id="${id}"]`);
+  const dbEl=oldRow?.closest('.db');
+  form.remove();
+  if(oldRow)oldRow.remove();
+  if(dbEl){
+    const ev={id,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?(DB[bkId]?.status?'done':'pending'):null};
+    renderUserEvent(ev,dbEl);
+  }
+  buildBookingTab();
+  apply();
+}
+
+// ===== FILTER EVENTS =====
+function filterEvents(type,chip){
+  const chips=document.querySelectorAll('#ev-filters .filter-chip');
+  if(type==='all'){
+    chips.forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    document.querySelectorAll('.ev').forEach(ev=>ev.classList.remove('filtered-out'));
+    return;
+  }
+  // Toggle this chip
+  const allChip=document.querySelector('#ev-filters .filter-chip[data-filter="all"]');
+  if(allChip)allChip.classList.remove('active');
+  chip.classList.toggle('active');
+  // Collect active filters
+  const activeTypes=[];const activePrios=[];
+  chips.forEach(c=>{
+    if(!c.classList.contains('active')||c.dataset.filter==='all')return;
+    if(['must','rec','opt'].includes(c.dataset.filter))activePrios.push(c.dataset.filter);
+    else activeTypes.push(c.dataset.filter);
+  });
+  // If nothing active, show all
+  if(!activeTypes.length&&!activePrios.length){
+    if(allChip)allChip.classList.add('active');
+    document.querySelectorAll('.ev').forEach(ev=>ev.classList.remove('filtered-out'));
+    return;
+  }
+  document.querySelectorAll('.ev').forEach(ev=>{
+    const dot=ev.querySelector('.ev-dot');
+    const dotClasses=dot?[...dot.classList]:[];
+    // Check type match
+    let typeMatch=!activeTypes.length;
+    if(activeTypes.length){
+      typeMatch=activeTypes.some(t=>dotClasses.includes(t));
+      // Also check old hardcoded types: food→restaurant, act→place
+      if(!typeMatch&&activeTypes.includes('restaurant')&&dotClasses.includes('food'))typeMatch=true;
+      if(!typeMatch&&activeTypes.includes('place')&&dotClasses.includes('act'))typeMatch=true;
+    }
+    // Check priority match
+    let prioMatch=!activePrios.length;
+    if(activePrios.length){
+      // User events: check data-priority
+      const evPrio=ev.dataset.priority||'';
+      if(evPrio&&activePrios.includes(evPrio)){prioMatch=true;}
+      // Hardcoded events: check dot class for must/rec/opt
+      if(!prioMatch){prioMatch=activePrios.some(p=>dotClasses.includes(p));}
+      // Also check priority badge text
+      if(!prioMatch){
+        const badge=ev.querySelector('.ev-priority-badge');
+        if(badge){
+          if(activePrios.includes('must')&&badge.classList.contains('must'))prioMatch=true;
+          if(activePrios.includes('rec')&&badge.classList.contains('rec'))prioMatch=true;
+          if(activePrios.includes('opt')&&badge.classList.contains('opt'))prioMatch=true;
+        }
+      }
+    }
+    if(typeMatch&&prioMatch)ev.classList.remove('filtered-out');
+    else ev.classList.add('filtered-out');
+  });
+}
+
+// ===== ADD EDIT BUTTONS TO HARDCODED EVENTS =====
+function addEditButtonsToHardcoded(){
+  document.querySelectorAll('.ev:not(.user-ev)').forEach(ev=>{
+    const titleEl=ev.querySelector('.ev-title');
+    if(!titleEl||titleEl.querySelector('.hw-ev-actions'))return;
+    const actions=document.createElement('span');
+    actions.className='user-ev-actions hw-ev-actions';
+    actions.innerHTML='<button onclick="editHardcodedEvent(this)" title="Edit">✏️</button>';
+    titleEl.appendChild(actions);
+  });
+}
+function editHardcodedEvent(btn){
+  const ev=btn.closest('.ev');
+  if(!ev||ev.querySelector('.edit-ev-form'))return;
+  const titleEl=ev.querySelector('.ev-title');
+  const detailEl=ev.querySelector('.ev-detail');
+  const timeEl=ev.querySelector('.ev-time');
+  const dotEl=ev.querySelector('.ev-dot');
+  const curTitle=(titleEl?.childNodes[0]?.textContent||titleEl?.textContent||'').trim();
+  const curDetail=detailEl?.textContent?.trim()||'';
+  const curTime=timeEl?.textContent?.trim()||'00:00';
+  const [curH,curM]=curTime.split(':');
+  // Detect dot type from classes
+  let curDot='place';
+  ['fly','train','hotel','food','act','must','rec','opt','place','landmark','restaurant'].forEach(c=>{if(dotEl?.classList.contains(c))curDot=c;});
+  // Detect priority from dot class (for hardcoded must/rec/opt events)
+  let curPrio='';
+  if(['must','rec','opt'].includes(curDot)){curPrio=curDot;curDot='place';}
+  let hourOpts='';for(let h=0;h<24;h++){const v=String(h).padStart(2,'0');hourOpts+=`<option value="${v}" ${curH===v?'selected':''}>${v}</option>`;}
+  const mins=['00','15','30','45'];
+  let minOpts=mins.map(m=>`<option value="${m}" ${(curM||'00')===m?'selected':''}>${m}</option>`).join('');
+  const types=[['place','📍 Place'],['landmark','🏛️ Landmark'],['restaurant','🍽️ Restaurant'],['fly','✈️ Flight'],['train','🚂 Train'],['hotel','🏨 Hotel']];
+  const typeOpts=types.map(([v,l])=>`<option value="${v}" ${curDot===v?'selected':''}>${l}</option>`).join('');
+  const form=document.createElement('div');
+  form.className='edit-ev-form';
+  form.innerHTML=`
+    <div class="form-row"><div class="time-select-row"><select class="ev-hour-input">${hourOpts}</select><span class="time-colon">:</span><select class="ev-min-input">${minOpts}</select></div><input type="text" class="ev-title-input" value="${curTitle.replace(/"/g,'&quot;')}" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;flex:1"></div>
+    <div class="form-row full" style="margin-top:6px"><textarea class="ev-detail-input" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;min-height:40px;width:100%;resize:vertical">${curDetail}</textarea></div>
+    <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
+      <select class="ev-dot-input" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px">${typeOpts}</select>
+      <div class="priority-chips">
+        <span class="priority-chip ${curPrio==='must'?'selected':''}" data-val="must" onclick="togglePriority(this)">⭐ Must-see</span>
+        <span class="priority-chip ${curPrio==='rec'?'selected':''}" data-val="rec" onclick="togglePriority(this)">👍 Recommended</span>
+        <span class="priority-chip ${curPrio==='opt'?'selected':''}" data-val="opt" onclick="togglePriority(this)">💡 Optional</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:8px;align-items:center">
+      <label class="ev-booking-row"><input type="checkbox" class="ev-booking-input"> Request Booking</label>
+      <span style="flex:1"></span>
+      <button style="padding:4px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer" onclick="saveHardcodedEdit(this)">💾 Save</button>
+      <button style="padding:4px 12px;background:#fff;color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer" onclick="this.closest('.edit-ev-form').remove()">Cancel</button>
+    </div>`;
+  ev.after(form);
+}
+async function saveHardcodedEdit(btn){
+  const form=btn.closest('.edit-ev-form');
+  const origEv=form.previousElementSibling;
+  const db=origEv?.closest('.db');
+  const cb=db?.closest('.cb');
+  const hh=form.querySelector('.ev-hour-input').value;
+  const mm=form.querySelector('.ev-min-input').value;
+  const time=hh+':'+mm;
+  const title=form.querySelector('.ev-title-input').value.trim();
+  const detail=form.querySelector('.ev-detail-input').value.trim();
+  const dotType=form.querySelector('.ev-dot-input').value;
+  const priorityChip=form.querySelector('.priority-chip.selected');
+  const priority=priorityChip?priorityChip.dataset.val:null;
+  const requestBooking=form.querySelector('.ev-booking-input').checked;
+  if(!title){alert('กรุณาใส่ Title');return;}
+  const country=cb?.dataset.country||'';
+  const dayDate=db?.dataset.date||'';
+  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null};
+  const res=await sbInsert('trip_events',[data]);
+  if(res&&res[0]){
+    renderUserEvent(res[0],db);
+    if(requestBooking){
+      const bkId='bk-ev-'+res[0].id;
+      const catMap={place:'activities',landmark:'activities',restaurant:'activities',fly:'flights',train:'trains',hotel:'hotels'};
+      const bkData={id:bkId,status:false,category:catMap[dotType]||'activities',label:title,date_info:dayDate||'',is_custom:true,dot_type:dotType,updated_at:new Date().toISOString()};
+      DB[bkId]=bkData;
+      await sbInsert('trip_bookings',[bkData]);
+      buildBookingTab();
+      apply();
+    }
+  }
+  form.remove();
+  origEv.style.display='none';
 }
 
 // ===== MAP =====
@@ -2573,6 +2812,7 @@ async function init(){
   rows.forEach(r=>{DB[r.id]=r;});
   buildBookingTab();
   apply();
+  addEditButtonsToHardcoded();
   initMap();
   loadNotes();
   loadEvents();
