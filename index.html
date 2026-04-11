@@ -689,8 +689,13 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
       <option value="Austria">🇦🇹 Vienna</option>
       <option value="Italy-Venice">🇮🇹 Venice</option>
       <option value="Italy-Bologna">🇮🇹 Bologna</option>
-      <option value="Italy-Milan">🇮🇹 Milan + Como</option>
-      <option value="Switzerland">🇨🇭 Switzerland</option>
+      <option value="Italy-Milan">🇮🇹 Milan</option>
+      <option value="Italy-Como">🇮🇹 Como</option>
+      <option value="Swiss-Lucerne">🇨🇭 Lucerne</option>
+      <option value="Swiss-Interlaken">🇨🇭 Interlaken</option>
+      <option value="Swiss-Bern">🇨🇭 Bern</option>
+      <option value="Swiss-Zurich">🇨🇭 Zürich</option>
+      <option value="Italy-Milan2">🇮🇹 Milan (post-Bernina)</option>
       <option value="Italy-Rome">🇮🇹 Rome</option>
       <option value="Italy-Naples">🇮🇹 Naples</option>
     </select>
@@ -996,9 +1001,9 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   </div>
 </div>
 
-<!-- ====== MILAN + COMO ====== -->
+<!-- ====== MILAN ====== -->
 <div class="cb" data-country="Italy-Milan">
-  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Milan · Como</span><span class="cd">25–27 May</span><span class="ck">1+1 คืน</span><span class="ch-chevron">▼</span></div>
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Milan</span><span class="cd">25–26 May</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
   <div class="db travel day-collapsed" data-date="2026-05-25">
     <div class="dh"><span class="dn">25 MAY</span><span class="dd">อาทิตย์ 25 May</span><span class="dt">· Bologna → Milan 🚂 + Duomo + Aperitivo</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
@@ -1007,6 +1012,13 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">เย็น</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Duomo + Galleria + Aperitivo แถว Navigli</div></div></div>
     </div>
   </div>
+  </div><!-- /cb-body -->
+</div>
+
+<!-- ====== COMO ====== -->
+<div class="cb" data-country="Italy-Como">
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Como</span><span class="cd">26–27 May</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
+  <div class="cb-body">
   <div class="db travel day-collapsed" data-date="2026-05-26">
     <div class="dh"><span class="dn">26 MAY</span><span class="dd">จันทร์ 26 May</span><span class="dt">· Milan → Como</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
@@ -1019,11 +1031,10 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   </div><!-- /cb-body -->
 </div>
 
-<!-- ====== SWITZERLAND ====== -->
-<div class="cb" data-country="Switzerland">
-  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland</span><span class="cd">27 May–2 Jun</span><span class="ck">7 คืน</span><span class="ch-chevron">▼</span></div>
+<!-- ====== LUCERNE ====== -->
+<div class="cb" data-country="Swiss-Lucerne">
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Lucerne</span><span class="cd">27–28 May</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
   <div class="cb-body">
-
   <div class="db travel day-collapsed" data-date="2026-05-27">
     <div class="dh"><span class="dn">27 MAY</span><span class="dd">อังคาร 27 May</span><span class="dt">· Como → Lucerne ~3h</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
@@ -1033,7 +1044,13 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">บ่าย</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Chapel Bridge + Lake Lucerne + Lion Monument</div></div></div>
     </div>
   </div>
+  </div><!-- /cb-body -->
+</div>
 
+<!-- ====== INTERLAKEN ====== -->
+<div class="cb" data-country="Swiss-Interlaken">
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Interlaken</span><span class="cd">28–30 May</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
+  <div class="cb-body">
   <div class="db travel day-collapsed" data-date="2026-05-28">
     <div class="dh"><span class="dn">28 MAY</span><span class="dd">พุธ 28 May</span><span class="dt">· Lucerne → Interlaken ~2h</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
@@ -1042,14 +1059,19 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-interlaken" onclick="goBooking('bk-hotel-interlaken',event)">🏨</span><span class="ev-time">~11:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Interlaken ใกล้ Westbahnhof &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-interlaken',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">2 คืน</div></div></div>
     </div>
   </div>
-
   <div class="db day-collapsed" data-date="2026-05-29">
-    <div class="dh"><span class="dn">29 MAY</span><span class="dd">พฤหัส 29 May</span><span class="dt">· 🏔️ Jungfraujoch</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">29 MAY</span><span class="dd">พฤหัส 29 May</span><span class="dt">· Jungfraujoch</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
     <div class="ev"><span class="ev-st warn" data-bk="bk-jungfrau" onclick="goBooking('bk-jungfrau',event)">🏔️</span><span class="ev-time">07:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Jungfraujoch 3,454m UNESCO &nbsp;<a class="tbadge warn" onclick="goBooking('bk-jungfrau',event)">⚠️ จอง jungfrau.ch</a></div><div class="ev-detail">Full day · ~CHF 225/คน</div></div></div>
     </div>
   </div>
+  </div><!-- /cb-body -->
+</div>
 
+<!-- ====== BERN ====== -->
+<div class="cb" data-country="Swiss-Bern">
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Bern</span><span class="cd">30–31 May</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
+  <div class="cb-body">
   <div class="db travel day-collapsed" data-date="2026-05-30">
     <div class="dh"><span class="dn">30 MAY</span><span class="dd">ศุกร์ 30 May</span><span class="dt">· Zermatt Day Trip → Bern</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
@@ -1059,36 +1081,51 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-bern" onclick="goBooking('bk-hotel-bern',event)">🏨</span><span class="ev-time">~19:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Bern UNESCO Old Town &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-bern',event)">⚠️ ยังไม่จอง</a></div></div></div>
     </div>
   </div>
+  </div><!-- /cb-body -->
+</div>
 
+<!-- ====== ZURICH ====== -->
+<div class="cb" data-country="Swiss-Zurich">
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇨🇭</span><span class="cn">Switzerland — Zurich</span><span class="cd">31 May–2 Jun</span><span class="ck">2 คืน</span><span class="ch-chevron">▼</span></div>
+  <div class="cb-body">
   <div class="db travel day-collapsed" data-date="2026-05-31">
-    <div class="dh"><span class="dn">31 MAY</span><span class="dd">เสาร์ 31 May</span><span class="dt">· Bern → Zürich</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">31 MAY</span><span class="dd">เสาร์ 31 May</span><span class="dt">· Bern → Zurich</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Bern Old Town เช้า — Zytglogge + Federal Palace</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:30</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Bern</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">13:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Train Bern → Zürich HB ~1h</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-zurich" onclick="goBooking('bk-hotel-zurich',event)">🏨</span><span class="ev-time">~14:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Zürich Altstadt/West &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-zurich',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">2 คืน</div></div></div>
+    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">13:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Train Bern → Zurich HB ~1h</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม</div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-zurich" onclick="goBooking('bk-hotel-zurich',event)">🏨</span><span class="ev-time">~14:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Zurich Altstadt/West &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-zurich',event)">⚠️ ยังไม่จอง</a></div><div class="ev-detail">2 คืน</div></div></div>
     </div>
   </div>
-
   <div class="db day-collapsed" data-date="2026-06-01">
-    <div class="dh"><span class="dn">1 JUN</span><span class="dd">อาทิตย์ 1 Jun</span><span class="dt">· Zürich วันเต็ม</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">1 JUN</span><span class="dd">อาทิตย์ 1 Jun</span><span class="dt">· Zurich วันเต็ม</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Altstadt + Lake Zürich + Kunsthaus + Zürich West cafés</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">ทั้งวัน</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Altstadt + Lake Zurich + Kunsthaus + Zurich West cafes</div></div></div>
     </div>
   </div>
-
   <div class="db travel day-collapsed" data-date="2026-06-02">
-    <div class="dh"><span class="dn">2 JUN</span><span class="dd">จันทร์ 2 Jun</span><span class="dt">· 🚂 Bernina Express → Milan</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">2 JUN</span><span class="dd">จันทร์ 2 Jun</span><span class="dt">· Bernina Express → Milan</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Zürich</div></div></div>
-    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">SBB IC Zürich HB → Chur ~1h 15min</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม · ไม่ต้องจองล่วงหน้า</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot act"></div><div class="ev-body"><div class="ev-title">Check-out Zurich</div></div></div>
+    <div class="ev"><span class="ev-st info">🚂</span><span class="ev-time">~10:00</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">SBB IC Zurich HB → Chur ~1h 15min</div><div class="ev-info-box">🎫 Swiss Travel Pass ครอบคลุม · ไม่ต้องจองล่วงหน้า</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:15</span><div class="ev-dot food"></div><div class="ev-body"><div class="ev-title">เดินชม Chur Old Town + Lunch รอรถไฟ 13:30</div></div></div>
-    <div class="ev"><span class="ev-st done" data-bk="bk-bernina" onclick="goBooking('bk-bernina',event)">🚂</span><span class="ev-time">13:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">🚂 Bernina Express Chur → Tirano &nbsp;<a class="tbadge done" onclick="goBooking('bk-bernina',event)">✅ จองแล้ว</a></div><div class="ev-detail">UNESCO · ~4.5h · Landwasser Viaduct · arr 18:00 · ขอที่นั่งฝั่งซ้าย</div></div></div>
+    <div class="ev"><span class="ev-st done" data-bk="bk-bernina" onclick="goBooking('bk-bernina',event)">🚂</span><span class="ev-time">13:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Bernina Express Chur → Tirano &nbsp;<a class="tbadge done" onclick="goBooking('bk-bernina',event)">จองแล้ว</a></div><div class="ev-detail">UNESCO · ~4.5h · Landwasser Viaduct · arr 18:00 · ขอที่นั่งฝั่งซ้าย</div></div></div>
     <div class="ev"><span class="ev-st warn" data-bk="bk-train-tirano" onclick="goBooking('bk-train-tirano',event)">🚄</span><span class="ev-time">~18:15</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">Trenord Tirano → Milan Centrale &nbsp;<a class="tbadge warn" onclick="goBooking('bk-train-tirano',event)">ซื้อล่วงหน้า</a></div><div class="ev-detail">~2.5h · ถึง Milan ~20:30 · trenord.it</div></div></div>
+    </div>
+  </div>
+  </div><!-- /cb-body -->
+</div>
+
+<!-- ====== MILAN POST-BERNINA ====== -->
+<div class="cb" data-country="Italy-Milan2">
+  <div class="ch" onclick="toggleCountry(this)"><span class="cf">🇮🇹</span><span class="cn">Italy — Milan</span><span class="cd">2–3 Jun</span><span class="ck">1 คืน</span><span class="ch-chevron">▼</span></div>
+  <div class="cb-body">
+  <div class="db travel day-collapsed" data-date="2026-06-02b">
+    <div class="dh"><span class="dn">2 JUN</span><span class="dd">จันทร์ 2 Jun</span><span class="dt">· post-Bernina · ถึง Milan ~21:00</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="db-content">
     <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-milan2" onclick="goBooking('bk-hotel-milan2',event)">🏨</span><span class="ev-time">~21:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Milan (post-Bernina) &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-milan2',event)">⚠️ ยังไม่จอง</a></div></div></div>
     </div>
   </div>
-
   </div><!-- /cb-body -->
 </div>
 
@@ -2426,8 +2463,8 @@ const COUNTRY_CITIES={
   'Spain':['Spain-Barcelona','Spain-Madrid'],
   'Denmark':['Denmark'],
   'Austria':['Austria'],
-  'Italy':['Italy-Venice','Italy-Bologna','Italy-Milan','Italy-Rome','Italy-Naples'],
-  'Switzerland':['Switzerland']
+  'Italy':['Italy-Venice','Italy-Bologna','Italy-Milan','Italy-Como','Italy-Milan2','Italy-Rome','Italy-Naples'],
+  'Switzerland':['Swiss-Lucerne','Swiss-Interlaken','Swiss-Bern','Swiss-Zurich']
 };
 function filterByCountry(c){
   // Reset city filter
