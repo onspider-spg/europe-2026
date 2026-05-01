@@ -2865,6 +2865,17 @@ function filterEvents(type,chip){
     if(typeMatch&&prioMatch)ev.classList.remove('filtered-out');
     else ev.classList.add('filtered-out');
   });
+  // Auto-expand day/country blocks that contain at least one matching event,
+  // and collapse those with no matches — so the filter is actually visible.
+  document.querySelectorAll('.db').forEach(db=>{
+    const hasMatch=db.querySelector('.ev:not(.filtered-out)');
+    if(hasMatch)db.classList.remove('day-collapsed');
+    else db.classList.add('day-collapsed');
+  });
+  document.querySelectorAll('.cb').forEach(cb=>{
+    const hasMatch=cb.querySelector('.ev:not(.filtered-out)');
+    if(hasMatch)cb.classList.remove('collapsed');
+  });
 }
 
 // ===== DAY TOGGLE — make .dh clickable =====
