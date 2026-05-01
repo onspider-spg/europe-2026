@@ -581,6 +581,15 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   .city-bar .cb-name{width:60px;}
   .catb-name{width:60px;}
 }
+.editable-desc{position:relative;cursor:default;}
+.desc-edit-icon{display:inline-block;margin-left:6px;padding:0 4px;font-size:11px;opacity:.35;cursor:pointer;border-radius:4px;transition:opacity .15s, background .15s;user-select:none;}
+.editable-desc:hover .desc-edit-icon{opacity:1;}
+.desc-edit-icon:hover{background:var(--surface);opacity:1!important;}
+.editable-desc.editing{padding:8px!important;background:var(--surface);border-radius:6px;}
+.desc-edit-textarea{width:100%;min-height:60px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-style:italic;font-family:inherit;color:var(--muted);resize:vertical;box-sizing:border-box;}
+.desc-edit-btnrow{display:flex;gap:6px;margin-top:6px;justify-content:flex-end;}
+.desc-save-btn{padding:4px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer;font-style:normal;}
+.desc-cancel-btn{padding:4px 12px;background:#fff;color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer;font-style:normal;}
 </style>
 </head>
 <body>
@@ -919,7 +928,6 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
     <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เสาร์เช้า = hora del vermut! → vermutería → AVE ไป Madrid</div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Hora del Vermut — Vermuteria del Tano</div><div class="ev-detail">Gràcia · เสาร์เช้า = ritual vermut ของ Barcelona · vermouth + olives + tapas · EUR 5-10</div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-out Barcelona</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-ave" onclick="goBooking('bk-ave',event)">🚂</span><span class="ev-time">12:30</span><div class="ev-dot train"></div><div class="ev-body"><div class="ev-title">AVE Barcelona → Madrid</div><div class="ev-detail">Barcelona Sants → Madrid Atocha · ~2.5 ชม. · ถึง ~15:00</div></div></div>
     </div>
   </div>
 
@@ -2262,7 +2270,6 @@ const ITEMS_META=[
   {id:'bk-fly-nap-syd',cat:'fly',icon:'✈️',label:'Naples NAP → Sydney SYD',date:'22 Jun',category:'flights'},
   // TRAINS
   {id:'bk-bernina',cat:'train',icon:'🚂',label:'Bernina Express Chur → Tirano',date:'2 Jun',category:'trains'},
-  {id:'bk-ave',cat:'train',icon:'🚄',label:'AVE Barcelona → Madrid',date:'16 May',category:'trains'},
   {id:'bk-train-venice-bologna',cat:'train',icon:'🚄',label:'Venice → Bologna',date:'23 May',category:'trains'},
   {id:'bk-train-bologna-milan',cat:'train',icon:'🚄',label:'Bologna → Milan',date:'24 May',category:'trains'},
   {id:'bk-train-varenna',cat:'train',icon:'🚄',label:'Milan → Varenna',date:'26 May',category:'trains'},
