@@ -2654,14 +2654,17 @@ function renderUserEvent(ev,dbEl){
   for(const existing of allEvs){
     const existTime=existing.querySelector('.ev-time')?.textContent?.trim()||'';
     if(existTime && evTime < existTime){
-      dbEl.insertBefore(row,existing);
+      // Insert into existing's actual parent (could be .db-content, not dbEl directly)
+      existing.parentNode.insertBefore(row,existing);
       inserted=true;
       break;
     }
   }
   if(!inserted){
-    const form=dbEl.querySelector('.add-ev-form');
-    if(form){dbEl.insertBefore(row,form);}else{dbEl.appendChild(row);}
+    // Prefer .db-content as container if it exists, fallback to dbEl
+    const target=dbEl.querySelector('.db-content')||dbEl;
+    const form=target.querySelector('.add-ev-form');
+    if(form){target.insertBefore(row,form);}else{target.appendChild(row);}
   }
 }
 async function deleteEvent(id){
