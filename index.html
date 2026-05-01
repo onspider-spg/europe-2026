@@ -2885,6 +2885,132 @@ function filterEvents(type,chip){
   });
 }
 
+// ===== EDITABLE DESCRIPTIONS (italic gray text per country/day) =====
+function descKeyForElement(div){
+  const cb=div.closest('.cb');
+  const db=div.closest('.db');
+  const country=cb?.dataset.country||'';
+  if(db){return 'day:'+(db.dataset.date||'')+':'+country;}
+  return 'country:'+country;
+}
+function initDescriptions(){
+  // Country descriptions: first italic div as direct child of .cb-body
+  document.querySelectorAll('.cb-body').forEach(cbBody=>{
+    const desc=cbBody.querySelector(':scope > div[style*="font-style:italic"]');
+    if(desc)wireDescriptionEditor(desc);
+  });
+  // Day descriptions: first italic div as direct child of .db-content
+  document.querySelectorAll('.db-content').forEach(dbContent=>{
+    const desc=dbContent.querySelector(':scope > div[style*="font-style:italic"]');
+    if(desc)wireDescriptionEditor(desc);
+  });
+}
+function wireDescriptionEditor(div){
+  if(div.dataset.descKey)return; // already wired
+  const key=descKeyForElement(div);
+  if(!key||key==='country:'||key.startsWith('day::'))return;
+  div.dataset.descKey=key;
+  div.classList.add('editable-desc');
+  const icon=document.createElement('span');
+  icon.className='desc-edit-icon';
+  icon.textContent='✏️';
+  icon.title='แก้ไข';
+  icon.onclick=(e)=>{e.stopPropagation();editDescription(div);};
+  div.appendChild(icon);
+}
+function editDescription(div){
+  if(div.querySelector('.desc-edit-textarea'))return;
+  const key=div.dataset.descKey;
+  const icon=div.querySelector('.desc-edit-icon');
+  const currentText=Array.from(div.childNodes).filter(n=>n!==icon).map(n=>n.textContent||'').join('').trim();
+  // Snapshot original style to restore later
+  const origInline=div.getAttribute('style')||'';
+  div.dataset.origStyle=origInline;
+  div.innerHTML='';
+  div.classList.add('editing');
+  const ta=document.createElement('textarea');
+  ta.value=currentText;
+  ta.className='desc-edit-textarea';
+  const btnRow=document.createElement('div');
+  btnRow.className='desc-edit-btnrow';
+  const saveBtn=document.createElement('button');
+  saveBtn.textContent='💾 Save';
+  saveBtn.className='desc-save-btn';
+  saveBtn.onclick=async()=>{
+    const newText=ta.value.trim();
+    if(!newText){alert('กรุณาใส่ข้อความ');return;}
+    saveBtn.disabled=true;saveBtn.textContent='Saving...';
+    await fetch(SB_URL+'/rest/v1/trip_descriptions',{method:'POST',headers:{...hdr,'Prefer':'resolution=merge-duplicates,return=representation'},body:JSON.stringify({key,body:newText,updated_at:new Date().toISOString()})});
+    restoreDescription(div,newText);
+  };
+  const cancelBtn=document.createElement('button');
+  cancelBtn.textContent='Cancel';
+  cancelBtn.className='desc-cancel-btn';
+  cancelBtn.onclick=()=>restoreDescription(div,currentText);
+  btnRow.appendChild(saveBtn);btnRow.appendChild(cancelBtn);
+  div.appendChild(ta);div.appendChild(btnRow);
+  ta.focus();ta.select();
+}
+function restoreDescription(div,text){
+  div.classList.remove('editing');
+  if(div.dataset.origStyle)div.setAttribute('style',div.dataset.origStyle);
+  div.innerHTML='';
+  div.appendChild(document.createTextNode(text));
+  // Re-add icon
+  const icon=document.createElement('span');
+  icon.className='desc-edit-icon';
+  icon.textContent='✏️';
+  icon.title='แก้ไข';
+  icon.onclick=(e)=>{e.stopPropagation();editDescription(div);};
+  div.appendChild(icon);
+}
+async function loadDescriptions(){
+  const rows=await sbFetch('trip_descriptions?select=*');
+  const map={};rows.forEach(r=>{map[r.key]=r.body;});
+  document.querySelectorAll('[data-desc-key]').forEach(div=>{
+    const key=div.dataset.descKey;
+    if(map[key]){
+      const icon=div.querySelector('.desc-edit-icon');
+      // Replace text but keep icon
+      Array.from(div.childNodes).forEach(n=>{if(n!==icon)div.removeChild(n);});
+      div.insertBefore(document.createTextNode(map[key]),icon);
+    }
+  });
+}
+
+// ===== HARDCODED EVENT DELETION (persist via Supabase) =====
+function hcKeyForEvent(ev){
+  const db=ev.closest('.db');
+  const date=db?.dataset.date||'';
+  const time=ev.querySelector('.ev-time')?.textContent?.trim()||'';
+  const titleEl=ev.querySelector('.ev-title');
+  const title=(titleEl?.childNodes[0]?.textContent||titleEl?.textContent||'').trim();
+  return 'hc:'+date+':'+time+':'+title;
+}
+function initHardcodedDeletion(){
+  document.querySelectorAll('.ev:not(.user-ev)').forEach(ev=>{
+    if(!ev.dataset.hcKey)ev.dataset.hcKey=hcKeyForEvent(ev);
+  });
+}
+async function loadHardcodedHidden(){
+  const rows=await sbFetch('trip_hardcoded_hidden?select=hc_key');
+  const hidden=new Set(rows.map(r=>r.hc_key));
+  document.querySelectorAll('.ev:not(.user-ev)').forEach(ev=>{
+    if(hidden.has(ev.dataset.hcKey))ev.remove();
+  });
+}
+async function deleteHardcodedEvent(btn){
+  const ev=btn.closest('.ev')||btn.closest('.edit-ev-form')?.previousElementSibling;
+  if(!ev)return;
+  if(!confirm('ลบ Event นี้? (จะลบถาวร)'))return;
+  const hcKey=ev.dataset.hcKey||hcKeyForEvent(ev);
+  await fetch(SB_URL+'/rest/v1/trip_hardcoded_hidden',{method:'POST',headers:{...hdr,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({hc_key:hcKey})});
+  // Remove the edit form (if any) and the event
+  const form=ev.nextElementSibling;
+  if(form&&form.classList.contains('edit-ev-form'))form.remove();
+  ev.remove();
+}
+
 // ===== DAY TOGGLE — make .dh clickable =====
 function initDayToggle(){
   document.querySelectorAll('.dh').forEach(dh=>{
@@ -2944,7 +3070,7 @@ function editHardcodedEvent(clickedTitle){
       <label class="ev-booking-row"><input type="checkbox" class="ev-booking-input"> Request Booking</label>
     </div>
     <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
-      <button style="padding:4px 12px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;font-size:11px;cursor:pointer" onclick="this.closest('.edit-ev-form').previousElementSibling.style.display='none';this.closest('.edit-ev-form').remove()">🗑️ Delete</button>
+      <button style="padding:4px 12px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;font-size:11px;cursor:pointer" onclick="deleteHardcodedEvent(this)">🗑️ Delete</button>
       <span style="flex:1"></span>
       <button style="padding:4px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer" onclick="saveHardcodedEdit(this)">💾 Save</button>
       <button style="padding:4px 12px;background:#fff;color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer" onclick="this.closest('.edit-ev-form').remove()">Cancel</button>
@@ -3557,6 +3683,10 @@ async function init(){
   apply();
   addEditButtonsToHardcoded();
   initDayToggle();
+  initDescriptions();
+  initHardcodedDeletion();
+  loadDescriptions();
+  loadHardcodedHidden();
   initMap();
   loadNotes();
   loadEvents();
