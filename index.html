@@ -2555,7 +2555,14 @@ async function deleteNote(id,city){
 // ===== EVENTS — ADD =====
 function showAddEvent(btn){
   const db=btn.closest('.db');
-  let form=db.querySelector('.add-ev-form');
+  // Ensure .db-content exists so form lives inside the collapsible container
+  let content=db.querySelector(':scope > .db-content');
+  if(!content){
+    content=document.createElement('div');
+    content.className='db-content';
+    db.appendChild(content);
+  }
+  let form=content.querySelector('.add-ev-form');
   if(!form){
     form=document.createElement('div');
     form.className='add-ev-form';
@@ -2577,7 +2584,7 @@ function showAddEvent(btn){
         <button style="padding:4px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer" onclick="saveEvent(this)">💾 Save</button>
         <button style="padding:4px 12px;background:#fff;color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer" onclick="this.closest('.add-ev-form').classList.remove('show')">Cancel</button>
       </div>`;
-    db.appendChild(form);
+    content.appendChild(form);
   }
   form.classList.toggle('show');
 }
@@ -2647,24 +2654,28 @@ function renderUserEvent(ev,dbEl){
   // Booking badge text
   const bkBadge=ev.request_booking?(DB[bkId]?.status||(ev.booking_status==='done')?'<span class="ev-bk-badge">✅ จองแล้ว</span>':'<span class="ev-bk-badge">⚠️ ยังไม่จอง</span>'):'';
   row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title" onclick="editEvent(${ev.id})">${ev.title}${prio}${bkBadge}</div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
-  // Insert sorted by time — find correct position among all .ev elements
+  // Insert sorted by time — always go inside .db-content so day-collapsed can hide it.
+  // Create .db-content if the day block doesn't have one (e.g. single-line stub days).
+  let content=dbEl.querySelector(':scope > .db-content');
+  if(!content){
+    content=document.createElement('div');
+    content.className='db-content';
+    dbEl.appendChild(content);
+  }
   const evTime=ev.time||'99:99';
-  const allEvs=dbEl.querySelectorAll('.ev');
+  const allEvs=content.querySelectorAll('.ev');
   let inserted=false;
   for(const existing of allEvs){
     const existTime=existing.querySelector('.ev-time')?.textContent?.trim()||'';
     if(existTime && evTime < existTime){
-      // Insert into existing's actual parent (could be .db-content, not dbEl directly)
       existing.parentNode.insertBefore(row,existing);
       inserted=true;
       break;
     }
   }
   if(!inserted){
-    // Prefer .db-content as container if it exists, fallback to dbEl
-    const target=dbEl.querySelector('.db-content')||dbEl;
-    const form=target.querySelector('.add-ev-form');
-    if(form){target.insertBefore(row,form);}else{target.appendChild(row);}
+    const form=content.querySelector('.add-ev-form');
+    if(form){content.insertBefore(row,form);}else{content.appendChild(row);}
   }
 }
 async function deleteEvent(id){
