@@ -608,6 +608,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
 .desc-edit-icon:hover{background:var(--surface);opacity:1!important;}
 .editable-desc.editing{padding:8px!important;background:var(--surface);border-radius:6px;}
 .desc-edit-textarea{width:100%;min-height:60px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-style:italic;font-family:inherit;color:var(--muted);resize:vertical;box-sizing:border-box;}
+.desc-edit-input{padding:3px 6px;border:1px solid var(--border);border-radius:4px;font-size:12px;font-family:inherit;color:var(--muted);min-width:200px;}
 .desc-edit-btnrow{display:flex;gap:6px;margin-top:6px;justify-content:flex-end;}
 .desc-save-btn{padding:4px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer;font-style:normal;}
 .desc-cancel-btn{padding:4px 12px;background:#fff;color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer;font-style:normal;}
@@ -2948,6 +2949,7 @@ function descKeyForElement(div){
   const cb=div.closest('.cb');
   const db=div.closest('.db');
   const country=cb?.dataset.country||'';
+  if(div.classList.contains('dt')){return 'daytitle:'+(db?.dataset.date||'')+':'+country;}
   if(db){return 'day:'+(db.dataset.date||'')+':'+country;}
   return 'country:'+country;
 }
@@ -2962,6 +2964,8 @@ function initDescriptions(){
     const desc=dbContent.querySelector(':scope > div[style*="font-style:italic"]');
     if(desc)wireDescriptionEditor(desc);
   });
+  // Day title (.dt) inside .dh — short text after the date
+  document.querySelectorAll('.dh > .dt').forEach(dt=>wireDescriptionEditor(dt));
 }
 function wireDescriptionEditor(div){
   if(div.dataset.descKey)return; // already wired
@@ -2977,7 +2981,7 @@ function wireDescriptionEditor(div){
   div.appendChild(icon);
 }
 function editDescription(div){
-  if(div.querySelector('.desc-edit-textarea'))return;
+  if(div.querySelector('.desc-edit-textarea')||div.querySelector('.desc-edit-input'))return;
   const key=div.dataset.descKey;
   const icon=div.querySelector('.desc-edit-icon');
   const currentText=Array.from(div.childNodes).filter(n=>n!==icon).map(n=>n.textContent||'').join('').trim();
@@ -2986,28 +2990,36 @@ function editDescription(div){
   div.dataset.origStyle=origInline;
   div.innerHTML='';
   div.classList.add('editing');
-  const ta=document.createElement('textarea');
+  // Use single-line <input> for short headers (.dt) and textarea for long descriptions
+  const isShort=div.tagName==='SPAN'||div.classList.contains('dt');
+  const ta=document.createElement(isShort?'input':'textarea');
+  if(isShort)ta.type='text';
   ta.value=currentText;
-  ta.className='desc-edit-textarea';
-  const btnRow=document.createElement('div');
+  ta.className=isShort?'desc-edit-input':'desc-edit-textarea';
+  // Stop clicks from bubbling to .dh (which toggles collapse)
+  [ta].forEach(el=>el.onclick=(e)=>e.stopPropagation());
+  const btnRow=document.createElement('span');
   btnRow.className='desc-edit-btnrow';
+  btnRow.onclick=(e)=>e.stopPropagation();
   const saveBtn=document.createElement('button');
-  saveBtn.textContent='💾 Save';
+  saveBtn.textContent='💾';
   saveBtn.className='desc-save-btn';
-  saveBtn.onclick=async()=>{
+  saveBtn.onclick=async(e)=>{
+    e.stopPropagation();
     const newText=ta.value.trim();
     if(!newText){alert('กรุณาใส่ข้อความ');return;}
-    saveBtn.disabled=true;saveBtn.textContent='Saving...';
+    saveBtn.disabled=true;saveBtn.textContent='...';
     await fetch(SB_URL+'/rest/v1/trip_descriptions',{method:'POST',headers:{...hdr,'Prefer':'resolution=merge-duplicates,return=representation'},body:JSON.stringify({key,body:newText,updated_at:new Date().toISOString()})});
     restoreDescription(div,newText);
   };
   const cancelBtn=document.createElement('button');
-  cancelBtn.textContent='Cancel';
+  cancelBtn.textContent='✕';
   cancelBtn.className='desc-cancel-btn';
-  cancelBtn.onclick=()=>restoreDescription(div,currentText);
+  cancelBtn.onclick=(e)=>{e.stopPropagation();restoreDescription(div,currentText);};
   btnRow.appendChild(saveBtn);btnRow.appendChild(cancelBtn);
   div.appendChild(ta);div.appendChild(btnRow);
   ta.focus();ta.select();
+  if(isShort)ta.addEventListener('keydown',(e)=>{if(e.key==='Enter'){e.preventDefault();saveBtn.click();}else if(e.key==='Escape'){e.preventDefault();cancelBtn.click();}});
 }
 function restoreDescription(div,text){
   div.classList.remove('editing');
@@ -3314,8 +3326,11 @@ function addDailyRouteButtons(){
 function initDayToggle(){
   document.querySelectorAll('.dh').forEach(dh=>{
     dh.addEventListener('click',function(e){
-      // Don't toggle if clicking the + button
+      // Don't toggle if clicking + button, edit icon, route button, or inside an editing field
       if(e.target.closest('.add-ev-btn'))return;
+      if(e.target.closest('.desc-edit-icon'))return;
+      if(e.target.closest('.dh-route-btn'))return;
+      if(e.target.closest('.editable-desc.editing'))return;
       toggleDay(this);
     });
   });
