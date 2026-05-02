@@ -3197,7 +3197,26 @@ async function geocodePlace(query){
   }catch(e){console.warn('geocode failed:',query,e);}
   return null;
 }
+async function expandShortLink(url){
+  // Google Maps short links (maps.app.goo.gl/...) need server-side resolution
+  // because of CORS. Edge function follows redirects and returns the long URL.
+  // Note: NO auth headers — adding apikey/authorization triggers a preflight
+  // that Supabase strips CORS headers from. Function is verify_jwt:false on purpose.
+  if(!url||!/maps\.app\.goo\.gl|goo\.gl\/maps/.test(url))return url;
+  try{
+    const r=await fetch(SB_URL+'/functions/v1/resolve-maps-link',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({url})
+    });
+    if(!r.ok)return url;
+    const data=await r.json();
+    return data.resolved_url||url;
+  }catch(e){console.warn('expandShortLink failed:',e);return url;}
+}
 async function resolveCoords(url,fallbackName){
+  // 0. If short link, expand first via edge function
+  if(url)url=await expandShortLink(url);
   // 1. Try extract from URL directly
   if(url){
     const direct=extractCoordsFromUrl(url);
