@@ -2651,7 +2651,14 @@ async function saveEvent(btn){
   if(!title){alert('กรุณาใส่ Title');return;}
   const country=cb?.dataset.country||'';
   const dayDate=db?.dataset.date||'';
-  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,map_url:mapUrl};
+  let lat=null,lng=null;
+  if(mapUrl){
+    const coords=await resolveCoords(mapUrl,title);
+    if(coords){[lat,lng]=coords;}else{
+      if(!confirm('⚠️ หาพิกัดจาก URL นี้ไม่เจอ — Daily Route จะไม่แสดงจุดนี้\nบันทึกต่อไหม? (แนะนำใช้ Google Maps Share link ที่มี @lat,lng)'))return;
+    }
+  }
+  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,map_url:mapUrl,lat,lng};
   const res=await sbInsert('trip_events',[data]);
   if(res&&res[0]){
     renderUserEvent(res[0],db);
@@ -2696,6 +2703,7 @@ function renderUserEvent(ev,dbEl){
   const bkBadge=ev.request_booking?(DB[bkId]?.status||(ev.booking_status==='done')?'<span class="ev-bk-badge">✅ จองแล้ว</span>':'<span class="ev-bk-badge">⚠️ ยังไม่จอง</span>'):'';
   if(ev.is_done)row.classList.add('is-done');
   if(ev.map_url)row.dataset.mapUrl=ev.map_url;
+  if(ev.lat!=null&&ev.lng!=null){row.dataset.lat=ev.lat;row.dataset.lng=ev.lng;}
   row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title" onclick="editEvent(${ev.id})">${ev.title}${prio}${bkBadge}</div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
   ensureDoneCheck(row);
   if(ev.map_url)setEventMapPin(row,ev.map_url);
@@ -2791,7 +2799,15 @@ async function saveEditEvent(id,btn){
   const isDone=form.querySelector('.ev-done-input')?.checked||false;
   const mapUrl=form.querySelector('.ev-map-input')?.value?.trim()||null;
   if(!title){alert('กรุณาใส่ Title');return;}
-  const data={time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,is_done:isDone,map_url:mapUrl};
+  // Resolve coords once at save time so we never need to geocode at view time
+  let lat=null,lng=null;
+  if(mapUrl){
+    const coords=await resolveCoords(mapUrl,title);
+    if(coords){[lat,lng]=coords;}else{
+      if(!confirm('⚠️ หาพิกัดจาก URL นี้ไม่เจอ — Daily Route จะไม่แสดงจุดนี้\nบันทึกต่อไหม? (แนะนำใช้ Google Maps Share link ที่มี @lat,lng)'))return;
+    }
+  }
+  const data={time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,is_done:isDone,map_url:mapUrl,lat,lng};
   await sbFetch('trip_events?id=eq.'+id,{method:'PATCH',body:JSON.stringify(data)});
   // Update booking entry if needed
   const bkId='bk-ev-'+id;
@@ -3130,12 +3146,13 @@ function decorateEventsWithMapPins(){
 }
 async function loadHardcodedMaps(){
   // Pull overrides for hardcoded events
-  const rows=await sbFetch('trip_hardcoded_maps?select=hc_key,map_url');
-  const map={};rows.forEach(r=>{map[r.hc_key]=r.map_url;});
+  const rows=await sbFetch('trip_hardcoded_maps?select=hc_key,map_url,lat,lng');
+  const map={};rows.forEach(r=>{map[r.hc_key]=r;});
   document.querySelectorAll('.ev:not(.user-ev)').forEach(ev=>{
-    if(map[ev.dataset.hcKey]){
-      ev.dataset.mapUrl=map[ev.dataset.hcKey];
-      setEventMapPin(ev,map[ev.dataset.hcKey]);
+    const r=map[ev.dataset.hcKey];
+    if(r){
+      if(r.map_url){ev.dataset.mapUrl=r.map_url;setEventMapPin(ev,r.map_url);}
+      if(r.lat!=null&&r.lng!=null){ev.dataset.lat=r.lat;ev.dataset.lng=r.lng;}
     }
   });
 }
@@ -3180,20 +3197,27 @@ async function geocodePlace(query){
   }catch(e){console.warn('geocode failed:',query,e);}
   return null;
 }
-async function getEventCoords(ev){
-  const url=getEventMapUrl(ev);
+async function resolveCoords(url,fallbackName){
   // 1. Try extract from URL directly
-  const direct=extractCoordsFromUrl(url);
-  if(direct)return direct;
-  // 2. Try query param + geocode
-  const query=extractQueryFromUrl(url);
-  if(query){const c=await geocodePlace(query);if(c)return c;}
-  // 3. Fall back to event title + country
+  if(url){
+    const direct=extractCoordsFromUrl(url);
+    if(direct)return direct;
+    const query=extractQueryFromUrl(url);
+    if(query){const c=await geocodePlace(query);if(c)return c;}
+  }
+  // 2. Fall back to event title + country
+  if(fallbackName){const c=await geocodePlace(fallbackName);if(c)return c;}
+  return null;
+}
+async function getEventCoords(ev){
+  // 1. Prefer stored lat/lng (saved at save-time, no geocoding needed)
+  if(ev.dataset.lat&&ev.dataset.lng)return [parseFloat(ev.dataset.lat),parseFloat(ev.dataset.lng)];
+  // 2. Resolve via URL or title
+  const url=getEventMapUrl(ev);
   const titleEl=ev.querySelector('.ev-title');
   const name=cleanPlaceName(titleEl?.childNodes[0]?.textContent||titleEl?.textContent||'');
-  if(!name)return null;
   const country=ev.closest('.cb')?.querySelector('.cn')?.textContent?.replace(/.*—\s*/,'')||'';
-  return geocodePlace(name+(country?', '+country:''));
+  return resolveCoords(url,name?(name+(country?', '+country:'')):null);
 }
 function closeDailyMap(){
   document.getElementById('dm-modal').classList.remove('show');
@@ -3352,7 +3376,14 @@ async function saveHardcodedEdit(btn){
   if(!title){alert('กรุณาใส่ Title');return;}
   const country=cb?.dataset.country||'';
   const dayDate=db?.dataset.date||'';
-  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,map_url:mapUrl};
+  let lat=null,lng=null;
+  if(mapUrl){
+    const coords=await resolveCoords(mapUrl,title);
+    if(coords){[lat,lng]=coords;}else{
+      if(!confirm('⚠️ หาพิกัดจาก URL นี้ไม่เจอ — Daily Route จะไม่แสดงจุดนี้\nบันทึกต่อไหม? (แนะนำใช้ Google Maps Share link ที่มี @lat,lng)'))return;
+    }
+  }
+  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,map_url:mapUrl,lat,lng};
   const res=await sbInsert('trip_events',[data]);
   if(res&&res[0]){
     renderUserEvent(res[0],db);
