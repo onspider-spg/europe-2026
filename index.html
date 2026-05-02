@@ -120,6 +120,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 
 /* EVENT ROW */
 .ev{display:flex;align-items:flex-start;gap:8px;padding:4px 0;}
+.ev-map-pin{display:inline-block;margin-left:6px;padding:1px 5px;font-size:11px;border-radius:4px;background:var(--surface);text-decoration:none;cursor:pointer;border:1px solid var(--border);transition:background .15s;}
+.ev-map-pin:hover{background:#fde68a;border-color:#fbbf24;}
+.dh-route-btn{margin-left:8px;padding:2px 8px;font-size:10px;border-radius:4px;background:var(--surface);border:1px solid var(--border);cursor:pointer;color:var(--muted);transition:all .15s;}
+.dh-route-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 .ev-done-check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);background:#fff;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;margin-top:3px;transition:all .15s;user-select:none;}
 .ev-done-check:hover{border-color:var(--accent);}
 .ev.is-done .ev-done-check{background:var(--done);border-color:var(--done);color:#fff;}
@@ -2589,6 +2593,7 @@ function showAddEvent(btn){
     form.innerHTML=`
       <div class="form-row"><div class="time-select-row"><select class="ev-hour-input">${hourOpts}</select><span class="time-colon">:</span><select class="ev-min-input"><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select></div><input type="text" class="ev-title-input" placeholder="Title" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;flex:1"></div>
       <div class="form-row full" style="margin-top:6px"><textarea class="ev-detail-input" placeholder="Detail (optional)" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;min-height:40px;width:100%;resize:vertical"></textarea></div>
+      <div class="form-row full" style="margin-top:6px"><input type="text" class="ev-map-input" placeholder="📍 Google Maps URL (paste link, optional)" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;width:100%;box-sizing:border-box"></div>
       <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
         <select class="ev-dot-input" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px"><option value="place">📍 Place</option><option value="landmark">🏛️ Landmark</option><option value="restaurant">🍽️ Restaurant</option><option value="fly">✈️ Flight</option><option value="train">🚂 Train</option><option value="hotel">🏨 Hotel</option></select>
         <div class="priority-chips">
@@ -2626,10 +2631,11 @@ async function saveEvent(btn){
   const priorityChip=form.querySelector('.priority-chip.selected');
   const priority=priorityChip?priorityChip.dataset.val:null;
   const requestBooking=form.querySelector('.ev-booking-input').checked;
+  const mapUrl=form.querySelector('.ev-map-input')?.value?.trim()||null;
   if(!title){alert('กรุณาใส่ Title');return;}
   const country=cb?.dataset.country||'';
   const dayDate=db?.dataset.date||'';
-  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null};
+  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,map_url:mapUrl};
   const res=await sbInsert('trip_events',[data]);
   if(res&&res[0]){
     renderUserEvent(res[0],db);
@@ -2673,8 +2679,10 @@ function renderUserEvent(ev,dbEl){
   // Booking badge text
   const bkBadge=ev.request_booking?(DB[bkId]?.status||(ev.booking_status==='done')?'<span class="ev-bk-badge">✅ จองแล้ว</span>':'<span class="ev-bk-badge">⚠️ ยังไม่จอง</span>'):'';
   if(ev.is_done)row.classList.add('is-done');
+  if(ev.map_url)row.dataset.mapUrl=ev.map_url;
   row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title" onclick="editEvent(${ev.id})">${ev.title}${prio}${bkBadge}</div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
   ensureDoneCheck(row);
+  if(ev.map_url)setEventMapPin(row,ev.map_url);
   // Insert sorted by time — always go inside .db-content so day-collapsed can hide it.
   // Create .db-content if the day block doesn't have one (e.g. single-line stub days).
   let content=dbEl.querySelector(':scope > .db-content');
@@ -2733,6 +2741,7 @@ async function editEvent(id){
   form.innerHTML=`
     <div class="form-row"><div class="time-select-row"><select class="ev-hour-input">${hourOpts}</select><span class="time-colon">:</span><select class="ev-min-input">${minOpts}</select></div><input type="text" class="ev-title-input" value="${ev.title.replace(/"/g,'&quot;')}" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;flex:1"></div>
     <div class="form-row full" style="margin-top:6px"><textarea class="ev-detail-input" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;min-height:40px;width:100%;resize:vertical">${ev.detail||''}</textarea></div>
+    <div class="form-row full" style="margin-top:6px"><input type="text" class="ev-map-input" value="${(ev.map_url||'').replace(/"/g,'&quot;')}" placeholder="📍 Google Maps URL (paste link)" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;width:100%;box-sizing:border-box"></div>
     <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
       <select class="ev-dot-input" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px">${typeOpts}</select>
       <div class="priority-chips">
@@ -2764,8 +2773,9 @@ async function saveEditEvent(id,btn){
   const priority=priorityChip?priorityChip.dataset.val:null;
   const requestBooking=form.querySelector('.ev-booking-input').checked;
   const isDone=form.querySelector('.ev-done-input')?.checked||false;
+  const mapUrl=form.querySelector('.ev-map-input')?.value?.trim()||null;
   if(!title){alert('กรุณาใส่ Title');return;}
-  const data={time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,is_done:isDone};
+  const data={time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,is_done:isDone,map_url:mapUrl};
   await sbFetch('trip_events?id=eq.'+id,{method:'PATCH',body:JSON.stringify(data)});
   // Update booking entry if needed
   const bkId='bk-ev-'+id;
@@ -3062,6 +3072,91 @@ async function loadHardcodedDone(){
   });
 }
 
+// ===== MAP PINS + DAILY ROUTE =====
+function extractInlineMapUrl(ev){
+  // Hardcoded events have a `<a href="...">📍 Map</a>` inside .ev-detail
+  const a=ev.querySelector('.ev-detail a[href*="google.com/maps"]');
+  return a?.href||'';
+}
+function getEventMapUrl(ev){
+  if(ev.dataset.mapUrl)return ev.dataset.mapUrl;
+  return extractInlineMapUrl(ev);
+}
+function setEventMapPin(ev,url){
+  // Remove any existing pin in title
+  const title=ev.querySelector('.ev-title');
+  if(!title)return;
+  title.querySelectorAll('.ev-map-pin').forEach(p=>p.remove());
+  if(!url)return;
+  const pin=document.createElement('a');
+  pin.className='ev-map-pin';
+  pin.href=url;
+  pin.target='_blank';
+  pin.rel='noopener';
+  pin.textContent='📍';
+  pin.title='เปิด Google Maps';
+  pin.onclick=(e)=>e.stopPropagation();
+  title.appendChild(pin);
+}
+function decorateEventsWithMapPins(){
+  document.querySelectorAll('.ev').forEach(ev=>{
+    const url=getEventMapUrl(ev);
+    if(url){
+      ev.dataset.mapUrl=url;
+      // For hardcoded events with inline link in detail, replace with header pin (cleaner)
+      if(!ev.classList.contains('user-ev')){
+        const inlineLink=ev.querySelector('.ev-detail a[href*="google.com/maps"]');
+        if(inlineLink)inlineLink.remove();
+      }
+      setEventMapPin(ev,url);
+    }
+  });
+}
+async function loadHardcodedMaps(){
+  // Pull overrides for hardcoded events
+  const rows=await sbFetch('trip_hardcoded_maps?select=hc_key,map_url');
+  const map={};rows.forEach(r=>{map[r.hc_key]=r.map_url;});
+  document.querySelectorAll('.ev:not(.user-ev)').forEach(ev=>{
+    if(map[ev.dataset.hcKey]){
+      ev.dataset.mapUrl=map[ev.dataset.hcKey];
+      setEventMapPin(ev,map[ev.dataset.hcKey]);
+    }
+  });
+}
+function cleanPlaceName(title){
+  // Strip leading emoji/star markers and any badge text after the name
+  return title.replace(/[⭐👍💡🥪🥧🥮🦀🌅🌇🌆🌳🌸🌺🍽️🚂🚄✈️🏛️🏨📍🛍️⛪🗼🐙🥂📝💡⚠️→]/g,'').replace(/Must-see|Recommended|Optional|✅\s*จองแล้ว|⚠️\s*ยังไม่จอง/gi,'').trim();
+}
+function openDailyRoute(dhEl){
+  const db=dhEl.closest('.db');
+  if(!db)return;
+  const evs=db.querySelectorAll('.ev:not([style*="display:none"])');
+  const stops=[];
+  evs.forEach(ev=>{
+    const url=getEventMapUrl(ev);
+    if(!url)return;
+    const titleEl=ev.querySelector('.ev-title');
+    const name=cleanPlaceName(titleEl?.childNodes[0]?.textContent||titleEl?.textContent||'');
+    if(name)stops.push(name);
+  });
+  if(!stops.length){alert('ยังไม่มี event ที่มี map URL ในวันนี้');return;}
+  const url='https://www.google.com/maps/dir/'+stops.map(s=>encodeURIComponent(s)).join('/');
+  window.open(url,'_blank','noopener');
+}
+function addDailyRouteButtons(){
+  document.querySelectorAll('.dh').forEach(dh=>{
+    if(dh.querySelector('.dh-route-btn'))return;
+    const btn=document.createElement('button');
+    btn.className='dh-route-btn';
+    btn.textContent='📍 Route';
+    btn.title='เปิด daily route ใน Google Maps';
+    btn.onclick=(e)=>{e.stopPropagation();openDailyRoute(dh);};
+    // Insert before chevron
+    const chev=dh.querySelector('.dh-chevron');
+    if(chev)dh.insertBefore(btn,chev);else dh.appendChild(btn);
+  });
+}
+
 // ===== DAY TOGGLE — make .dh clickable =====
 function initDayToggle(){
   document.querySelectorAll('.dh').forEach(dh=>{
@@ -3109,6 +3204,7 @@ function editHardcodedEvent(clickedTitle){
   form.innerHTML=`
     <div class="form-row"><div class="time-select-row"><select class="ev-hour-input">${hourOpts}</select><span class="time-colon">:</span><select class="ev-min-input">${minOpts}</select></div><input type="text" class="ev-title-input" value="${curTitle.replace(/"/g,'&quot;')}" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;flex:1"></div>
     <div class="form-row full" style="margin-top:6px"><textarea class="ev-detail-input" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;min-height:40px;width:100%;resize:vertical">${curDetail}</textarea></div>
+    <div class="form-row full" style="margin-top:6px"><input type="text" class="ev-map-input" value="${(ev.dataset.mapUrl||'').replace(/"/g,'&quot;')}" placeholder="📍 Google Maps URL (paste link)" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;width:100%;box-sizing:border-box"></div>
     <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
       <select class="ev-dot-input" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px">${typeOpts}</select>
       <div class="priority-chips">
@@ -3142,10 +3238,11 @@ async function saveHardcodedEdit(btn){
   const priorityChip=form.querySelector('.priority-chip.selected');
   const priority=priorityChip?priorityChip.dataset.val:null;
   const requestBooking=form.querySelector('.ev-booking-input').checked;
+  const mapUrl=form.querySelector('.ev-map-input')?.value?.trim()||null;
   if(!title){alert('กรุณาใส่ Title');return;}
   const country=cb?.dataset.country||'';
   const dayDate=db?.dataset.date||'';
-  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null};
+  const data={country,day_date:dayDate||null,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,map_url:mapUrl};
   const res=await sbInsert('trip_events',[data]);
   if(res&&res[0]){
     renderUserEvent(res[0],db);
@@ -3160,7 +3257,12 @@ async function saveHardcodedEdit(btn){
     }
   }
   form.remove();
-  origEv.style.display='none';
+  // Persist the hide so the original hardcoded event doesn't reappear on refresh
+  if(origEv){
+    const hcKey=origEv.dataset.hcKey||hcKeyForEvent(origEv);
+    if(hcKey)await fetch(SB_URL+'/rest/v1/trip_hardcoded_hidden',{method:'POST',headers:{...hdr,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({hc_key:hcKey})});
+    origEv.remove();
+  }
 }
 
 // ===== BUILD PLACES & RESTAURANTS TABS (auto-fill from hardcoded + user events) =====
@@ -3737,9 +3839,12 @@ async function init(){
   initDescriptions();
   initHardcodedDeletion();
   initEventDoneChecks();
+  decorateEventsWithMapPins();
+  addDailyRouteButtons();
   loadDescriptions();
   loadHardcodedHidden();
   loadHardcodedDone();
+  loadHardcodedMaps();
   initMap();
   loadNotes();
   loadEvents();
