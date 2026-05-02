@@ -120,6 +120,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 
 /* EVENT ROW */
 .ev{display:flex;align-items:flex-start;gap:8px;padding:4px 0;}
+.ev-done-check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);background:#fff;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;margin-top:3px;transition:all .15s;user-select:none;}
+.ev-done-check:hover{border-color:var(--accent);}
+.ev.is-done .ev-done-check{background:var(--done);border-color:var(--done);color:#fff;}
+.ev.is-done .ev-title{text-decoration:line-through;color:var(--muted);}
+.ev.is-done .ev-detail{text-decoration:line-through;opacity:.6;}
 .ev-time{min-width:50px;font-size:11px;color:var(--muted);padding-top:4px;flex-shrink:0;font-variant-numeric:tabular-nums;}
 .ev-dot{width:16px;flex-shrink:0;margin-top:3px;font-size:11px;line-height:1;text-align:center;}
 .ev-dot::before{display:block;}
@@ -2660,7 +2665,9 @@ function renderUserEvent(ev,dbEl){
   const prio=ev.priority&&prioMap[ev.priority]?`<span class="ev-priority-badge ${prioMap[ev.priority].cls}">${prioMap[ev.priority].label}</span>`:'';
   // Booking badge text
   const bkBadge=ev.request_booking?(DB[bkId]?.status||(ev.booking_status==='done')?'<span class="ev-bk-badge">✅ จองแล้ว</span>':'<span class="ev-bk-badge">⚠️ ยังไม่จอง</span>'):'';
+  if(ev.is_done)row.classList.add('is-done');
   row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title" onclick="editEvent(${ev.id})">${ev.title}${prio}${bkBadge}</div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
+  ensureDoneCheck(row);
   // Insert sorted by time — always go inside .db-content so day-collapsed can hide it.
   // Create .db-content if the day block doesn't have one (e.g. single-line stub days).
   let content=dbEl.querySelector(':scope > .db-content');
@@ -2729,6 +2736,7 @@ async function editEvent(id){
     </div>
     <div style="display:flex;gap:12px;margin-top:8px;align-items:center">
       <label class="ev-booking-row"><input type="checkbox" class="ev-booking-input" ${ev.request_booking?'checked':''}> Request Booking</label>
+      <label class="ev-booking-row"><input type="checkbox" class="ev-done-input" ${ev.is_done?'checked':''}> ✓ Done</label>
       <span style="flex:1"></span>
       <button style="padding:4px 12px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;font-size:11px;cursor:pointer" onclick="deleteEvent(${id})">🗑️ Delete</button>
       <span style="flex:1"></span>
@@ -2748,8 +2756,9 @@ async function saveEditEvent(id,btn){
   const priorityChip=form.querySelector('.priority-chip.selected');
   const priority=priorityChip?priorityChip.dataset.val:null;
   const requestBooking=form.querySelector('.ev-booking-input').checked;
+  const isDone=form.querySelector('.ev-done-input')?.checked||false;
   if(!title){alert('กรุณาใส่ Title');return;}
-  const data={time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null};
+  const data={time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?'pending':null,is_done:isDone};
   await sbFetch('trip_events?id=eq.'+id,{method:'PATCH',body:JSON.stringify(data)});
   // Update booking entry if needed
   const bkId='bk-ev-'+id;
@@ -3009,6 +3018,41 @@ async function deleteHardcodedEvent(btn){
   const form=ev.nextElementSibling;
   if(form&&form.classList.contains('edit-ev-form'))form.remove();
   ev.remove();
+}
+
+// ===== DONE STATUS (per-event check + strike-through) =====
+function ensureDoneCheck(ev){
+  if(ev.querySelector(':scope > .ev-done-check'))return;
+  const check=document.createElement('span');
+  check.className='ev-done-check';
+  check.textContent='✓';
+  check.title='Done';
+  check.onclick=(e)=>{e.stopPropagation();toggleEventDone(ev);};
+  ev.insertBefore(check,ev.firstChild);
+}
+function initEventDoneChecks(){
+  document.querySelectorAll('.ev').forEach(ensureDoneCheck);
+}
+async function toggleEventDone(ev){
+  const isDone=ev.classList.toggle('is-done');
+  if(ev.classList.contains('user-ev')){
+    const id=ev.dataset.eventId;
+    if(id)await sbFetch('trip_events?id=eq.'+id,{method:'PATCH',body:JSON.stringify({is_done:isDone})});
+  }else{
+    const hcKey=ev.dataset.hcKey||hcKeyForEvent(ev);
+    if(isDone){
+      await fetch(SB_URL+'/rest/v1/trip_hardcoded_done',{method:'POST',headers:{...hdr,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({hc_key:hcKey})});
+    }else{
+      await sbDelete('trip_hardcoded_done','hc_key',encodeURIComponent(hcKey));
+    }
+  }
+}
+async function loadHardcodedDone(){
+  const rows=await sbFetch('trip_hardcoded_done?select=hc_key');
+  const done=new Set(rows.map(r=>r.hc_key));
+  document.querySelectorAll('.ev:not(.user-ev)').forEach(ev=>{
+    if(done.has(ev.dataset.hcKey))ev.classList.add('is-done');
+  });
 }
 
 // ===== DAY TOGGLE — make .dh clickable =====
@@ -3685,8 +3729,10 @@ async function init(){
   initDayToggle();
   initDescriptions();
   initHardcodedDeletion();
+  initEventDoneChecks();
   loadDescriptions();
   loadHardcodedHidden();
+  loadHardcodedDone();
   initMap();
   loadNotes();
   loadEvents();
