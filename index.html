@@ -2401,10 +2401,10 @@ function buildBookingTab(){
           <div class="bd-field"><label>Notes</label><textarea id="note-${m.id}" placeholder="รายละเอียด...">${d.details||''}</textarea></div>
           <div class="bd-field"><label>Amount</label><div style="display:flex;gap:6px"><input type="text" id="amt-${m.id}" value="${d.amount||''}" placeholder="0.00" style="width:120px"><select id="cur-${m.id}" style="width:80px"><option value="EUR" ${(d.currency||'EUR')==='EUR'?'selected':''}>EUR</option><option value="CHF" ${d.currency==='CHF'?'selected':''}>CHF</option><option value="AUD" ${d.currency==='AUD'?'selected':''}>AUD</option><option value="GBP" ${d.currency==='GBP'?'selected':''}>GBP</option></select></div></div>
           <div class="bd-img-area">
-            <label style="display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">📎 แนบ Confirmation (รูปหรือ PDF)</label>
-            <div class="bd-img-drop" onclick="document.getElementById('file-${m.id}').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="event.preventDefault();this.classList.remove('drag-over');handleFile('${m.id}',event.dataTransfer.files[0])">📷 คลิกหรือลากรูป/PDF มาวาง</div>
-            <input type="file" id="file-${m.id}" accept="image/*,application/pdf" style="display:none" onchange="handleFile('${m.id}',this.files[0])">
-            <div class="bd-img-preview" id="preview-${m.id}">${bookingPreviewHtml(d.image_path)}</div>
+            <label style="display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">📎 แนบ Confirmation (รูป + PDF, หลายไฟล์ได้)</label>
+            <div class="bd-img-drop" onclick="document.getElementById('file-${m.id}').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="event.preventDefault();this.classList.remove('drag-over');handleFiles('${m.id}',event.dataTransfer.files)">📷 คลิกหรือลากรูป/PDF มาวาง (เลือกหลายไฟล์ได้)</div>
+            <input type="file" id="file-${m.id}" accept="image/*,application/pdf" multiple style="display:none" onchange="handleFiles('${m.id}',this.files)">
+            <div class="bd-img-preview" id="preview-${m.id}">${bookingAttachmentsHtml(m.id)}</div>
           </div>
           <div class="bd-save-row">
             <button class="bd-save-btn" onclick="saveDetail('${m.id}')">💾 Save</button>
@@ -2452,6 +2452,27 @@ async function saveDetail(id){
   buildBookingTab();
 }
 
+function getAttachments(d){
+  if(!d)return [];
+  if(Array.isArray(d.attachments)&&d.attachments.length)return d.attachments.filter(Boolean);
+  if(d.image_path)return [d.image_path]; // legacy single
+  return [];
+}
+function attachmentTileHtml(id,path){
+  const url=SB_URL+'/storage/v1/object/public/trip-images/'+path;
+  const isPdf=/\.pdf(\?|$)/i.test(path);
+  const safePath=path.replace(/'/g,"\\'");
+  const inner=isPdf?
+    `<a href="${url}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;padding:10px;text-decoration:none;color:#1f2937;font-size:12px;height:100%;"><span style="font-size:28px">📄</span><span style="overflow:hidden"><strong style="display:block">PDF</strong><span style="font-size:10px;color:var(--muted)">เปิด</span></span></a>`:
+    `<img src="${url}" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;">`;
+  return `<div class="bk-att-tile" style="position:relative;width:120px;height:90px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff;flex-shrink:0;">${inner}<button onclick="event.stopPropagation();deleteAttachment('${id}','${safePath}')" title="ลบ" style="position:absolute;top:2px;right:2px;width:22px;height:22px;border:none;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:14px;cursor:pointer;line-height:1;padding:0;">×</button></div>`;
+}
+function bookingAttachmentsHtml(id){
+  const list=getAttachments(DB[id]);
+  if(!list.length)return '';
+  return `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">${list.map(p=>attachmentTileHtml(id,p)).join('')}</div>`;
+}
+// Legacy alias used elsewhere
 function bookingPreviewHtml(path){
   if(!path)return '';
   const url=SB_URL+'/storage/v1/object/public/trip-images/'+path;
@@ -2459,19 +2480,49 @@ function bookingPreviewHtml(path){
   if(isPdf)return `<a href="${url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;text-decoration:none;color:#1f2937;font-size:13px;"><span style="font-size:24px">📄</span><span><strong>PDF Confirmation</strong><br><span style="font-size:11px;color:var(--muted)">คลิกเพื่อเปิดดู</span></span></a>`;
   return `<img src="${url}" onclick="openLightbox(this.src)">`;
 }
-async function handleFile(id,file){
-  if(!file)return;
-  const path=id+'/'+Date.now()+'_'+file.name;
-  await fetch(SB_URL+'/storage/v1/object/trip-images/'+path,{
-    method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':file.type},body:file
+async function uploadOneFile(id,file){
+  // Sanitize filename: storage rejects some non-ASCII chars / spaces in path
+  const safeName=file.name.replace(/[^\w.\-]+/g,'_');
+  const path=id+'/'+Date.now()+'_'+safeName;
+  const r=await fetch(SB_URL+'/storage/v1/object/trip-images/'+encodeURI(path),{
+    method:'POST',
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':file.type||'application/octet-stream','x-upsert':'true'},
+    body:file
   });
-  DB[id]={...DB[id],image_path:path,status:true};
-  apply();
-  await sbUpdate(id,{image_path:path,status:true});
-  const preview=document.getElementById('preview-'+id);
-  if(preview)preview.innerHTML=bookingPreviewHtml(path);
+  if(!r.ok){console.error('upload failed',r.status,await r.text());return null;}
+  return path;
+}
+async function handleFiles(id,fileList){
+  if(!fileList||!fileList.length)return;
   const msg=document.getElementById('msg-'+id);
-  if(msg){msg.textContent='✅ Uploaded!';setTimeout(()=>msg.textContent='',2000);}
+  if(msg){msg.textContent='⌛ Uploading...';}
+  const existing=Array.isArray(DB[id]?.attachments)?[...DB[id].attachments]:(DB[id]?.image_path?[DB[id].image_path]:[]);
+  const added=[];
+  for(const file of Array.from(fileList)){
+    const path=await uploadOneFile(id,file);
+    if(path)added.push(path);
+  }
+  if(!added.length){if(msg)msg.textContent='❌ Upload failed';return;}
+  const allPaths=[...existing,...added];
+  DB[id]={...DB[id],attachments:allPaths,image_path:allPaths[0],status:true};
+  apply();
+  await sbUpdate(id,{attachments:allPaths,image_path:allPaths[0],status:true});
+  const preview=document.getElementById('preview-'+id);
+  if(preview)preview.innerHTML=bookingAttachmentsHtml(id);
+  if(msg){msg.textContent='✅ '+added.length+' file uploaded!';setTimeout(()=>msg.textContent='',2500);}
+}
+// Backward compat
+async function handleFile(id,file){return handleFiles(id,file?[file]:[]);}
+async function deleteAttachment(id,path){
+  if(!confirm('ลบไฟล์นี้?'))return;
+  const list=(DB[id]?.attachments||[]).filter(p=>p!==path);
+  // Try to delete from storage too (best effort, doesn't matter if it fails)
+  fetch(SB_URL+'/storage/v1/object/trip-images/'+encodeURI(path),{method:'DELETE',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}}).catch(()=>{});
+  DB[id]={...DB[id],attachments:list,image_path:list[0]||null,status:!!(DB[id].ref_number||list.length)};
+  await sbUpdate(id,{attachments:list,image_path:list[0]||null,status:DB[id].status});
+  const preview=document.getElementById('preview-'+id);
+  if(preview)preview.innerHTML=bookingAttachmentsHtml(id);
+  apply();
 }
 
 function openLightbox(src){
