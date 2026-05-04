@@ -2383,10 +2383,10 @@ function buildBookingTab(){
           <div class="bd-field"><label>Notes</label><textarea id="note-${m.id}" placeholder="รายละเอียด...">${d.details||''}</textarea></div>
           <div class="bd-field"><label>Amount</label><div style="display:flex;gap:6px"><input type="text" id="amt-${m.id}" value="${d.amount||''}" placeholder="0.00" style="width:120px"><select id="cur-${m.id}" style="width:80px"><option value="EUR" ${(d.currency||'EUR')==='EUR'?'selected':''}>EUR</option><option value="CHF" ${d.currency==='CHF'?'selected':''}>CHF</option><option value="AUD" ${d.currency==='AUD'?'selected':''}>AUD</option><option value="GBP" ${d.currency==='GBP'?'selected':''}>GBP</option></select></div></div>
           <div class="bd-img-area">
-            <label style="display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">📎 แนบรูป Confirmation</label>
-            <div class="bd-img-drop" onclick="document.getElementById('file-${m.id}').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="event.preventDefault();this.classList.remove('drag-over');handleFile('${m.id}',event.dataTransfer.files[0])">📷 คลิกหรือลากรูปมาวาง</div>
-            <input type="file" id="file-${m.id}" accept="image/*" style="display:none" onchange="handleFile('${m.id}',this.files[0])">
-            <div class="bd-img-preview" id="preview-${m.id}">${d.image_path?`<img src="${SB_URL}/storage/v1/object/public/trip-images/${d.image_path}" onclick="openLightbox(this.src)">`:''}</div>
+            <label style="display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">📎 แนบ Confirmation (รูปหรือ PDF)</label>
+            <div class="bd-img-drop" onclick="document.getElementById('file-${m.id}').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="event.preventDefault();this.classList.remove('drag-over');handleFile('${m.id}',event.dataTransfer.files[0])">📷 คลิกหรือลากรูป/PDF มาวาง</div>
+            <input type="file" id="file-${m.id}" accept="image/*,application/pdf" style="display:none" onchange="handleFile('${m.id}',this.files[0])">
+            <div class="bd-img-preview" id="preview-${m.id}">${bookingPreviewHtml(d.image_path)}</div>
           </div>
           <div class="bd-save-row">
             <button class="bd-save-btn" onclick="saveDetail('${m.id}')">💾 Save</button>
@@ -2434,6 +2434,13 @@ async function saveDetail(id){
   buildBookingTab();
 }
 
+function bookingPreviewHtml(path){
+  if(!path)return '';
+  const url=SB_URL+'/storage/v1/object/public/trip-images/'+path;
+  const isPdf=/\.pdf(\?|$)/i.test(path);
+  if(isPdf)return `<a href="${url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;text-decoration:none;color:#1f2937;font-size:13px;"><span style="font-size:24px">📄</span><span><strong>PDF Confirmation</strong><br><span style="font-size:11px;color:var(--muted)">คลิกเพื่อเปิดดู</span></span></a>`;
+  return `<img src="${url}" onclick="openLightbox(this.src)">`;
+}
 async function handleFile(id,file){
   if(!file)return;
   const path=id+'/'+Date.now()+'_'+file.name;
@@ -2444,9 +2451,9 @@ async function handleFile(id,file){
   apply();
   await sbUpdate(id,{image_path:path,status:true});
   const preview=document.getElementById('preview-'+id);
-  if(preview)preview.innerHTML=`<img src="${SB_URL}/storage/v1/object/public/trip-images/${path}" onclick="openLightbox(this.src)">`;
+  if(preview)preview.innerHTML=bookingPreviewHtml(path);
   const msg=document.getElementById('msg-'+id);
-  if(msg){msg.textContent='✅ Image uploaded!';setTimeout(()=>msg.textContent='',2000);}
+  if(msg){msg.textContent='✅ Uploaded!';setTimeout(()=>msg.textContent='',2000);}
 }
 
 function openLightbox(src){
