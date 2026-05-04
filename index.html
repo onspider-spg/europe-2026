@@ -2702,6 +2702,7 @@ async function saveEvent(btn){
   form.querySelector('.ev-detail-input').value='';
   form.querySelector('.ev-booking-input').checked=false;
   form.querySelectorAll('.priority-chip').forEach(c=>c.classList.remove('selected'));
+  refreshDerivedFromEvents();
 }
 function renderUserEvent(ev,dbEl){
   const row=document.createElement('div');
@@ -2763,11 +2764,10 @@ async function deleteEvent(id){
   if(DB[bkId]){
     await sbDelete('trip_bookings','id',bkId);
     delete DB[bkId];
-    buildBookingTab();
-    apply();
   }
   const el=document.querySelector(`.user-ev[data-event-id="${id}"]`);
   if(el)el.remove();
+  refreshDerivedFromEvents();
 }
 
 // ===== EDIT EVENT =====
@@ -2858,8 +2858,7 @@ async function saveEditEvent(id,btn){
     const ev={id,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?(DB[bkId]?.status?'done':'pending'):null};
     renderUserEvent(ev,dbEl);
   }
-  buildBookingTab();
-  apply();
+  refreshDerivedFromEvents();
 }
 
 // ===== FILTER BY COUNTRY =====
@@ -3102,6 +3101,7 @@ async function deleteHardcodedEvent(btn){
   const form=ev.nextElementSibling;
   if(form&&form.classList.contains('edit-ev-form'))form.remove();
   ev.remove();
+  refreshDerivedFromEvents();
 }
 
 // ===== DONE STATUS (per-event check + strike-through) =====
@@ -3461,6 +3461,7 @@ async function saveHardcodedEdit(btn){
     if(hcKey)await fetch(SB_URL+'/rest/v1/trip_hardcoded_hidden',{method:'POST',headers:{...hdr,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({hc_key:hcKey})});
     origEv.remove();
   }
+  refreshDerivedFromEvents();
 }
 
 // ===== BUILD PLACES & RESTAURANTS TABS (auto-fill from hardcoded + user events) =====
@@ -3509,6 +3510,15 @@ function buildPlacesTab(){
     html+='</div>';
   }
   wrap.innerHTML=html;
+}
+// Re-derive everything that depends on Day-by-Day events.
+// Call after any add/edit/delete in Day-by-Day so Places, Restaurants,
+// and Booking pages stay in sync without needing a tab switch or refresh.
+function refreshDerivedFromEvents(){
+  if(document.getElementById('places-list-auto'))buildPlacesTab();
+  if(document.getElementById('restaurants-list-auto'))buildRestaurantsTab();
+  if(document.getElementById('bk-list'))buildBookingTab();
+  apply();
 }
 function buildRestaurantsTab(){
   const wrap=document.getElementById('restaurants-list-auto');
