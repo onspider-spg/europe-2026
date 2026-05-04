@@ -1072,7 +1072,7 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   <div class="db travel day-collapsed" data-date="2026-05-22">
     <div class="dh"><span class="dn">22 MAY</span><span class="dd">ศุกร์ 22 May</span><span class="dt">· Arrive from Copenhagen ✈ + Duomo + Aperitivo</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-milan1" onclick="goBooking('bk-hotel-milan1',event)">🏨</span><span class="ev-time">~14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Milan Brera/Navigli &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-milan1',event)">⚠️ ยังไม่จอง</a></div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-milan" onclick="goBooking('bk-hotel-milan',event)">🏨</span><span class="ev-time">~14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Milan Brera/Navigli &nbsp;<a class="tbadge warn" onclick="goBooking('bk-hotel-milan',event)">⚠️ ยังไม่จอง</a></div></div></div>
     <div class="ev"><span class="ev-st none"></span><span class="ev-time">เย็น</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">Duomo + Galleria + Aperitivo แถว Navigli</div></div></div>
     </div>
   </div>
@@ -2300,13 +2300,10 @@ const ITEMS_META=[
   {id:'bk-fly-nce-bcn',cat:'fly',icon:'✈️',label:'Nice → Barcelona',date:'13 May',category:'flights'},
   {id:'bk-fly-mad-cph',cat:'fly',icon:'✈️',label:'Madrid → Vienna',date:'18 May',category:'flights'},
   {id:'bk-fly-cph-vie',cat:'fly',icon:'✈️',label:'Vienna → Copenhagen',date:'20 May',category:'flights'},
-  {id:'bk-fly-vie-vce',cat:'fly',icon:'✈️',label:'Copenhagen → Milan',date:'22 May',category:'flights'},
   {id:'bk-train-milan-rome',cat:'train',icon:'🚄',label:'Frecciarossa Milan → Rome',date:'3 Jun',category:'trains'},
   {id:'bk-fly-nap-syd',cat:'fly',icon:'✈️',label:'Naples NAP → Sydney SYD',date:'22 Jun',category:'flights'},
   // TRAINS
   {id:'bk-bernina',cat:'train',icon:'🚂',label:'Bernina Express Chur → Tirano',date:'2 Jun',category:'trains'},
-  {id:'bk-train-varenna',cat:'train',icon:'🚄',label:'Milan → Varenna',date:'26 May',category:'trains'},
-  {id:'bk-train-tirano',cat:'train',icon:'🚄',label:'Trenord Tirano → Milan',date:'2 Jun',category:'trains'},
   {id:'bk-train-bern-zurich',cat:'train',icon:'🚄',label:'Bern → Zürich',date:'31 May',category:'trains'},
   {id:'bk-train-rome-naples',cat:'train',icon:'🚄',label:'Frecciarossa Rome → Naples',date:'7 Jun',category:'trains'},
   // HOTELS
@@ -2325,13 +2322,10 @@ const ITEMS_META=[
   {id:'bk-hotel-zurich',cat:'hotel',icon:'🏨',label:'Zürich · Altstadt/West',date:'31 May–2 Jun',category:'hotels'},
   {id:'bk-hotel-milan2',cat:'hotel',icon:'🏨',label:'Milan (post-Bernina)',date:'2–3 Jun',category:'hotels'},
   {id:'bk-hotel-rome',cat:'hotel',icon:'🏨',label:'Rome · Trastevere/Prati',date:'3–7 Jun',category:'hotels'},
-  {id:'bk-hotel-naples',cat:'hotel',icon:'🏨',label:'Naples · 1 คืน',date:'7–8 Jun',category:'hotels'},
   {id:'bk-airbnb-naples',cat:'hotel',icon:'🏠',label:'Naples Airbnb · Chiaia',date:'8–22 Jun',category:'hotels'},
-  {id:'bk-hotel-amalfi',cat:'hotel',icon:'🏨',label:'Amalfi Coast',date:'12–14 Jun',category:'hotels'},
   // ACTIVITIES
   {id:'bk-sagrada',cat:'act',icon:'🎟️',label:'Sagrada Família',date:'14 May',category:'activities'},
   {id:'bk-parkguell',cat:'act',icon:'🎟️',label:'Park Güell',date:'14 May',category:'activities'},
-  {id:'bk-montbar',cat:'food',icon:'🍽️',label:'Mont Bar ⭐⭐',date:'14–16 May',category:'activities'},
   {id:'bk-jungfrau',cat:'act',icon:'🏔️',label:'Jungfraujoch',date:'29 May',category:'activities'},
   {id:'bk-vatican',cat:'act',icon:'🏛️',label:'Vatican Museums + Sistine Chapel',date:'4 Jun',category:'activities'},
   {id:'bk-colosseum',cat:'act',icon:'🏛️',label:'Colosseum + Roman Forum',date:'5 Jun',category:'activities'},
@@ -2345,13 +2339,37 @@ function buildBookingTab(){
   const wrap=document.getElementById('bk-list');
   if(!wrap)return;
   // Combine ITEMS_META with custom items from DB
-  const allItems=[...ITEMS_META];
+  // Show only items that have a corresponding Day-by-Day event linking to them.
+  // - Hardcoded items: must be referenced via data-bk on at least one .ev
+  // - User-event-linked (bk-ev-X): the .user-ev[data-event-id="X"] must still exist in DOM
+  // Pruning is SKIPPED until at least one .user-ev exists in DOM (avoids deleting
+  // valid bk-ev-X rows on the first build before loadEvents runs).
+  const referenced=new Set();
+  document.querySelectorAll('[data-bk]').forEach(el=>{if(el.closest('.ev'))referenced.add(el.dataset.bk);});
+  const userEventsLoaded=document.querySelectorAll('.user-ev').length>0;
+  const allItems=ITEMS_META.filter(m=>referenced.has(m.id));
+  const orphanIds=[];
   Object.keys(DB).forEach(id=>{
-    if(DB[id].is_custom && !allItems.find(m=>m.id===id)){
-      const d=DB[id];
-      allItems.push({id,cat:d.dot_type||catToCss(d.category),icon:catToIcon(d.category),label:d.label||id,date:d.date_info||'',category:d.category||'activities'});
+    if(!DB[id].is_custom)return;
+    if(allItems.find(m=>m.id===id))return;
+    if(id.startsWith('bk-ev-')){
+      const eid=id.slice(6);
+      const evExists=document.querySelector(`.user-ev[data-event-id="${eid}"]`);
+      if(!evExists){
+        if(userEventsLoaded)orphanIds.push(id);
+        // Always include in display so user sees it (until the prune actually fires)
+        const d=DB[id];
+        allItems.push({id,cat:d.dot_type||catToCss(d.category),icon:catToIcon(d.category),label:d.label||id,date:d.date_info||'',category:d.category||'activities'});
+        return;
+      }
     }
+    const d=DB[id];
+    allItems.push({id,cat:d.dot_type||catToCss(d.category),icon:catToIcon(d.category),label:d.label||id,date:d.date_info||'',category:d.category||'activities'});
   });
+  // Only prune when we KNOW user events are in DOM (post-loadEvents)
+  if(userEventsLoaded&&orphanIds.length){
+    orphanIds.forEach(id=>{delete DB[id];sbDelete('trip_bookings','id',id).catch(()=>{});});
+  }
 
   // Group by category
   const groups={flights:[],trains:[],hotels:[],activities:[]};
@@ -3578,6 +3596,10 @@ async function loadEvents(){
     const dbs=document.querySelectorAll('.db[data-date="'+ev.day_date+'"]');
     if(dbs.length){renderUserEvent(ev,dbs[0]);}
   });
+  // Rebuild booking tab now that user events exist in DOM —
+  // orphan bk-ev-X rows are pruned correctly only after this point.
+  buildBookingTab();
+  apply();
 }
 
 // ===== PLACES/RESTAURANTS =====
@@ -4020,7 +4042,9 @@ async function init(){
   decorateEventsWithMapPins();
   addDailyRouteButtons();
   loadDescriptions();
-  loadHardcodedHidden();
+  // Await loadHardcodedHidden so the second buildBookingTab (after loadEvents)
+  // sees the correct DOM state (no hidden events still attached with data-bk).
+  await loadHardcodedHidden();
   loadHardcodedDone();
   loadHardcodedMaps();
   initMap();
