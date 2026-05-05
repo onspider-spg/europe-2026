@@ -152,6 +152,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .ev-dot{width:16px;flex-shrink:0;margin-top:3px;font-size:11px;line-height:1;text-align:center;}
 .ev-dot::before{display:block;}
 .ev-dot.fly::before{content:'✈️';}
+.ev-dot.arrive::before{content:'🛬';}
 .ev-dot.train::before{content:'🚄';}
 .ev-dot.hotel::before{content:'🏨';}
 .ev-dot.food::before{content:'🍽️';}
@@ -2824,6 +2825,13 @@ function renderUserEvent(ev,dbEl){
   row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title" onclick="editEvent(${ev.id})">${ev.title}${prio}${bkBadge}</div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
   ensureDoneCheck(row);
   ensurePrioBadge(row);
+  // Auto-arrival icon for titles starting with Arrive/🛬/ถึง
+  if(ev.dot_type==='fly'){
+    const stripped=(ev.title||'').replace(/^[\s⭐👍💡✈️🛬🚂🚄🏨🍽️🏛️📍✅⚠️→·]+/g,'').trim();
+    if(/^arrive\b/i.test(stripped)||/^ถึง\b/.test(stripped)||/^🛬/.test(ev.title||'')){
+      row.querySelector('.ev-dot')?.classList.add('arrive');
+    }
+  }
   if(ev.map_url)setEventMapPin(row,ev.map_url);
   // Insert sorted by time — always go inside .db-content so day-collapsed can hide it.
   // Create .db-content if the day block doesn't have one (e.g. single-line stub days).
@@ -3250,6 +3258,20 @@ async function cyclePriority(ev){
 }
 function injectPriorityBadges(){
   document.querySelectorAll('.ev').forEach(ensurePrioBadge);
+}
+// ===== ARRIVAL ICONS — swap ✈️ to 🛬 when title starts with "Arrive" / "🛬" / "ถึง" =====
+function decorateArrivalIcons(){
+  document.querySelectorAll('.ev').forEach(ev=>{
+    const dot=ev.querySelector('.ev-dot');
+    if(!dot||!dot.classList.contains('fly'))return;
+    const titleEl=ev.querySelector('.ev-title');
+    const title=(titleEl?.childNodes[0]?.textContent||titleEl?.textContent||'').trim();
+    // Strip leading emojis/markers, then check first word
+    const stripped=title.replace(/^[\s⭐👍💡✈️🛬🚂🚄🏨🍽️🏛️📍✅⚠️→·]+/g,'').trim();
+    if(/^arrive\b/i.test(stripped)||/^ถึง\b/.test(stripped)||/^🛬/.test(title)){
+      dot.classList.add('arrive');
+    }
+  });
 }
 async function toggleEventDone(ev){
   const isDone=ev.classList.toggle('is-done');
@@ -4208,6 +4230,7 @@ async function init(){
   initHardcodedDeletion();
   initEventDoneChecks();
   injectPriorityBadges();
+  decorateArrivalIcons();
   decorateEventsWithMapPins();
   addDailyRouteButtons();
   loadDescriptions();
