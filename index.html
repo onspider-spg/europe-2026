@@ -120,6 +120,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 
 /* EVENT ROW */
 .ev{display:flex;align-items:flex-start;gap:8px;padding:4px 0;}
+.ev-prio{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:18px;padding:0 5px;border-radius:4px;font-size:11px;font-weight:800;font-family:'DM Sans',sans-serif;flex-shrink:0;margin-top:4px;letter-spacing:-0.5px;line-height:1;}
+.ev-prio.prio-3{background:#fef2f2;color:#dc2626;border:1px solid #fca5a5;}
+.ev-prio.prio-2{background:#fffbeb;color:#d97706;border:1px solid #fcd34d;}
+.ev-prio.prio-1{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db;}
+.ev-prio-spacer{display:inline-block;width:26px;flex-shrink:0;}
 .dm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:12px;}
 .dm-modal.show{display:flex;}
 .dm-sheet{background:#fff;border-radius:12px;width:100%;max-width:760px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -927,41 +932,62 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--light);border-t
   </div>
 
   <div class="db travel day-collapsed" data-date="2026-05-13">
-    <div class="dh"><span class="dn">13 MAY</span><span class="dd">พุธ 13 May</span><span class="dt">· Arrive + Gothic Quarter Tapas</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">13 MAY</span><span class="dd">พุธ 13 May</span><span class="dt">· Old Town Loop: Boqueria → Raval → Gothic → Born</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">บ่ายถึง Barcelona → เดิน Gothic Quarter → pintxos Basque ที่ Euskal Etxea → tapas สมัยใหม่ Bar del Pla</div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-bcn" onclick="goBooking('bk-hotel-bcn',event)">🏨</span><span class="ev-time">14:00</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in Barcelona · Eixample</div><div class="ev-detail">แนะนำโซน Eixample — ใกล้ Sagrada + Passeig de Gràcia + metro สะดวก</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Gothic Quarter</div><div class="ev-detail">Barcelona Cathedral + ซอยโรมัน + Plaça Reial · เดินเล่นหลงทาง</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Euskal Etxea</div><div class="ev-detail">Gothic Quarter · pintxos Basque หยิบจากบาร์ EUR 2.50/อัน · จ่ายตามไม้จิ้ม</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Bar del Pla</div><div class="ev-detail">Carrer de Montcada 2 · croquetas Idiazábal + Iberian pork · natural wine · จองล่วงหน้า · EUR 20-30</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">บ่ายถึง → drop bags → Boqueria lunch → Raval (Granja Viader + Palau Güell) → Gothic (Catedral + Plaça del Rei) → Born (Picasso + Santa Maria del Mar) → tapas dinner — เส้นเดียวจากตะวันตกไปตะวันออก</div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-hotel-bcn" onclick="goBooking('bk-hotel-bcn',event)">🏨</span><span class="ev-time">13:30</span><div class="ev-dot hotel"></div><div class="ev-body"><div class="ev-title">Check-in/Drop bags · Eixample</div><div class="ev-detail">แนะนำโซน Eixample — ใกล้ Sagrada + Passeig de Gràcia + metro สะดวก · <a href="https://www.google.com/maps/place/Eixample,+Barcelona/@41.3905,2.1664,14z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Bar Pinotxo @ Boqueria 🍳</div><div class="ev-detail">⚠️ <strong>เปิด 6:30-16:00 เท่านั้น</strong> · counter-only · queue ~30 นาที · cash · garbanzos + cuttlefish · €15-25 · <a href="https://www.google.com/maps/place/Bar+Pinotxo/@41.3818,2.1716,18z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Mercat de la Boqueria 🛒</div><div class="ev-detail">เดินตลาดสีสัน · ผลไม้ ชีส jamón juice ขวดสี · ฟรี · เปิด-20:30 · <a href="https://www.google.com/maps/place/Mercat+de+la+Boqueria/@41.3818,2.1716,18z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 La Rambla + Plaça Reial 🌴</div><div class="ev-detail">เดินสาย iconic + Plaça Reial (ต้นปาล์ม + lamps Gaudí ออกแบบ!) · <a href="https://www.google.com/maps/place/Pla%C3%A7a+Reial/@41.3801,2.1747,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">16:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Granja Viader 🍫</div><div class="ev-detail">Carrer d'En Xuclà 4 · churros con chocolate since 1870 · ลอง Cacaolat (chocolate milk ที่เขาคิด) · €5-8 · <a href="https://www.google.com/maps/place/Granja+Viader/@41.3826,2.1707,18z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn"></span><span class="ev-time">16:45</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Palau Güell (Raval) 🏛️</div><div class="ev-detail">Gaudí first big work (1888) UNESCO · roof chimneys · 🟡 จองออนไลน์แนะนำ · €12 · เปิด 10-17:30 · <a href="https://www.google.com/maps/place/Palau+G%C3%BCell/@41.3796,2.1741,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Catedral de Barcelona ⛪</div><div class="ev-detail">Gothic cathedral · 🟢 walk-in OK €9 (ฟรี 17:30-19:00 weekdays!) · ห่าน 13 ตัวที่ cloister · <a href="https://www.google.com/maps/place/Cathedral+of+Barcelona/@41.3839,2.1759,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:15</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Plaça del Rei + Roman Walls 🏛️</div><div class="ev-detail">ลานยุคกลาง + กำแพง Roman เก่า 2000 ปี · MUHBA museum (โบราณคดีใต้ดิน) optional · <a href="https://www.google.com/maps/place/Pla%C3%A7a+del+Rei/@41.3839,2.1764,18z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:45</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Plaça Sant Jaume + Pont del Bisbe 📸</div><div class="ev-detail">ลานหน้า Generalitat + สะพาน Gothic neo-medieval (1928) ถ่ายรูปสวย · <a href="https://www.google.com/maps/place/Pont+del+Bisbe/@41.3833,2.1761,18z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-picasso"></span><span class="ev-time">19:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Picasso Museum (El Born) 🎨</div><div class="ev-detail">⚠️ <strong>last entry 18:30 → ต้องไป 17:00 ถ้าอยากเข้า</strong> · 🟡 จองออนไลน์ skip line · €15 (ฟรี Thu 16-19:00 + first Sun) · <a href="https://www.google.com/maps/place/Museu+Picasso/@41.3853,2.181,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Santa Maria del Mar ⛪</div><div class="ev-detail">Catalan Gothic ที่บริสุทธิ์ที่สุด · 🟢 walk-in ฟรี · ปิด 20:30 · <a href="https://www.google.com/maps/place/Basilica+de+Santa+Maria+del+Mar/@41.3837,2.1822,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ El Xampanyet 🍷</div><div class="ev-detail">Carrer Montcada 22 · cava ขวดเล็ก + anchovies + canned tapas since 1929 · 🟢 ไม่รับจอง queue ~20-30 นาที · €15-25 · <a href="https://www.google.com/maps/place/El+Xampanyet/@41.3855,2.1819,18z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Cal Pep Dinner 🍽️</div><div class="ev-detail">Plaça de les Olles 8 · counter only — เชฟเลือกให้ · baby squid omelette ตำนาน · 🟢 ไม่รับจอง · queue 30+ นาที · €30-40 · <a href="https://www.google.com/maps/place/Cal+Pep/@41.3838,2.1825,18z" target="_blank">📍 Map</a></div></div></div>
     </div>
   </div>
 
   <div class="db day-collapsed" data-date="2026-05-14">
-    <div class="dh"><span class="dn">14 MAY</span><span class="dd">พฤหัส 14 May</span><span class="dt">· Sagrada + Park Güell + Barceloneta</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">14 MAY</span><span class="dd">พฤหัส 14 May</span><span class="dt">· Gaudí Marathon: Sagrada → Sant Pau → Park Güell → Casa Batlló sunset</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">churros เช้า → Sagrada Familia → lunch Cal Pep ไม่มีเมนู → Park Güell → Barceloneta → La Cova Fumada bomba ต้นตำรับ!</div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Granja Viader</div><div class="ev-detail">Carrer d'En Xuclà 4 · churros con chocolate since 1870s · ลอง Cacaolat (ช็อกนมที่เขาคิดขึ้น!) · EUR 5-8</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-sagrada" onclick="goBooking('bk-sagrada',event)">🏛️</span><span class="ev-time">09:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Sagrada Familia</div><div class="ev-detail">ต้องจองล่วงหน้า! · Gaudí masterpiece · EUR 26-47 · 1.5-2 ชม.</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Casa Batlló</div><div class="ev-detail">Passeig de Gràcia 43 · Gaudí masterpiece ด้านหน้าเหมือนกระดูก · EUR 35 · ระหว่างทางไป El Born</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Cal Pep</div><div class="ev-detail">Plaça de les Olles 8, El Born · นั่งบาร์ไม่มีเมนู เชฟเลือกให้ · baby squid + omelette · คิว 30 นาที คุ้ม · EUR 30-40</div></div></div>
-    <div class="ev"><span class="ev-st warn" data-bk="bk-parkguell" onclick="goBooking('bk-parkguell',event)">🏛️</span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Park Güell</div><div class="ev-detail">ต้องจองล่วงหน้า! · Gaudí mosaic + วิว Barcelona · EUR 15</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Barceloneta Beach</div><div class="ev-detail">หาดในเมือง · เดินเล่น + sunset</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ La Cova Fumada</div><div class="ev-detail">Carrer del Baluard 56 · ไม่มีป้ายหน้าร้าน! · ร้านต้นกำเนิด BOMBA EUR 2.20/ลูก · เปิด พฤ-ศ 18-20:00 · ไม่รับจอง</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">ตื่น 6am → Sagrada slot แรก → Hospital Sant Pau (เดิน 5 นาที) → Casa Vicens Gràcia → lunch Gràcia → Park Güell บ่าย → กลับ Eixample ดู Casa Milà + Casa Batlló sunset → Bunkers del Carmel sunset → late dinner — ตะวันออกไปตะวันตก เก็บ Gaudí ครบ</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">07:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Forn Boix Eixample 🥐</div><div class="ev-detail">เบเกอรี่ neighborhood · pa amb tomàquet + café con leche · €5 · <a href="https://www.google.com/maps/search/?api=1&query=Forn+Boix+Eixample+Barcelona" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-sagrada" onclick="goBooking('bk-sagrada',event)">🏛️</span><span class="ev-time">09:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Sagrada Família 🏛️ MUST</div><div class="ev-detail">🔴 <strong>ต้องจองล่วงหน้า 1-2 สัปดาห์</strong> sagradafamilia.org · slot แรก 9:00 ก่อนพีค · €26 basic / €36 + tower · 1.5-2 ชม. · <a href="https://www.google.com/maps/place/Sagrada+Familia/@41.4036,2.1744,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn"></span><span class="ev-time">11:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Hospital de Sant Pau (UNESCO) 🏥</div><div class="ev-detail">เดิน 5 นาทีจาก Sagrada · modernista hospital ตัว icon ที่ลึกลับสุด · 🔴 จองล่วงหน้า · €18 · 1-1.5 ชม. · <a href="https://www.google.com/maps/place/Recinte+Modernista+de+Sant+Pau/@41.4115,2.1746,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn"></span><span class="ev-time">12:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Casa Vicens (Gràcia) 🏛️</div><div class="ev-detail">Gaudí first house (1885) · color tile + ironwork · 🟡 จองออนไลน์แนะนำ · €18 · ~45 นาที · <a href="https://www.google.com/maps/place/Casa+Vicens/@41.4035,2.1496,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Lunch Gràcia · Cal Boter 🍽️</div><div class="ev-detail">Carrer Tordera 62 · Catalan classics · canelones + escalivada · จองล่วงหน้า · €25-35 · <a href="https://www.google.com/maps/place/Cal+Boter/@41.4022,2.157,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn" data-bk="bk-parkguell" onclick="goBooking('bk-parkguell',event)">🏛️</span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Park Güell 🌈 MUST</div><div class="ev-detail">🔴 <strong>ต้องจองล่วงหน้า 1-2 สัปดาห์</strong> · slot จำกัด · mosaic ตำนาน + วิว Barcelona · €18 · 1.5-2 ชม. · <a href="https://www.google.com/maps/place/Park+G%C3%BCell/@41.4145,2.1527,16z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">17:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Plaça del Sol + Gràcia walk 🚶</div><div class="ev-detail">ย่าน bohemian · plaças หลายแห่ง · ร้าน indie · เดินเล่นชิลล์ก่อนกลับ Eixample · <a href="https://www.google.com/maps/place/Pla%C3%A7a+del+Sol/@41.4023,2.1543,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn"></span><span class="ev-time">18:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Casa Milà / La Pedrera 🏛️</div><div class="ev-detail">Passeig de Gràcia 92 · Gaudí roof + iron balcony · 🟡 จองออนไลน์ skip line · €28 · 1 ชม. · <a href="https://www.google.com/maps/place/Casa+Mil%C3%A0+-+La+Pedrera/@41.3954,2.1619,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn"></span><span class="ev-time">19:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Casa Batlló 🦴 MUST (Magical Nights!)</div><div class="ev-detail">Passeig de Gràcia 43 · facade ราวกระดูก · 🔴 <strong>จองล่วงหน้า 2-3 วัน</strong> · "Magical Nights" 19:00-21:00 มี jazz บนหลังคา + แสงไฟ · €35-45 · 1-1.5 ชม. · <a href="https://www.google.com/maps/place/Casa+Batll%C3%B3/@41.3917,2.1649,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Bunkers del Carmel — Sunset 🌅</div><div class="ev-detail">จุดชมวิว 360° · sunset 21:15 · locals only · ฟรี · เดินขึ้น 20 นาที จาก El Carmel metro · <a href="https://www.google.com/maps/place/Bunkers+del+Carmel/@41.4181,2.1583,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">22:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Late Dinner · Bar Mut หรือ Mont Bar 🍽️</div><div class="ev-detail">Eixample · Bar Mut: classic tapas natural wine · Mont Bar: Bib Gourmand modern Catalan · 🟡 จองล่วงหน้า · €40-60 · <a href="https://www.google.com/maps/place/Mont+Bar/@41.3868,2.1638,17z" target="_blank">📍 Map</a></div></div></div>
     </div>
   </div>
 
   <div class="db day-collapsed" data-date="2026-05-15">
-    <div class="dh"><span class="dn">15 MAY</span><span class="dd">ศุกร์ 15 May</span><span class="dt">· Food Crawl Day + Montjuïc</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
+    <div class="dh"><span class="dn">15 MAY</span><span class="dd">ศุกร์ 15 May</span><span class="dt">· Beach + Montjuïc + Magic Fountain</span><button class="add-ev-btn" onclick="showAddEvent(this)" title="เพิ่ม event">+</button><span class="dh-chevron">▼</span></div>
     <div class="db-content">
-    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">ตลาด Santa Caterina → vermut Morro Fi → paella จริงที่ Mana 75 → Barceloneta → Bunkers del Carmel sunset → Montjuïc Magic Fountain</div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Mercat de Santa Caterina</div><div class="ev-detail">ตลาดหลังคาคลื่นสวยมาก · ดีกว่า Boqueria ไม่ tourist trap · ผลไม้ ชีส jamón</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Vermut — Morro Fi</div><div class="ev-detail">Carrer del Consell de Cent 171 · vermouth on tap + conservas (กระป๋อง seafood) · EUR 5</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Mana 75 — Paella</div><div class="ev-detail">Barceloneta · paella ของจริง ไม่ใช่ tourist trap · สั่ง lunch เท่านั้น สั่งขั้นต่ำ 2 คน · EUR 12-18/คน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">เดินเล่น Barceloneta beach</div><div class="ev-detail">ชายหาดในเมือง · พักผ่อน</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Bunkers del Carmel</div><div class="ev-detail">จุดชมวิว secret ที่ดีที่สุดใน Barcelona · locals only · sunset · ฟรี</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:30</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Bodega La Puntual</div><div class="ev-detail">El Born · seafood tapas + octopus · EUR 20-30</div></div></div>
-    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Montjuïc Magic Fountain</div><div class="ev-detail">show น้ำพุเต้นประกอบเพลง + แสงสี · ศ-ส 21:00 · ฟรี!</div></div></div>
+    <div style="padding:0 0 6px 0;font-size:11px;color:var(--muted);font-style:italic;">เช้า Mercat Santa Caterina → walk Born → Barceloneta beach → La Cova Fumada bomba lunch → cable car ขึ้น Montjuïc → Castell + MNAC + Miró → Poble Espanyol → Quimet & Quimet vermut → Magic Fountain show — เส้นเดียวจากตะวันออก-ใต้</div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">08:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">👍 Forn breakfast 🥐</div><div class="ev-detail">café + croissant ใกล้โรงแรม</div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">09:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Mercat de Santa Caterina 🛒</div><div class="ev-detail">หลังคาคลื่น colourful · ดีกว่า Boqueria ไม่ tourist trap · ตลาด local จริงๆ · ฟรี · <a href="https://www.google.com/maps/place/Mercat+de+Santa+Caterina/@41.3858,2.1788,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">10:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Palau de la Música Catalana 🎵</div><div class="ev-detail">UNESCO concert hall — ตึกที่สวยที่สุดใน Barcelona · 🟡 <strong>จองทัวร์ 50 min</strong> · €23 · skip ถ้าไม่ทัน · <a href="https://www.google.com/maps/place/Palau+de+la+M%C3%BAsica+Catalana/@41.3875,2.1755,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">11:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">👍 Parc de la Ciutadella + Arc de Triomf 🌳</div><div class="ev-detail">สวนใหญ่กลางเมือง · cascade fountain Gaudí ออกแบบบางส่วน · arch ทางเข้า · ฟรี · <a href="https://www.google.com/maps/place/Parc+de+la+Ciutadella/@41.3884,2.1869,16z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">12:15</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">⭐ Barceloneta Beach + walk 🏖️</div><div class="ev-detail">เดินจาก Ciutadella ผ่าน Born → ทะเล · แล้วเดินเลียบ beach · <a href="https://www.google.com/maps/place/Barceloneta+Beach/@41.3782,2.1925,16z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn"></span><span class="ev-time">13:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ La Cova Fumada · Bomba origin! 🍽️ MUST</div><div class="ev-detail">Carrer del Baluard 56 · <strong>ไม่มีป้ายหน้าร้าน!</strong> · ร้านต้นตำรับ BOMBA (mash potato + meat ball + spicy sauce) €2.20/ลูก · 🟢 ไม่รับจอง · queue · เปิด 9-15:30 + 18-20 (พฤ-ศ) · <a href="https://www.google.com/maps/place/La+Cova+Fumada/@41.3804,2.1906,18z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">14:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Cable Car Barceloneta → Montjuïc 🚠</div><div class="ev-detail">Telefèric del Port · 10 นาที · วิว 360° เมือง+ทะเล · €11 one-way / €16.50 RT · <a href="https://www.google.com/maps/place/Telef%C3%A8ric+del+Port/@41.3744,2.1854,16z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">15:00</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">👍 Castell de Montjuïc 🏰</div><div class="ev-detail">ป้อมยุค 17 · วิว Barcelona · 🟢 walk-in €5 · ฟรีอาทิตย์ 15:00-20:00 + first Sun ทั้งวัน · <a href="https://www.google.com/maps/place/Castell+de+Montju%C3%AFc/@41.3633,2.1665,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn"></span><span class="ev-time">16:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Fundació Joan Miró 🎨</div><div class="ev-detail">museum modern art โดย Miró · ตึก Sert design · 🟡 จองออนไลน์ · €14 · <a href="https://www.google.com/maps/place/Fundaci%C3%B3+Joan+Mir%C3%B3/@41.3686,2.1601,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st warn"></span><span class="ev-time">17:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ MNAC — National Art Museum 🏛️</div><div class="ev-detail">Palau Nacional · Romanesque + Catalan modernisme · 🟡 จองออนไลน์ · €12 · ฟรี Sat 15:00+ first Sun · ฟรีถ่ายรูปด้านหน้า terrace · <a href="https://www.google.com/maps/place/MNAC/@41.3683,2.1535,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">18:30</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">💡 Olympic Stadium + Anella Olímpica</div><div class="ev-detail">ติด MNAC · Stadium Barcelona 1992 + Palau Sant Jordi · ฟรี edges · <a href="https://www.google.com/maps/place/Estadi+Ol%C3%ADmpic/@41.3654,2.1554,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">19:00</span><div class="ev-dot place"></div><div class="ev-body"><div class="ev-title">💡 Poble Espanyol 🏘️</div><div class="ev-detail">หมู่บ้านจำลอง 117 อาคาร Spanish · open-air museum · 🟡 €14 · skip ถ้าเหนื่อย · <a href="https://www.google.com/maps/place/Poble+Espanyol/@41.3691,2.1473,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">20:00</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">⭐ Quimet & Quimet 🍷 MUST</div><div class="ev-detail">Carrer del Poeta Cabanyes 25, Poble Sec · vermut + canned tapas (anchovy + tuna belly + caviar) · standing room only · 🟢 ไม่รับจอง · €15-30 · ปิด 22:00 · <a href="https://www.google.com/maps/place/Quimet+%26+Quimet/@41.3743,2.166,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">21:30</span><div class="ev-dot landmark"></div><div class="ev-body"><div class="ev-title">⭐ Magic Fountain Montjuïc 💧</div><div class="ev-detail">show น้ำพุประกอบเพลง+แสง · ⚠️ <strong>ศ-ส 21:30-22:30 เท่านั้น</strong> (พ.ค.) · ฟรี · <a href="https://www.google.com/maps/place/Magic+Fountain+of+Montju%C3%AFc/@41.3712,2.1502,17z" target="_blank">📍 Map</a></div></div></div>
+    <div class="ev"><span class="ev-st none"></span><span class="ev-time">22:45</span><div class="ev-dot restaurant"></div><div class="ev-body"><div class="ev-title">💡 Late drink · Tickets/Bodega 1900 (if booked)</div><div class="ev-detail">Av. Paral·lel 164 · Adrià brothers · 🔴 <strong>จอง 1-2 เดือน</strong> · €60-120 · skip ถ้าไม่ได้จอง · <a href="https://www.google.com/maps/place/Bodega+1900/@41.3756,2.1622,17z" target="_blank">📍 Map</a></div></div></div>
     </div>
   </div>
 
@@ -2794,6 +2820,7 @@ function renderUserEvent(ev,dbEl){
   if(ev.lat!=null&&ev.lng!=null){row.dataset.lat=ev.lat;row.dataset.lng=ev.lng;}
   row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title" onclick="editEvent(${ev.id})">${ev.title}${prio}${bkBadge}</div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
   ensureDoneCheck(row);
+  ensurePrioBadge(row);
   if(ev.map_url)setEventMapPin(row,ev.map_url);
   // Insert sorted by time — always go inside .db-content so day-collapsed can hide it.
   // Create .db-content if the day block doesn't have one (e.g. single-line stub days).
@@ -3179,6 +3206,43 @@ function ensureDoneCheck(ev){
 }
 function initEventDoneChecks(){
   document.querySelectorAll('.ev').forEach(ensureDoneCheck);
+}
+// ===== PRIORITY BADGES (! / !! / !!! before time) =====
+function inferPriority(ev){
+  // 1. data-priority on .ev (user events: must/rec/opt)
+  const dp=ev.dataset.priority;
+  if(dp==='must'||dp==='3')return 3;
+  if(dp==='rec'||dp==='2')return 2;
+  if(dp==='opt'||dp==='1')return 1;
+  // 2. dot class
+  const dot=ev.querySelector('.ev-dot');
+  if(dot){
+    if(dot.classList.contains('must'))return 3;
+    if(dot.classList.contains('rec'))return 2;
+    if(dot.classList.contains('opt'))return 1;
+  }
+  // 3. title emoji prefix (existing convention: ⭐=must, 👍=rec, 💡=opt)
+  const title=(ev.querySelector('.ev-title')?.childNodes[0]?.textContent||ev.querySelector('.ev-title')?.textContent||'').trim();
+  if(/^⭐/.test(title))return 3;
+  if(/^👍/.test(title))return 2;
+  if(/^💡/.test(title))return 1;
+  return 0;
+}
+function ensurePrioBadge(ev){
+  if(ev.querySelector(':scope > .ev-prio,:scope > .ev-prio-spacer'))return;
+  const p=inferPriority(ev);
+  const el=document.createElement('span');
+  if(p){
+    el.className='ev-prio prio-'+p;
+    el.textContent='!'.repeat(p);
+    el.title=p===3?'!!! Must-see':(p===2?'!! Recommended':'! Optional');
+  }else{
+    el.className='ev-prio-spacer';
+  }
+  ev.insertBefore(el,ev.firstChild);
+}
+function injectPriorityBadges(){
+  document.querySelectorAll('.ev').forEach(ensurePrioBadge);
 }
 async function toggleEventDone(ev){
   const isDone=ev.classList.toggle('is-done');
@@ -4112,6 +4176,7 @@ async function init(){
   initDescriptions();
   initHardcodedDeletion();
   initEventDoneChecks();
+  injectPriorityBadges();
   decorateEventsWithMapPins();
   addDailyRouteButtons();
   loadDescriptions();
