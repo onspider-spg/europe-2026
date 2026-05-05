@@ -2973,10 +2973,13 @@ async function saveEditEvent(id,btn){
   // Re-render: remove old row, create new
   const oldRow=document.querySelector(`.user-ev[data-event-id="${id}"]`);
   const dbEl=oldRow?.closest('.db');
+  // Capture priority_rank from old row BEFORE removing it (priority is independent of tag)
+  const oldPrio=parseInt(oldRow?.dataset.prio||'0',10);
   form.remove();
   if(oldRow)oldRow.remove();
   if(dbEl){
-    const ev={id,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?(DB[bkId]?.status?'done':'pending'):null};
+    // Re-render with ALL fields so pin/done/priority/coords don't disappear after save
+    const ev={id,time,title,detail,dot_type:dotType,priority,request_booking:requestBooking,booking_status:requestBooking?(DB[bkId]?.status?'done':'pending'):null,map_url:mapUrl,lat,lng,is_done:isDone,priority_rank:(oldPrio>=1&&oldPrio<=3)?oldPrio:null};
     renderUserEvent(ev,dbEl);
   }
   refreshDerivedFromEvents();
