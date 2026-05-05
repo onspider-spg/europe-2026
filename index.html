@@ -3802,9 +3802,17 @@ async function loadNotes(){
 async function loadEvents(){
   const events=await sbFetch('trip_events?select=*&order=time.asc');
   events.forEach(ev=>{
-    // Find matching day block
+    // Find matching day block — for travel days where 2 .db share the same date
+    // (e.g. Paris/11 May + Nice/11 May), pick the one whose .cb data-country matches
+    // the event's saved country. Fall back to first match if country is missing/unmatched.
     const dbs=document.querySelectorAll('.db[data-date="'+ev.day_date+'"]');
-    if(dbs.length){renderUserEvent(ev,dbs[0]);}
+    if(!dbs.length)return;
+    let target=dbs[0];
+    if(ev.country&&dbs.length>1){
+      const match=Array.from(dbs).find(db=>db.closest('.cb')?.dataset.country===ev.country);
+      if(match)target=match;
+    }
+    renderUserEvent(ev,target);
   });
   // Rebuild booking tab now that user events exist in DOM —
   // orphan bk-ev-X rows are pruned correctly only after this point.
