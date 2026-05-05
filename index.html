@@ -124,7 +124,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .ev-prio.prio-3{background:#fef2f2;color:#dc2626;border:1px solid #fca5a5;}
 .ev-prio.prio-2{background:#fffbeb;color:#d97706;border:1px solid #fcd34d;}
 .ev-prio.prio-1{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db;}
-.ev-prio-spacer{display:inline-block;width:26px;flex-shrink:0;}
+.ev-prio-spacer{display:inline-block;width:26px;height:18px;flex-shrink:0;margin-top:4px;border-radius:4px;cursor:pointer;transition:background .15s;}
+.ev-prio-spacer:hover{background:#f3f4f6;border:1px dashed #d1d5db;}
+.ev-prio:hover{filter:brightness(1.05);}
 .dm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:12px;}
 .dm-modal.show{display:flex;}
 .dm-sheet{background:#fff;border-radius:12px;width:100%;max-width:760px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -2818,6 +2820,7 @@ function renderUserEvent(ev,dbEl){
   if(ev.is_done)row.classList.add('is-done');
   if(ev.map_url)row.dataset.mapUrl=ev.map_url;
   if(ev.lat!=null&&ev.lng!=null){row.dataset.lat=ev.lat;row.dataset.lng=ev.lng;}
+  if(ev.priority_rank>=1&&ev.priority_rank<=3)row.dataset.prio=String(ev.priority_rank);
   row.innerHTML=`${stHtml}<span class="ev-time">${ev.time||''}</span><div class="ev-dot ${ev.dot_type||'act'}"></div><div class="ev-body"><div class="ev-title" onclick="editEvent(${ev.id})">${ev.title}${prio}${bkBadge}</div>${ev.detail?`<div class="ev-detail">${ev.detail}</div>`:''}</div>`;
   ensureDoneCheck(row);
   ensurePrioBadge(row);
@@ -3208,25 +3211,11 @@ function initEventDoneChecks(){
   document.querySelectorAll('.ev').forEach(ensureDoneCheck);
 }
 // ===== PRIORITY BADGES (! / !! / !!! before time) =====
+// Priority = personal urgency rank (1/2/3) — independent from Must-see/Rec/Opt tag.
+// Only set by explicit user choice (data-prio attribute or priority_rank in DB).
 function inferPriority(ev){
-  // 1. data-priority on .ev (user events: must/rec/opt)
-  const dp=ev.dataset.priority;
-  if(dp==='must'||dp==='3')return 3;
-  if(dp==='rec'||dp==='2')return 2;
-  if(dp==='opt'||dp==='1')return 1;
-  // 2. dot class
-  const dot=ev.querySelector('.ev-dot');
-  if(dot){
-    if(dot.classList.contains('must'))return 3;
-    if(dot.classList.contains('rec'))return 2;
-    if(dot.classList.contains('opt'))return 1;
-  }
-  // 3. title emoji prefix (existing convention: ⭐=must, 👍=rec, 💡=opt)
-  const title=(ev.querySelector('.ev-title')?.childNodes[0]?.textContent||ev.querySelector('.ev-title')?.textContent||'').trim();
-  if(/^⭐/.test(title))return 3;
-  if(/^👍/.test(title))return 2;
-  if(/^💡/.test(title))return 1;
-  return 0;
+  const r=parseInt(ev.dataset.prio||'0',10);
+  return r>=1&&r<=3?r:0;
 }
 function ensurePrioBadge(ev){
   if(ev.querySelector(':scope > .ev-prio,:scope > .ev-prio-spacer'))return;
@@ -3235,11 +3224,29 @@ function ensurePrioBadge(ev){
   if(p){
     el.className='ev-prio prio-'+p;
     el.textContent='!'.repeat(p);
-    el.title=p===3?'!!! Must-see':(p===2?'!! Recommended':'! Optional');
   }else{
     el.className='ev-prio-spacer';
   }
+  el.title='คลิกเพื่อตั้ง priority (cycle: ว่าง → ! → !! → !!! → ว่าง)';
+  el.style.cursor='pointer';
+  el.onclick=(e)=>{e.stopPropagation();cyclePriority(ev);};
   ev.insertBefore(el,ev.firstChild);
+}
+async function cyclePriority(ev){
+  const current=parseInt(ev.dataset.prio||'0',10);
+  const next=current>=3?0:current+1;
+  if(ev.classList.contains('user-ev')){
+    const id=ev.dataset.eventId;
+    if(id){
+      if(next>0)ev.dataset.prio=String(next);else delete ev.dataset.prio;
+      await sbFetch('trip_events?id=eq.'+id,{method:'PATCH',body:JSON.stringify({priority_rank:next||null})});
+    }
+  }else{
+    await setHardcodedPriority(ev,next);
+    return; // setHardcodedPriority handles re-render
+  }
+  ev.querySelectorAll(':scope > .ev-prio,:scope > .ev-prio-spacer').forEach(b=>b.remove());
+  ensurePrioBadge(ev);
 }
 function injectPriorityBadges(){
   document.querySelectorAll('.ev').forEach(ensurePrioBadge);
@@ -3257,6 +3264,30 @@ async function toggleEventDone(ev){
       await sbDelete('trip_hardcoded_done','hc_key',encodeURIComponent(hcKey));
     }
   }
+}
+async function loadHardcodedPriority(){
+  const rows=await sbFetch('trip_hardcoded_priority?select=hc_key,rank');
+  const map={};rows.forEach(r=>{map[r.hc_key]=r.rank;});
+  document.querySelectorAll('.ev:not(.user-ev)').forEach(ev=>{
+    const r=map[ev.dataset.hcKey];
+    if(r){ev.dataset.prio=String(r);}
+  });
+  // Re-decorate priority badges
+  document.querySelectorAll('.ev .ev-prio,.ev .ev-prio-spacer').forEach(b=>b.remove());
+  injectPriorityBadges();
+}
+async function setHardcodedPriority(ev,rank){
+  const hcKey=ev.dataset.hcKey||hcKeyForEvent(ev);
+  if(!hcKey)return;
+  if(rank){
+    await fetch(SB_URL+'/rest/v1/trip_hardcoded_priority',{method:'POST',headers:{...hdr,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({hc_key:hcKey,rank,updated_at:new Date().toISOString()})});
+    ev.dataset.prio=String(rank);
+  }else{
+    await sbDelete('trip_hardcoded_priority','hc_key',encodeURIComponent(hcKey));
+    delete ev.dataset.prio;
+  }
+  ev.querySelectorAll(':scope > .ev-prio,:scope > .ev-prio-spacer').forEach(b=>b.remove());
+  ensurePrioBadge(ev);
 }
 async function loadHardcodedDone(){
   const rows=await sbFetch('trip_hardcoded_done?select=hc_key');
@@ -4185,6 +4216,7 @@ async function init(){
   await loadHardcodedHidden();
   loadHardcodedDone();
   loadHardcodedMaps();
+  loadHardcodedPriority();
   initMap();
   loadNotes();
   loadEvents();
