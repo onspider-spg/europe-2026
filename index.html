@@ -2375,6 +2375,24 @@ const ITEMS_META=[
   {id:'bk-romasparita',cat:'restaurant',icon:'🍽️',label:'Roma Sparita',date:'6 Jun',category:'activities'},
 ];
 
+// ===== PARSE BOOKING DATE for sorting =====
+// Handles 'YYYY-MM-DD', '12 May', '12–14 May', '31 May–2 Jun', '14–18 May'.
+// Returns far-future date for unparseable strings so they sink to the bottom.
+function parseBookingDate(str){
+  if(!str)return new Date('9999-12-31');
+  let m=str.match(/(\d{4})-(\d{2})-(\d{2})/);
+  if(m)return new Date(parseInt(m[1],10),parseInt(m[2],10)-1,parseInt(m[3],10));
+  // Take the FIRST day-month token; ranges like "12–14 May" → 12 May; "31 May–2 Jun" → 31 May
+  m=str.match(/(\d{1,2})\s*[–\-]\s*\d{1,2}\s*([A-Za-z]+)/) ||
+    str.match(/(\d{1,2})\s*([A-Za-z]+)/);
+  if(m){
+    const day=parseInt(m[1],10);
+    const months={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+    const mNum=months[(m[2]||'').substring(0,3).toLowerCase()];
+    if(mNum!=null)return new Date(2026,mNum,day);
+  }
+  return new Date('9999-12-31');
+}
 // ===== BUILD BOOKING TAB =====
 function buildBookingTab(){
   const wrap=document.getElementById('bk-list');
@@ -2421,6 +2439,8 @@ function buildBookingTab(){
 
   const catLabels={flights:'✈️ Flights',trains:'🚄 Trains',hotels:'🏨 Hotels',activities:'🎟️ Activities & Restaurants'};
   let html='';
+  // Sort each group by date ascending
+  Object.values(groups).forEach(arr=>arr.sort((a,b)=>parseBookingDate(a.date)-parseBookingDate(b.date)));
   for(const [key,items] of Object.entries(groups)){
     if(!items.length)continue;
     html+=`<div class="bks"><div class="bks-title">${catLabels[key]||key}</div>`;
